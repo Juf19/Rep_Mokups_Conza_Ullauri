@@ -1,0 +1,573 @@
+/* Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+/* Contenedor principal */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 700px;
+  
+  
+}
+
+/* Sidebar con íconos */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  width: 100px;
+  background-color: #fff;
+  
+}
+
+.icon img {
+  width: 235px;
+  height: 235px;
+  margin-right: 600px;
+  
+}
+
+/* Contenedor de botones */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
+  padding: 20px;
+  
+  
+}
+
+.button {
+  width: 800px;
+ 
+  padding: 90px ;
+  margin: 10px ;
+  background-color: #003366;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+  border-radius: 30px;
+  margin-left: 400px;
+  font-size: 35px;
+  
+}
+
+.button:hover {
+  background-color: #00509e;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1575ba;
+  color: white;
+  padding: 10px;
+  margin: 0;
+}
+.celeste {
+  background-color: #1575ba;
+  margin: 0;
+}
+
+.azul {
+  height: 20px;
+  width: 50%;
+  background-color: #27357d;
+  padding: 5px 20px;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+}
+
+.logo {
+  width: 100px;
+  height: 97px;
+}
+
+.search-bar input {
+  padding: 5px;
+  width: 450px;
+  height: 25px;
+  border-radius: 30px;
+  background-color: none;
+   font-size: 20px;
+   text-align: inherit;
+   font-family: "Pathway Extreme";
+    
+}
+
+.search-button {
+  margin-left: 5px;
+  cursor: pointer;
+  background-color: #1575ba;
+}
+
+.menu button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin-left: 15px;
+  cursor: pointer;
+}
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+.menuh{
+  flex: 11;
+  margin: 20px;
+  gap: 20px;
+}
+
+.botones{
+  flex:2;
+}
+
+.horario{
+  margin: 20px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.icono {
+  width: 75px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 60px;
+  margin-bottom: 5px; /* Espacio entre la imagen y el texto */
+  align-items: center;
+  margin-right: 60px;  
+}
+
+.menu-text {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  align-items: center;
+  margin-right: 60px; 
+  font-family: "Pathway Extreme";
+}
+
+
+
+.title {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 24px;
+}
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  padding: 20px;
+}
+.left-content {
+  display: flex;
+  width: 50%;
+  padding: 20px;
+  background-color: #f0f0f0; /* Color de fondo opcional para la parte izquierda */
+  overflow-y: auto; /* Para que el contenido sea desplazable si es necesario */
+}
+
+.item{
+max-width: 100%;
+flex: 3;
+width: 100%;
+}
+
+.item1{
+  flex: 2;
+  width: 700px ;
+  }
+
+.right-map {
+  width: 50%;
+  position: relative;
+}
+
+.right-map .map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.form1 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.form p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.form select, .form button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.disponibilidad-button {
+  background-color: #1575ba;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 80px;
+  border-radius: 30px;
+  width: 50%;
+  height: 50px;
+}
+
+.map {
+  flex: 2;
+  position: relative;
+}
+
+.map-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.cancha {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.futbol, .basquet{
+  text-align: start;
+  font-size: 18px;
+  margin: 30px;
+}
+
+h3 {
+  font-size: 25px;
+  text-align: start;
+  margin-left: 30px;
+}
+span{
+  font-size: 25px;
+  text-align: start;
+  margin-left: 20px;
+
+}
+
+label, input{
+  width: 25px;
+  height: 25px;
+  margin-left: 35px;
+  font-size: 30 px;
+}
+
+/* CSS de componente Admin cancha*/
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.contenedor {
+  width: 100%;
+  height: 100%;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  
+  text-align: center;
+}
+
+.encabezado {
+  margin-bottom: 20px;
+}
+
+.encabezado label {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.nombre-parque {
+  display: inline-block;
+  background-color: #e0e0e0;
+  padding: 5px 80px;
+  border-radius: 5px;
+  font-size: 35px;
+  font-weight: bold;
+  border-radius: 20px;
+  
+}
+
+.seccion-imagen {
+  margin: 20px 0;
+}
+
+.imagen-parque {
+  width: 100%;
+  max-width: 350px;
+  max-height: 400px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.boton-cargar {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-cargar:hover {
+  background-color: #0056b3;
+}
+
+.seccion-tabla {
+  margin: 20px 0;
+}
+
+.desplegable select {
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  width:  200px;
+  background-color: #e0e0e0;
+}
+
+.tabla-canchas {
+  flex: 4;
+  width: 70px;
+  margin-top: 10px;
+  border-collapse: collapse;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 100px;
+}
+
+.tabla-canchas th,
+.tabla-canchas td {
+  border: 2px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.boton-agregar,
+.boton-eliminar {
+  font-size: 18px;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.boton-agregar {
+  background-color: #28a745;
+}
+
+.boton-agregar:hover {
+  background-color: #218838;
+}
+
+.boton-eliminar {
+  background-color: #dc3545;
+}
+
+.boton-eliminar:hover {
+  background-color: #c82333;
+}
+
+.pie {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 150px;
+  height: 50%;
+}
+
+.boton-atras,
+.boton-guardar {
+  flex: 1;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 35px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-atras:hover,
+.boton-guardar:hover {
+  background-color: #0056b3;
+}
+
+.boton-atras {
+  background-color: #0056b3;
+margin-left: 0px;
+}
+.boton-guardar{
+  margin-right: 50px;
+}
+
+.boton-atras:hover {
+  background-color: #0056b3;
+ 
+}
+
+.inferior{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/*Formulario registro*/
+/* Contenedor del registro */
+.contenedor-registro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1575BA;
+}
+
+/* Formulario */
+.formulario-registro {
+  flex:10;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  background-color: #1575BA;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  border: 1px solid #003f8a;
+}
+
+/* Título del formulario */
+.titulo-registro {
+  font-size: 30px;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: right;
+  
+  
+}
+
+/* Imagen de usuario */
+.imagen-usuario-registro {
+  margin-bottom: 100px;
+  height: 200px;
+}
+
+.icono-usuario-registro {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+
+}
+
+/* Campos de entrada */
+.campos-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.entrada-registro {
+  width: 800px;
+  padding: 15px ;
+  font-size: 25px;
+  border: none;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #555;
+  margin-left: 70px;
+  margin-top: 26px;
+}
+
+.entrada-registro::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+/* Botón de registro */
+.boton-registro {
+  width: 20%;
+  padding: 15px;
+  font-size: 18px;
+  background-color: #e0e0e0;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 0px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.boton-registro:hover {
+  background-color: #002f6e;
+}
+
