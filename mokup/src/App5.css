@@ -1,0 +1,32 @@
+.contenedorp {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* Los elementos hijos estarán en columnas */
+    gap: 10px; /* Espacio entre las filas */
+}
+
+.item {
+    margin: 10px;
+    width: 200px;
+    padding: 10px;
+    align-self: flex-start; /* Alinea el select (listbox) a la izquierda */
+}
+
+.fila {
+    display: flex; /* Alinea los elementos en fila (horizontalmente) */
+    align-items: center; /* Centra los elementos verticalmente */
+    justify-content: flex-start; /* Opcional: alinea al inicio */
+    gap: 50px; /* Espacio entre el label y el componente */
+}
+
+.label {
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Opcional: pone en negrita */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+.menuh{
+    margin: 10px;
+}
+.btn{
+    margin-left: 50px;
+}

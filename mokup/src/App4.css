@@ -1,0 +1,107 @@
+/* Contenedor principal */
+.perfil-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alineado a la izquierda */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 400px;
+  max-width: 1200px; /* Máximo ancho para evitar que sea demasiado grande */
+  margin: 40px auto; /* Centrado vertical */
+}
+
+/* Imagen del perfil */
+.perfil-imagen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 70px;
+}
+
+#p {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  opacity: 0.5;
+  
+}
+
+/* Botón cerrar sesión */
+.cerrar-sesion {
+  background-color: #e4282f;
+  color: #1E1E1E;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.cerrar-sesion:hover {
+  background-color: #e04343;
+}
+
+/* Información del perfil */
+.perfil-informacion {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%; /* Abarca todo el ancho */
+}
+
+.perfil-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.perfil-item label {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+  font-size: 18px;
+  width: 30%; /* Ancho fijo para el texto */
+  padding: 20px;
+}
+
+.perfil-dato {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: #555;
+  font-size: 16px;
+  width: 65%; /* Ancho fijo para los datos */
+  text-align: left; /* Alineado al texto */
+}
+
+/* Ajustes para dispositivos grandes */
+@media (min-width: 768px) {
+  .perfil-card {
+    flex-direction: row; /* Organiza los elementos horizontalmente */
+    align-items: flex-start;
+  }
+
+  .perfil-imagen {
+    margin-right: 20px; /* Separación entre imagen y texto */
+  }
+}
+
+/* Ajustes para dispositivos pequeños */
+@media (max-width: 768px) {
+  .perfil-card {
+    flex-direction: column;
+  }
+
+  .perfil-item label, .perfil-dato {
+    font-size: 14px;
+    width: 100%; /* Ocupa toda la pantalla */
+    text-align: left;
+  }
+}
