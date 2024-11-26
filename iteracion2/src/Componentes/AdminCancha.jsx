@@ -1,6 +1,7 @@
 import React from 'react';
 import ItemBajoHeader from './ItemBajoHeader';
 import ItemHeaderA from './ItemHeaderA';
+import BotonConFlecha from './BotonConFlecha';
 
 const AdminCancha = () => {
     return (
@@ -34,7 +35,7 @@ const AdminCancha = () => {
                 </div>
                 <div className='inferior'>
                     <div className='pie'>
-                <button className="boton-atras">Atrás</button>
+              <BotonConFlecha></BotonConFlecha>
                 </div>
                     <table className="tabla-canchas">
                         

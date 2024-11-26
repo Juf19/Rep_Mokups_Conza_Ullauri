@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ItemHeaderA from "./ItemHeaderA";
 import ItemBajoHeader from "./ItemBajoHeader";
+import BotonConFlecha from "./BotonConFlecha";
 
 
 const NuevoParque = () => {
@@ -38,7 +39,7 @@ const NuevoParque = () => {
           <button className="eliminar-btn">Eliminar</button>
         </div>
       )}
-      <button className="atras-btn">Atrás</button>
+      <BotonConFlecha></BotonConFlecha>
     </div>
     </div>
   );
