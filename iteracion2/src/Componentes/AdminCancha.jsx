@@ -1,7 +1,12 @@
 import React from 'react';
+import ItemBajoHeader from './ItemBajoHeader';
+import ItemHeaderA from './ItemHeaderA';
 
 const AdminCancha = () => {
     return (
+        <div>
+            <ItemHeaderA></ItemHeaderA>
+            <ItemBajoHeader></ItemBajoHeader>
         <div className="contenedor">
             <div className="encabezado">
                 <label>Nombre</label>
@@ -54,9 +59,8 @@ const AdminCancha = () => {
                     </div>
 
                 </div>
-
-
             </div>
+        </div>
         </div>
     );
 };

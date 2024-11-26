@@ -1,8 +1,13 @@
 import React from "react";
+import ItemBajoHeader from "./ItemBajoHeader";
+import ItemHeaderA from "./ItemHeaderA";
 
 
 const HomeAdmin = () => {
   return (
+    <div>
+      <ItemHeaderA></ItemHeaderA>
+      <ItemBajoHeader></ItemBajoHeader>
     <div className="container">
       <div className="sidebar">
         <div className="icon">
@@ -29,6 +34,7 @@ const HomeAdmin = () => {
         <button className="button">CANCHAS</button>
         <button className="button">USUARIOS</button>
       </div>
+    </div>
     </div>
   );
 };

@@ -1,0 +1,114 @@
+.parques-container {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: fff;
+   
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    color: #333;
+    margin-top: 0px;
+    font-size: 35px;
+    text-align: left;
+  }
+  
+  .nuevo-parque-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .nuevo-parque-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .selector-container {
+    margin-bottom: 20px;
+  }
+  
+  .parque-select {
+    padding: 8px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  .parque-seleccionado{
+    padding: 50px;
+    margin: 50px;
+
+  }
+  .parque-nombre{
+    border: 3px solid #ccc ;
+    border-radius: 5px;
+    padding: 16px;
+    
+  }
+
+  
+  .acciones-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .editar-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 60px;
+    width: 200px;
+    font-size: 30px;
+  }
+  
+  .editar-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .eliminar-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 60px;
+    width: 200px;
+    font-size: 30px;
+  }
+  
+  .eliminar-btn:hover {
+    background-color: #a71d2a;
+  }
+  
+  .atras-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .atras-btn:hover {
+    background-color: #0056b3;
+  }
+
+  
+  

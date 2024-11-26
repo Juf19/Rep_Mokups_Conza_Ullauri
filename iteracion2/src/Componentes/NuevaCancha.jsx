@@ -3,7 +3,7 @@ import ItemHeaderA from "./ItemHeaderA";
 import ItemBajoHeader from "./ItemBajoHeader";
 
 
-const NuevoParque = () => {
+const NuevaCancha = () => {
   const [selectedParque, setSelectedParque] = useState("");
 
   const handleParqueChange = (event) => {
@@ -16,19 +16,19 @@ const NuevoParque = () => {
         <ItemBajoHeader></ItemBajoHeader>
     <div className="parques-container">
         
-      <h1>PARQUES</h1>
-      <button className="nuevo-parque-btn">Nuevo Parque</button>
+      <h1>Canchas</h1>
+      <button className="nuevo-parque-btn">Nueva Cancha</button>
       <div className="selector-container">
-        <label htmlFor="parque-select">Selecciona un parque</label>
+        <label htmlFor="parque-select">Selecciona una cancha</label>
         <select
           id="parque-select"
           className="parque-select"
           onChange={handleParqueChange}
         >
-          <option value="">-- Selecciona un parque --</option>
-          <option value="La Carolina">La Carolina</option>
-          <option value="Parque Metropolitano">Parque Metropolitano</option>
-          <option value="Parque El Ejido">Parque El Ejido</option>
+          <option value="">-- Selecciona una cancha --</option>
+          <option value="C-F1">C-F1</option>
+          <option value="C-B1">C-B1</option>
+          <option value="I-B1">I-B1</option>
         </select>
       </div>
       {selectedParque && (
@@ -44,4 +44,4 @@ const NuevoParque = () => {
   );
 };
 
-export default NuevoParque;
+export default NuevaCancha;
