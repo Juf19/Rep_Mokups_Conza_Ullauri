@@ -5,10 +5,7 @@ const ItemHeaderA = () => {
     <div className="app">
       <header className="header">
         <img src="LOGOA.svg" alt="Quito" className="logo" />
-        <div className="search-bar">
-          <input type="text" placeholder="Buscar" />
-          <button className="search-button">🔍</button>
-        </div>
+        
         <div className="menu">
           <div className="menu-item">
             <img src="file2.png" alt="Perfil" className="icono" />

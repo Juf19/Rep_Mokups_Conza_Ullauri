@@ -1,0 +1,17 @@
+/* Estilo para el botón */
+.boton-nuevo-parque {
+    background-color: #1575ba; /* Fondo azul */
+    color: white;              /* Texto blanco */
+    padding: 10px 20px;        /* Relleno alrededor del texto */
+    font-size: 16px;           /* Tamaño de la fuente */
+    border: none;              /* Sin borde */
+    border-radius: 5px;        /* Bordes redondeados */
+    cursor: pointer;          /* Cambia el cursor a puntero cuando pasa por encima */
+    transition: background-color 0.3s ease; /* Efecto de transición suave para el fondo */
+  }
+  
+  /* Cambiar el color de fondo al pasar el mouse sobre el botón */
+  .boton-nuevo-parque:hover {
+    background-color: #1976D2; /* Azul más oscuro */
+  }
+  
