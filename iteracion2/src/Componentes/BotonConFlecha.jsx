@@ -13,6 +13,7 @@ const BotonConFlecha = () => {
     fontSize: '16px',
     cursor: 'pointer',
     width: '150px',
+  
   };
   
 
@@ -26,7 +27,7 @@ const BotonConFlecha = () => {
   };
 
   return (
-    <div className='btn11'>
+    <div className='btn'>
     <button style={estiloBoton}>
       <div style={estiloTriangulo}></div>
       Atrás
