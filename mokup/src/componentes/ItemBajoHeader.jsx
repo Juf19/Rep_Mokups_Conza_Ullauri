@@ -4,7 +4,13 @@ class ItemBajoHeader extends Component {
         const { nombre } = this.props;
         return (
             <div className="app">
-                <div className="celeste"><div className="azul"><h2>{nombre}</h2></div></div>
+                <div className="celeste">
+                    <div className="azul">
+                        <h2>{nombre}</h2>
+                    </div>
+                    
+                </div>
+
             </div>
         );
     }
