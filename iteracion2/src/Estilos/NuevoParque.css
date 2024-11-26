@@ -112,6 +112,14 @@
   .btn11 hover{
     background-color: #0056b3;
   }
-
   
+
+  .input-nombre{
+    border: 3px solid #ccc ;
+    border-radius: 15px;
+    max-width: 500px;
+    max-height: 15px;
+    margin: 0px;
+    background-color: #ccc;
+  }
   

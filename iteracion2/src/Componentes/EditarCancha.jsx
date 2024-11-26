@@ -1,31 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ItemBajoHeader from './ItemBajoHeader';
 import ItemHeaderA from './ItemHeaderA';
 import BotonConFlecha from './BotonConFlecha';
 
 const EditarCancha = () => {
+    // Estado para controlar el valor del input de nombre
+    const [nombre, setNombre] = useState("C-F1");
+
+    // Manejar cambios en el input
+    const handleNombreChange = (event) => {
+        setNombre(event.target.value);
+    };
+
     return (
         <div>
-            <ItemHeaderA></ItemHeaderA>
-            <ItemBajoHeader></ItemBajoHeader>
+            <ItemHeaderA />
+            <ItemBajoHeader />
             <div className="contenedor">
                 <div className="encabezado">
                     <label>Nombre</label>
-                    <div className="nombre-parque">CF1</div>
-                </div>
+                    <input 
+                        type="text" 
+                        className="input-nombre" 
+                        value={nombre} 
+                        onChange={handleNombreChange} 
+                    />
+                </div> 
 
                 <div className="seccion-tabla">
-
                     <div className="desplegable">
                         <select>
-                        <option value="">-- TIPO--</option>
+                            <option value="">-- TIPO--</option>
                             <option value="Futbol">Futbol</option>
                             <option value="Basquet">Basquet</option>
                         </select>
                     </div>
                     <div className='inferior'>
                         <table className="tabla-canchas">
-
                             <tbody>
                                 <tr>
                                     <td>Basquet</td>
@@ -45,7 +56,6 @@ const EditarCancha = () => {
                 </div>
 
                 <div className="seccion-tabla">
-
                     <div className="desplegable">
                         <select>
                             <option value="">-- HORARIOS--</option>
@@ -55,10 +65,9 @@ const EditarCancha = () => {
                     </div>
                     <div className='inferior'>
                         <div className='pie'>
-                            <BotonConFlecha></BotonConFlecha>
+                            <BotonConFlecha />
                         </div>
                         <table className="tabla-canchas">
-
                             <tbody>
                                 <tr>
                                     <td>7-8</td>
@@ -74,11 +83,9 @@ const EditarCancha = () => {
                                 </tr>
                             </tbody>
                         </table>
-
                         <div className='pie'>
                             <button className="boton-guardar">Guardar</button>
                         </div>
-
                     </div>
                 </div>
             </div>

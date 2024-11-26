@@ -12,6 +12,7 @@ import Nuevacancha from './Componentes/NuevaCancha';
 import NuevoUsuario from './Componentes/NuevoUsuario';
 import EditarCancha from './Componentes/EditarCancha';
 import UsuarioNuevo from './Componentes/UsuarioNuevo';
+import ParqueNuevo from './Componentes/ParqueNuevo';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <NuevoUsuario></NuevoUsuario>
       <EditarCancha></EditarCancha>
       <UsuarioNuevo></UsuarioNuevo>
+      <ParqueNuevo></ParqueNuevo>
     </div>
   );
 }

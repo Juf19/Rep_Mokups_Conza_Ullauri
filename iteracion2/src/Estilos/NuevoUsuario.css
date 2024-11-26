@@ -25,12 +25,14 @@
     flex-direction: row;
     margin-bottom: 15px;
     margin-right: 250px;
+    
   }
   .form-group1 {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
     max-width: 500px;
+    
     
   }
   .l{
@@ -79,6 +81,7 @@
   
   .in{
     width: 700px;
+    border-radius: 20px;
   }
 
   .datos{
