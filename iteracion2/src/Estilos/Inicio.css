@@ -1,171 +1,119 @@
-/* Estilo principal */
-.App {
+/* Estilos de la página de inicio */
+.inicio-login-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    border-radius: 5%;
+    background-color: #0c5b99;
+    border: 2px solid #010388;
+    width: 80%;
     align-items: center;
-    height: 100vh;
-    background-color: #1575BA;
-  }
-  
-  .frame {
+    color: #fff;
+    margin-left: 150px;
+    
+}
+
+.inicio-frame {
+
     display: flex;
     width: 500px;
-    height: 450px;
-    padding: 20px;
+    height:480px;
+    padding: 5px;
     background-color: #0c5b99;
     border-radius: 15px;
     position: relative;
-    flex: 1.5;
-  
-  }
-  
-  .content {
+}
+
+.inicio-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 15%;
     text-align: center;
     color: #fff;
-  }
-  
-  .header {
-    flex: 1 ;
-    
+}
+
+.inicio-header {
     margin-bottom: 20px;
     margin-left: 90px;
-    background-color: #0c5b99;
-  }
-  
-  .emblem {
-    width: 80px;
-    height: 80px;
+}
+
+.inicio-emblem {
+    width: 150px;
+    height: 160px;
     margin-bottom: 10px;
-  }
-  .text{
-    flex: 1;
+}
+
+.inicio-text {
     font-family: 'Patrick Hand';
-    
-  
-  }
-  h1 {
-    font-weight: 100;
-    font-size: 35px;
-    margin: 0;
-  }
-  
-  h2 {
-    font-weight: 100;
-    font-size: 35px;
-   
-  }
-  
-  p {
-    font-weight: 100;
-    font-size: 20px;
-    margin: 5px 0 20px;
-  }
-  
-  /* Estilo de LoginBox */
-  .login-box {
-    width: 80%;
-    height: 74%;
+}
+
+.inicio-linea-gris {
+    border-top: 6px solid #ccc;
+    margin: 20px 0;
+}
+
+.inicio-login-box {
     display: flex;
-    flex-direction: row;
-    border-radius: 100%;
-    background-color: #0c5b99;
-    padding: 20px;
-    border-radius: 5%;
+    flex-direction: column;
     align-items: center;
-    color: #fff;
     border: 2px solid #010388;
-  }
-  
-  #p {
-    flex: 1;
-    margin-bottom: 0px;
-    border-radius: 100%;
-    max-width: 150px;
-    max-height: 150px;
-    margin-top: -50px;
-    padding: 0px;
-    
-  }
-  
-  h3 {
-    flex: 1;
-    font-size: 20px;
-    margin: 10px 0;
-    outline-color: red;
-    border-color: red;
-  }
-  
-  .input-field {
-    flex: 1;
+    border-radius: 20%;
+    width: 400px;
+    height: 450px;
+    margin-left: 100px;
+}
+
+.inicio-user-icon {
+    margin-bottom: 10px;
+}
+
+#inicio-icon {
+    border-radius: 50%;
+    max-width: 120px;
+    max-height: 120px;
+    margin-top: -20px;
+}
+
+.inicio-input {
     width: 90%;
-    
-   
     padding: 10px;
-    margin: 35px 0;
+    margin: 20px 0;
     border-radius: 25px;
     font-size: 20px;
     color: black;
-    background-color: #D9D9D9 ;
+    background-color: #D9D9D9;
     text-align: center;
-  
-  }
-  
-  .login-button {
+}
+
+.inicio-button {
     width: 50%;
     padding: 10px;
     background-color: #f0f0f0;
     border: none;
     border-radius: 50px;
     font-size: 16px;
-    font-weight: 200;
     color: #333;
     cursor: pointer;
     margin-top: 10px;
     font-family: 'Patrick Hand';
-  }
-  
-  .register-link {
-    flex: 1;
+}
+
+.inicio-register-link {
     margin-top: 10px;
     font-size: 20px;
     color: #f0f0f0;
     cursor: pointer;
     text-decoration: underline;
-  }
-  
-  
-  .log {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-     flex: 1;
+}
 
-     border: 2px solid #010388;
-     border-radius: 20%;
-     width: 500px;
-     height: 450px;
-    padding: 20px;
-     margin: 5%;  
-  }
-  
-  .linea-gris {
-    border-top: 6px solid #ccc;  /* Línea gris (puedes ajustar el color) */
-    margin: 20px 0;  /* Espaciado arriba y abajo de la línea */
-  }
-  
-  /* Estilos para el contenedor principal de la barra */
+ /* Estilos para el contenedor principal de la barra */
   /* Estilos para el contenedor principal de la barra */
   .barra-encabezado {
     width: 95%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 15px;
+    
     height: 100px;
     padding: 0 20px; /* Espacio a los lados */
   
@@ -221,4 +169,7 @@
   .q{
     max-width: 250px;
   }
-  
+   .inicio-general{
+    background-color: #1575BA;
+
+   }
