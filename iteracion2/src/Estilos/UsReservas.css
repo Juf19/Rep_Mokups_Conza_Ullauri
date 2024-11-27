@@ -1,0 +1,50 @@
+.tabla-reservas {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden; /* Para que el borde redondeado se aplique también al contenido */
+  }
+  
+  .tabla-reservas th,
+  .tabla-reservas td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .tabla-reservas th {
+    background-color: #f4f4f4;
+    text-align: center;
+  }
+  
+  .tabla-reservas td {
+    text-align: center;
+  }
+  
+  .tabla-reservas tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tabla-reservas tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  .espacio{
+    margin-left: 1%;
+  }
+  /* Estilo para la clase "izquierda", usando flexbox */
+.derecha {
+    display: flex;               /* Activa flexbox */
+    justify-content: flex-end;   /* Alinea el contenido al final (a la derecha) */
+    align-items: flex-start;     /* Alinea el contenido al principio de la línea verticalmente */
+    width: 100%;                 /* Se asegura de que ocupe todo el ancho disponible */
+  }
+  
+  /* Estilo para el CalendarioRectangulo si deseas darle un tamaño específico */
+  .CalendarioRectangulo {
+    width: auto;  /* Deja que el calendario ocupe solo el espacio necesario */
+    /* Puedes añadir un ancho fijo si lo deseas, por ejemplo: width: 300px; */
+  }
+  

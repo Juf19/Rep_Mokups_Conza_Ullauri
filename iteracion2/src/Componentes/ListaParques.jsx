@@ -17,17 +17,15 @@ class ListaParques extends Component {
         return (
             <div>
               <ItemHeader></ItemHeader>
+              <ItemBajoHeader></ItemBajoHeader>
                 <div className="parques-list">
                     <h2>PARQUES</h2>
                     <div className="parques">
                         {parques.map((parque, index) => (
-
                             <UsParques key={index} name={parque.name} img={parque.img}></UsParques>
-
                         ))}
                     </div>
                 </div>
-                <ItemBajoHeader></ItemBajoHeader>
             </div>
         );
     }

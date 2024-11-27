@@ -32,6 +32,7 @@ class UsReservaCancha extends Component {
         return (
             <div>
                 <ItemHeader></ItemHeader>
+                <ItemBajoHeader></ItemBajoHeader>
                 <div className='app'>
                     <h3>Seleccione el número de horas que desea reservar</h3>
                     <label>
@@ -76,7 +77,6 @@ class UsReservaCancha extends Component {
                         </div>
                     </div>
                 </div>
-                <ItemBajoHeader></ItemBajoHeader>
             </div>
         );
     }
