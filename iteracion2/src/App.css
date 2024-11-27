@@ -1,4 +1,7 @@
 /* Reset */
+.App{
+  margin: 10px;
+}
 body {
   margin: 0;
   padding: 0;
@@ -10,7 +13,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 700px;
+  height: 100%;
   
   
 }
@@ -156,6 +159,11 @@ h2 {
   color: white;
 }
 
+.btn{
+  margin-left: 0;
+  
+}
+
 .icono {
   width: 75px; /* Ajusta el tamaño de la imagen según sea necesario */
   height: 60px;
@@ -232,6 +240,7 @@ margin-left: 400px;
   border-radius: 30px;
   width: 50%;
   height: 50px;
+  margin-bottom: 10px;
 }
 
 .map {
@@ -439,3 +448,16 @@ body {
 
 /*Formulario registro*/
 /* Contenedor del registro */
+.boton-registro{
+  margin-top: 10px;
+}
+.campos-registro{
+  margin: 0;
+}
+.contenedor-registro{
+  padding: 0;
+}
+.formulario-registro{
+  margin: 0;
+  padding: 10px;
+}

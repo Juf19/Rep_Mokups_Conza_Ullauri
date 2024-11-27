@@ -34,7 +34,7 @@ class UsReservaCancha extends Component {
 
     render() {
         return (
-            <div>
+            <div className='espaciadocancha'>
                 <ItemHeader></ItemHeader>
                 <ItemBajoHeader nombre={this.texto[0].nombre}></ItemBajoHeader>
                 <div className='app'>
@@ -54,20 +54,20 @@ class UsReservaCancha extends Component {
                     <h3>Seleccione el horario</h3>
                     <div className='menuh'>
                         <button className='horario'>8-9</button>
-                        <button className='horario'>9-10</button>
-                        <button className='horario'>10-11</button>
-                        <button className='horario'>11-12</button>
-                        <button className='horario'>12-13</button>
-                        <button className='horario'>13-14</button>
-                        <button className='horario'>14-15</button>
-                        <button className='horario'>15-16</button>
-                        <button className='horario'>16-17</button>
+                        <button className='rojo1'>9-10</button>
+                        <button className='rojo1'>10-11</button>
+                        <button className='rojo1'>11-12</button>
+                        <button className='rojo1'>12-13</button>
+                        <button className='rojo1'>13-14</button>
+                        <button className='rojo1'>14-15</button>
+                        <button className='rojo1'>15-16</button>
+                        <button className='rojo1'>16-17</button>
                         <button className='horario'>17-18</button>
                         <button className='horario'>18-19</button>
 
                     </div>
                     <h3>Aceptar términos y condiciones</h3>
-                    <label className='textofinal'>
+                    <label>
                         <input
                             type="checkbox"
                             checked={this.state.aceptarTerminos}
@@ -80,7 +80,7 @@ class UsReservaCancha extends Component {
                             <BotonConFlecha></BotonConFlecha>
                         </div>
                         <div className='item1'>
-                            <button className="disponibilidad-button" onClick={this.handleReserva}>Reservar</button>
+                            <button className="reserva-button" onClick={this.handleReserva}>Reservar</button>
                         </div>
                     </div>
                 </div>

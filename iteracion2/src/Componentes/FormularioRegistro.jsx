@@ -35,9 +35,7 @@ const RegistroUsuario = () => {
                         type="date"
                         className="entrada-registro"
                     />
-                </div>
-
-                
+                </div>  
             </div>
             <button className="boton-registro">Crear cuenta</button>
         </div>

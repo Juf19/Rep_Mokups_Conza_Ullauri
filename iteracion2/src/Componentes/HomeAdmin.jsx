@@ -5,26 +5,26 @@ import ItemHeaderA from "./ItemHeaderA";
 
 const HomeAdmin = () => {
   return (
-    <div>
+    <div className="App">
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
     <div className="container1">
       <div className="sidebar">
         <div className="icon">
           <img
-            src="Parque.jpeg" // Reemplaza con tu imagen de árbol y banca
+            src="Parque.jpeg" 
             alt="Parque"
           />
         </div>
         <div className="icon">
           <img
-            src="Cancha.jpeg" // Reemplaza con tu imagen de cancha
+            src="Cancha.jpeg" 
             alt="Cancha"
           />
         </div>
         <div className="icon">
           <img
-            src="Usuario.jpeg" // Reemplaza con tu imagen de usuarios
+            src="Usuario.jpeg" 
             alt="Usuarios"
           />
         </div>

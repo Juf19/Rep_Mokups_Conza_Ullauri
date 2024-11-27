@@ -6,7 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.espaciadocancha{
+  margin-bottom: 10px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -204,14 +206,14 @@ h2 {
   font-size: 16px;
 }
 
-.disponibilidad-button {
+.reserva-button {
   background-color: #1575ba;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   width: 150px;
-  height: 50px;
+  height: 40px;
 }
 
 .map {
@@ -244,11 +246,13 @@ h3 {
   text-align: start;
   margin-left: 30px;
 }
-span{
-  font-size: 25px;
-  text-align: start;
-  margin-left: 20px;
+/* Estilo para el label que contiene el checkbox y el texto */
+/* Asegúrate de que el label se comporte como un contenedor flex */
 
+input[type="checkbox"] {
+  width: 20px;              /* Define un tamaño adecuado para el checkbox */
+  height: 20px;             /* Define un tamaño adecuado para el checkbox */
+  margin-right: 10px;       /* Espacio entre el checkbox y el texto */
 }
 
 label, input{
@@ -257,10 +261,13 @@ label, input{
   margin-left: 35px;
   font-size: 30px;
 }
-.rojo{
+.rojo1{
   margin: 20px;
   background-color: #fd2b2b;
 }
-.rojo:hover {
+.rojo1:hover {
   background-color: #e04343;
+}
+.rojo{
+  height: 40px;
 }
