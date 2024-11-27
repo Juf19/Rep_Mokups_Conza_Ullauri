@@ -75,12 +75,6 @@ const AdminNuevaCancha = () => {
                                         <button className="boton-agregar">+</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>8-9</td>
-                                    <td>
-                                        <button className="boton-eliminar">−</button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <div className='pie'>
