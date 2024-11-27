@@ -8,7 +8,7 @@ const HomeAdmin = () => {
     <div>
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
-    <div className="container">
+    <div className="container1">
       <div className="sidebar">
         <div className="icon">
           <img
