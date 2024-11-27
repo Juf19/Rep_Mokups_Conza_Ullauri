@@ -13,17 +13,17 @@ const BotonConFlecha = () => {
     fontSize: '16px',
     cursor: 'pointer',
     width: '150px',
+    height: '50px',
   };
 
   const estiloTriangulo = {
-  width: 0,
-  height: 0,
-  borderTop: '10px solid transparent', 
-  borderBottom: '10px solid transparent',
-  borderLeft: '10px solid #e4282f', // Cambié borderRight a borderLeft
-  marginLeft: '10px', // Espacio entre el triángulo y el texto (a la izquierda)
-};
-
+    width: 0,
+    height: 0,
+    borderTop: '10px solid transparent', // Triángulo rojo
+    borderBottom: '10px solid transparent',
+    borderRight: '10px solid red',
+    marginRight: '10px', // Espacio entre el triángulo y el texto
+  };
 
   return (
     <div className='btn'>

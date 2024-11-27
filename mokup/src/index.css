@@ -215,8 +215,8 @@ width: 100%;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 30px;
-  width: 50%;
+  border-radius: 5px;
+  width: 150px;
   height: 50px;
 }
 
@@ -263,4 +263,10 @@ label, input{
   margin-left: 35px;
   font-size: 30px;
 }
-
+.rojo{
+  margin: 20px;
+  background-color: #fd2b2b;
+}
+.btn{
+  margin-left: 50%;
+}

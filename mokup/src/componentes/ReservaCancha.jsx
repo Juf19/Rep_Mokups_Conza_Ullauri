@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BotonConFlecha from './BotonConFlecha'
 
 class ReservaCancha extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class ReservaCancha extends Component {
   };
   handleReserva = () => {
     alert(`Reservado`);
-};
+  };
 
   render() {
     return (
@@ -41,14 +42,14 @@ class ReservaCancha extends Component {
         <h3>Seleccione el horario</h3>
         <div className='menuh'>
           <button className='horario'>8-9</button>
-          <button className='horario'>9-10</button>
-          <button className='horario'>10-11</button>
-          <button className='horario'>11-12</button>
-          <button className='horario'>12-13</button>
-          <button className='horario'>13-14</button>
-          <button className='horario'>14-15</button>
-          <button className='horario'>15-16</button>
-          <button className='horario'>16-17</button>
+          <button className='rojo'>9-10</button>
+          <button className='rojo'>10-11</button>
+          <button className='rojo'>11-12</button>
+          <button className='rojo'>12-13</button>
+          <button className='rojo'>13-14</button>
+          <button className='rojo'>14-15</button>
+          <button className='rojo'>15-16</button>
+          <button className='rojo'>16-17</button>
           <button className='horario'>17-18</button>
           <button className='horario'>18-19</button>
 
@@ -63,14 +64,14 @@ class ReservaCancha extends Component {
           <span> Usted está aceptando que cumplirá con el horario establecido y que en caso de cancelar lo realizará con al menos 48 horas de antelación</span>
         </label>
         <div className="form1">
-        <div className='item1'>
-        <button className="disponibilidad-button"> Atras </button>
+          <div className='item1'>
+            <BotonConFlecha></BotonConFlecha>
+          </div>
+          <div className='item1'>
+            <button className="disponibilidad-button" onClick={this.handleReserva}>Reservar</button>
+          </div>
         </div>
-        <div className='item1'>
-        <button className="disponibilidad-button" onClick={this.handleReserva}>Reservar</button>
-        </div>
-        </div>
-        
+
       </div>
     );
   }
