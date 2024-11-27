@@ -267,6 +267,6 @@ label, input{
   margin: 20px;
   background-color: #fd2b2b;
 }
-.btn{
-  margin-left: 50%;
+.rojo:hover {
+  background-color: #e04343;
 }

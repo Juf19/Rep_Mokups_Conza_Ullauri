@@ -17,6 +17,9 @@ function App7 () {
             <TablaReservas></TablaReservas>
             <div className="espacio">
             <BotonConFlecha></BotonConFlecha>
+            <div className='derecha'>
+            <button className='rojo'>Cancelar</button>
+            </div>
             </div>
         </div>
 

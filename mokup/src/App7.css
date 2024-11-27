@@ -31,20 +31,40 @@
   .tabla-reservas tbody tr:hover {
     background-color: #f1f1f1;
   }
-  .espacio{
-    margin-left: 1%;
-  }
-  /* Estilo para la clase "izquierda", usando flexbox */
+
+  .espacio {
+    display: flex;               /* Activa el modelo de Flexbox */
+    justify-content: flex-start; /* Alinea el contenido al principio (izquierda) */
+    align-items: center;  
+    align-content: center;      /* Alinea verticalmente al centro si es necesario */
+    width: 100%;                 /* Asegura que ocupe todo el ancho disponible */
+    margin: 0;                   /* Asegura que no haya márgenes inesperados */
+}
+
+/* Asegúrate de que el contenedor derecha no afecta el botón */
 .derecha {
-    display: flex;               /* Activa flexbox */
-    justify-content: flex-end;   /* Alinea el contenido al final (a la derecha) */
-    align-items: flex-start;     /* Alinea el contenido al principio de la línea verticalmente */
-    width: 100%;                 /* Se asegura de que ocupe todo el ancho disponible */
-  }
+    display: flex;
+    justify-content: flex-end;   /* Este solo debe usarse si quieres alinear otros elementos a la derecha */
+    align-items: flex-start;
+    width: 100%;
+}
   
   /* Estilo para el CalendarioRectangulo si deseas darle un tamaño específico */
   .CalendarioRectangulo {
     width: auto;  /* Deja que el calendario ocupe solo el espacio necesario */
     /* Puedes añadir un ancho fijo si lo deseas, por ejemplo: width: 300px; */
   }
+.rojo{
+  margin-right: 200px;
+  height: 50px;
+  width: 150px;
+  background-color: #fd2b2b;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
   
+}
+.btn{
+  margin-left: 20%;
+}
+
