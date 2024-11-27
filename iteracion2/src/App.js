@@ -27,14 +27,16 @@ import UsReservas from './Componentes/UsReservas';
 import UsDisponibilidadH from './Componentes/UsDisponibilidadH';
 import AdminPerfil from './Componentes/AdminPerfil';
 import AdminNuevaCancha from './Componentes/AdminNuevaCancha';
-import UsSelectorCancha from './Componentes/UsSelectorCancha';
+import UsSeleccionarCancha from './Componentes/UsSeleccionarCancha';
+
+
 
 function App() {
   return (
     <div className="App">
       <Inicio></Inicio>
       <ListaParques></ListaParques>
-      <UsSelectorCancha></UsSelectorCancha>
+     <UsSeleccionarCancha></UsSeleccionarCancha>
      <UsReservaCancha></UsReservaCancha>
      <UsConfirmacion></UsConfirmacion>
      <FormularioRegistro></FormularioRegistro>

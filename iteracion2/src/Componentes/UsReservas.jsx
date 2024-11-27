@@ -2,6 +2,7 @@ import React from "react";
 import ItemBajoHeader from "./ItemBajoHeader";
 import ItemHeader from "./ItemHeader";
 import BotonConFlecha from "./BotonConFlecha";
+import CalendarioRectangulo from "./CalendarioRectangulo";
 
 const UsReservas = () => {
     // Datos ficticios de la tabla
@@ -16,6 +17,7 @@ const UsReservas = () => {
         <div>
             <ItemHeader></ItemHeader>
             <ItemBajoHeader></ItemBajoHeader>
+            <CalendarioRectangulo></CalendarioRectangulo>
             <div style={{ padding: "20px" }}>
                 <table className="tabla-reservas">
                     <thead>

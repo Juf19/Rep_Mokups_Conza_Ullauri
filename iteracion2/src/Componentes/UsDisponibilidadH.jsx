@@ -1,45 +1,24 @@
-import React from 'react';
-import ItemHorarios from './ItemHorarios';
+import React from "react";
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
+import CalendarioRectangulo from './CalendarioRectangulo';
+import HorariosMok from './HorariosMok';
 import BotonConFlecha from './BotonConFlecha';
 
-const UsDisponibilidadH = () => {
+const texto = [{ nombre: "HORARIO" }]
+function UsDisponibilidadH () {
     return (
-        <div>
-            <ItemHeader />
-            <ItemBajoHeader />
-            <div className='disponibilidad-container'>
-                <select value='todos' className='disponibilidad-select'>
-                    <option value="">Todos</option>
-                    <option value="C-F1">C-F1</option>
-                    <option value="C-F2">C-F2</option>
-                    <option value="C-F3">C-F3</option>
-                </select>
-                <div className='disponibilidad-row'>
-                    <label className='disponibilidad-label'>Cancha C-F1</label>
-                    <ItemHorarios />
-                </div>
-                <div className='disponibilidad-row'>
-                    <label className='disponibilidad-label'>Cancha C-F2</label>
-                    <ItemHorarios />
-                </div>
-                <div className='disponibilidad-row'>
-                    <label className='disponibilidad-label'>Cancha C-B1</label>
-                    <ItemHorarios />
-                </div>
-                <div className='disponibilidad-row'>
-                    <label className='disponibilidad-label'>Cancha C-B2</label>
-                    <ItemHorarios />
-                </div>
-                <div className='disponibilidad-row'>
-                    <label className='disponibilidad-label'>Cancha C-B3</label>
-                    <ItemHorarios />
-                </div>
+        <div className="App">
+           <ItemHeader></ItemHeader>
+            <ItemBajoHeader nombre={texto[0].nombre}></ItemBajoHeader>
+            <div className='derecha'>
+            <CalendarioRectangulo></CalendarioRectangulo>
             </div>
+            <HorariosMok></HorariosMok>
             <BotonConFlecha></BotonConFlecha>
         </div>
-    );
-};
 
+
+    )
+}
 export default UsDisponibilidadH;
