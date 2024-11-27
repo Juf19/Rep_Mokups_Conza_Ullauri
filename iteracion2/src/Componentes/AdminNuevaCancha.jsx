@@ -5,7 +5,7 @@ import BotonConFlecha from './BotonConFlecha';
 
 const AdminNuevaCancha = () => {
     // Estado para controlar el valor del input de nombre
-    const [nombre, setNombre] = useState("C-F1");
+    const [nombre, setNombre] = useState("");
 
     // Manejar cambios en el input
     const handleNombreChange = (event) => {
