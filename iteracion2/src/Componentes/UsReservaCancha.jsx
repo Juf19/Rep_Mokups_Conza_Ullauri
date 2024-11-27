@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
 import BotonConFlecha from './BotonConFlecha';
+import CalendarioRectangulo from './CalendarioRectangulo';
 
 class UsReservaCancha extends Component {
 
@@ -37,6 +38,10 @@ class UsReservaCancha extends Component {
             <div className='espaciadocancha'>
                 <ItemHeader></ItemHeader>
                 <ItemBajoHeader nombre={this.texto[0].nombre}></ItemBajoHeader>
+                <div className='derecha'>
+                <CalendarioRectangulo></CalendarioRectangulo>
+                </div>
+                
                 <div className='app'>
                     <h3>Seleccione el número de horas que desea reservar</h3>
                     <div className='radioB'>
