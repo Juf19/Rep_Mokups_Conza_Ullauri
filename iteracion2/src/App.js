@@ -1,9 +1,9 @@
-
 import './App.css';
 import "./Estilos/NuevoParque.css";
 import "./Estilos/NuevoUsuario.css";
 import "./Estilos/Registro.css";
 import "./Estilos/Inicio.css";
+import "./Estilos/ListaParques.css";
 
 import AdminCancha from './Componentes/AdminCancha';
 import FormularioRegistro from './Componentes/FormularioRegistro';
@@ -15,11 +15,15 @@ import EditarCancha from './Componentes/EditarCancha';
 import UsuarioNuevo from './Componentes/UsuarioNuevo';
 import ParqueNuevo from './Componentes/ParqueNuevo';
 import Inicio from './Componentes/Inicio';
+import ListaParques from './Componentes/ListaParques';
+import UsReservaCancha from './Componentes/UsReservaCancha';
 
 function App() {
   return (
     <div className="App">
       <Inicio></Inicio>
+      <ListaParques></ListaParques>
+     <UsReservaCancha></UsReservaCancha>
       <HomeAdmin></HomeAdmin>
       <AdminCancha></AdminCancha>
       <FormularioRegistro></FormularioRegistro>
