@@ -1,0 +1,33 @@
+.contenedorp {
+    margin: 5% 5% 3% 5%;
+    display: flex;
+    color: aliceblue;
+    font-size: 60px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    background-color: #27357d;
+    height: 50vh; /* Ocupa toda la altura de la ventana */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    padding: 0 20px; /* Agrega un poco de espacio alrededor del contenido */
+    border-radius: 20px;
+}
+.item1 {
+    display: flex; /* Activa Flexbox en el contenedor */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    width: 100%; /* Asegura que ocupe el ancho completo del contenedor */
+}
+.disponibilidad-button {
+    margin-top: 0;
+    padding: 10px 20px;
+    background-color: #1575ba;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.disponibilidad-button:hover {
+    background-color: #0e5b8b;
+}
