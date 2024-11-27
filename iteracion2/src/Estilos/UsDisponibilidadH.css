@@ -37,11 +37,13 @@
     display: flex;               /* Activa flexbox */
     justify-content: flex-end;   /* Alinea el contenido al final (a la derecha) */
     align-items: flex-start;     /* Alinea el contenido al principio de la línea verticalmente */
-    width: 100%;                 /* Se asegura de que ocupe todo el ancho disponible */
+    width: 100%;  
+                   /* Se asegura de que ocupe todo el ancho disponible */
   }
   
   /* Estilo para el CalendarioRectangulo si deseas darle un tamaño específico */
   .CalendarioRectangulo {
     width: auto;  /* Deja que el calendario ocupe solo el espacio necesario */
-    /* Puedes añadir un ancho fijo si lo deseas, por ejemplo: width: 300px; */
+    
+    
   }

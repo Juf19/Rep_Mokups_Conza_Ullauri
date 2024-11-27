@@ -25,6 +25,7 @@ const CalendarioRectangulo = () => {
           alignItems: 'center',
           cursor: 'pointer',
           borderRadius: '8px',
+          marginLeft:"850px",
         }}
         onClick={toggleCalendario}
       >

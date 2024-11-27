@@ -3,7 +3,7 @@ import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
 import CalendarioRectangulo from './CalendarioRectangulo';
 import HorariosMok from './HorariosMok';
-import BotonConFlecha from './BotonConFlecha';
+
 
 const texto = [{ nombre: "HORARIO" }]
 function UsDisponibilidadH () {
@@ -15,7 +15,7 @@ function UsDisponibilidadH () {
             <CalendarioRectangulo></CalendarioRectangulo>
             </div>
             <HorariosMok></HorariosMok>
-            <BotonConFlecha></BotonConFlecha>
+        
         </div>
 
 

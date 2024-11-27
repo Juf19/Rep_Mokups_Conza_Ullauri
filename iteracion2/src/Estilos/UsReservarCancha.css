@@ -1,0 +1,47 @@
+.radioB{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.radio1, .radio2{
+    display: flex;
+    flex-direction: row;
+    flex:1;
+    margin: 0px;
+    
+}
+
+.radio1{
+    margin-left: 500px;
+}
+.textofinal{
+    display: flex;
+    flex-direction: row;
+    width: 25px;
+    height: 25px;
+    font-size: 30px;
+    
+}
+
+
+  
+  .radiosPrimeros{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+  }
+
+  .ckb, .txt{
+    flex:1;
+  }
+
+  
+
+  
+  
+  
+  
+  

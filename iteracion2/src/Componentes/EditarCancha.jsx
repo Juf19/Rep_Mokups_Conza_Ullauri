@@ -19,13 +19,13 @@ const EditarCancha = () => {
             <div className="contenedor">
                 <div className="encabezado">
                     <label>Nombre</label>
-                    <input 
-                        type="text" 
-                        className="input-nombre" 
-                        value={nombre} 
-                        onChange={handleNombreChange} 
+                    <input
+                        type="text"
+                        className="input-nombre"
+                        value={nombre}
+                        onChange={handleNombreChange}
                     />
-                </div> 
+                </div>
 
                 <div className="seccion-tabla">
                     <div className="desplegable">

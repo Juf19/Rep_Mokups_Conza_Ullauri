@@ -147,6 +147,9 @@ h2 {
   padding: 20px;
 }
 .left-content {
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-top: 0;
   display: flex;
   width: 50%;
   padding: 20px;
@@ -212,9 +215,8 @@ width: 100%;
   color: white;
   border: none;
   cursor: pointer;
-  margin-top: 80px;
-  border-radius: 30px;
-  width: 50%;
+  border-radius: 5px;
+  width: 150px;
   height: 50px;
 }
 
@@ -261,6 +263,10 @@ label, input{
   margin-left: 35px;
   font-size: 30px;
 }
-
-
-
+.rojo{
+  margin: 20px;
+  background-color: #fd2b2b;
+}
+.rojo:hover {
+  background-color: #e04343;
+}

@@ -40,18 +40,16 @@ const UsuarioNuevo = () => {
               <input type="text" placeholder="Ingrese su correo electronico" className="in" />
             </div>
             <div className="rol">
-              
-            <button type="submit" className="btn-save">Guardar</button>
-            
               <div className="form-group1">
                 <label className="l">Rol</label>
                 <select>
                   <option value="Administrador">Administrador</option>
                   <option value="Usuario">Usuario</option>
                 </select>
-                
               </div>
-              
+            
+                <button type="submit" className="btn-save">Guardar</button>
+             
             </div>
           </div>
 

@@ -40,10 +40,8 @@
   }
   
   label {
-    
     text-align: center;
     margin-bottom: 5px;
-    
     font-size: 20px;
     padding-right: 100px;
   }
@@ -68,10 +66,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #1575ba;
     color: white;
-    max-width: 100px;
-    max-height: 35px;
+    max-width: 150px;
+    height: 45px;
+    
+
   }
   
   .btn-save:hover {
@@ -93,6 +93,6 @@
   .rol{
     display: flex;
     flex-direction: row;
-    align-items:center;
+    justify-content: space-evenly;
 
   }

@@ -8,6 +8,7 @@ import "./Estilos/UsConfirmacion.css";
 import "./Estilos/UsPerfil.css";
 import "./Estilos/UsReservas.css";
 import "./Estilos/UsDisponibilidadH.css";
+import "./Estilos/UsReservarCancha.css";
 
 import AdminCancha from './Componentes/AdminCancha';
 import FormularioRegistro from './Componentes/FormularioRegistro';

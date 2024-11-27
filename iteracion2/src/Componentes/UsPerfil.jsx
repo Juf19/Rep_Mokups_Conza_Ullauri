@@ -1,7 +1,12 @@
 import React from 'react';
+import ItemHeader from './ItemHeader';
+import ItemBajoHeader from './ItemBajoHeader';
 
 const UsPerfil = () => {
   return (
+    <div>
+      <ItemHeader></ItemHeader>
+      <ItemBajoHeader></ItemBajoHeader>
     <div className="perfil-card">
     <div className="perfil-imagen">
       <img src="logo_persona.png" alt="logoPersona" id="p" />
@@ -25,6 +30,7 @@ const UsPerfil = () => {
         <input type="text" className="perfil-dato" placeholder="11/05/1995"/>
       </div>
     </div>
+  </div>
   </div>
   );
 };

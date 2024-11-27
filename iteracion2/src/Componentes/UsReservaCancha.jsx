@@ -4,6 +4,8 @@ import ItemBajoHeader from './ItemBajoHeader';
 import BotonConFlecha from './BotonConFlecha';
 
 class UsReservaCancha extends Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +14,8 @@ class UsReservaCancha extends Component {
             aceptarTerminos: false
         };
     }
+
+    texto = [{ nombre: "CANCHA 1" }]
 
     handleHorasChange = (event) => {
         this.setState({ horas: event.target.value });
@@ -32,18 +36,21 @@ class UsReservaCancha extends Component {
         return (
             <div>
                 <ItemHeader></ItemHeader>
-                <ItemBajoHeader></ItemBajoHeader>
+                <ItemBajoHeader nombre={this.texto[0].nombre}></ItemBajoHeader>
                 <div className='app'>
                     <h3>Seleccione el número de horas que desea reservar</h3>
-                    <label>
-                        <input type="radio" value="1" checked={this.state.horas === '1'} onChange={this.handleHorasChange} />
-                        1
-                    </label>
-                    <label>
-                        <input type="radio" value="2" checked={this.state.horas === '2'} onChange={this.handleHorasChange} />
-                        2
-                    </label>
-
+                    <div className='radioB'>
+                        <div className='radio1'>
+                            <label className='radiosPrimeros'>
+                                <input type="radio" value="1" checked={this.state.horas === '1'} onChange={this.handleHorasChange} /> 1
+                            </label>
+                        </div>
+                        <div className='radio2'>
+                            <label className='radiosPrimeros'>
+                                <input type="radio" value="2" checked={this.state.horas === '2'} onChange={this.handleHorasChange} />  2
+                            </label>
+                        </div>
+                    </div>
                     <h3>Seleccione el horario</h3>
                     <div className='menuh'>
                         <button className='horario'>8-9</button>
@@ -60,7 +67,7 @@ class UsReservaCancha extends Component {
 
                     </div>
                     <h3>Aceptar términos y condiciones</h3>
-                    <label>
+                    <label className='textofinal'>
                         <input
                             type="checkbox"
                             checked={this.state.aceptarTerminos}

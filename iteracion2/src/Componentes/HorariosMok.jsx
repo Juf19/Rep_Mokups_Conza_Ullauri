@@ -1,10 +1,10 @@
 import React from 'react';
 import ItemHorarios from './ItemHorarios';
+import BotonConFlecha from './BotonConFlecha';
 
 const UsDisponibilidadH = () => {
     return (
         <div>
- 
             <div className='disponibilidad-container'>
                 <select value='todos' className='disponibilidad-select'>
                     <option value="">Todos</option>
@@ -32,7 +32,9 @@ const UsDisponibilidadH = () => {
                     <label className='disponibilidad-label'>Cancha C-B3</label>
                     <ItemHorarios />
                 </div>
+                
             </div>
+            <BotonConFlecha></BotonConFlecha>
         </div>
     );
 };
