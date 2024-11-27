@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ItemHeader from './ItemHeaderA';
+import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
 import BotonConFlecha from './BotonConFlecha';
 
