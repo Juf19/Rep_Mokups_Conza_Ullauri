@@ -18,7 +18,7 @@ class Inicio extends Component {
                                 />
                             </div>
                             <div className="inicio-text">
-                                <h1>Distrito Metropolitano de "QUITO"</h1>
+                                <h1 className='si'>Distrito Metropolitano de "QUITO"</h1>
                                 <h2>¡Bienvenidos!</h2>
                                 <div className="inicio-linea-gris"></div>
                                 <p>Sistema de reservación de cancha</p>
