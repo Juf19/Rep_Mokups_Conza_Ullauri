@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import BotonSig from './BotonSig';
+
 class SelectorCancha extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +44,7 @@ class SelectorCancha extends Component {
                 </div>
                 <div className='item'>
                     <button className="disponibilidad-button" onClick={this.handleDisponibilidad}>Disponibilidad</button>
+                    <BotonSig></BotonSig>
                 </div>
             </div>
         );
