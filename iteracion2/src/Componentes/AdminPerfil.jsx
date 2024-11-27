@@ -17,11 +17,11 @@ const AdminPerfil = () => {
         <div className="perfil-informacion">
           <div className="perfil-item">
             <label>Nombre</label>
-            <input type="text" className="perfil-dato" placeholder="Jhuliet Conza" />
+            <input type="text" className="perfil-dato" placeholder="Jorge Ullauri" />
           </div>
           <div className="perfil-item">
             <label>Correo electrónico</label>
-            <input type="email" className="perfil-dato" placeholder="jhulietconza@gmail.com" />
+            <input type="email" className="perfil-dato" placeholder="jorgeullauri@gmail.com" />
           </div>
           <div className="perfil-item">
             <label>Cédula</label>
@@ -29,7 +29,7 @@ const AdminPerfil = () => {
           </div>
           <div className="perfil-item">
             <label>Fecha de nacimiento</label>
-            <input type="text" className="perfil-dato" placeholder="11/05/1995" />
+            <input type="text" className="perfil-dato" placeholder="19/08/1999" />
           </div>
         </div>
       </div>
