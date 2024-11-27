@@ -6,7 +6,6 @@ import ItemBajoHeader from './componentes/ItemBajoHeader';
 import SelectorCancha from './componentes/SelectorCancha';
 import MapContainer from './componentes/MapContainer';
 
-
 const texto = [{ nombre: "LA CAROLINA" }]
 class App extends React.Component {
   render() {
