@@ -29,7 +29,7 @@ import UsDisponibilidadH from './Componentes/UsDisponibilidadH';
 import AdminPerfil from './Componentes/AdminPerfil';
 import AdminNuevaCancha from './Componentes/AdminNuevaCancha';
 import UsSeleccionarCancha from './Componentes/UsSeleccionarCancha';
-import TablasTodoAdmin from './Componentes/TablasTodoAdmin';
+import AdminParqueCrud from './Componentes/AdminParqueCrud';
 
 
 
@@ -55,7 +55,7 @@ function App() {
       <EditarCancha></EditarCancha>
       <UsuarioNuevo></UsuarioNuevo>
       <ParqueNuevo></ParqueNuevo>
-      <TablasTodoAdmin></TablasTodoAdmin>
+      <AdminParqueCrud></AdminParqueCrud>
     </div>
   );
 }
