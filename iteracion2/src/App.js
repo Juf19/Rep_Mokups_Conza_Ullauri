@@ -30,6 +30,7 @@ import AdminPerfil from './Componentes/AdminPerfil';
 import AdminNuevaCancha from './Componentes/AdminNuevaCancha';
 import UsSeleccionarCancha from './Componentes/UsSeleccionarCancha';
 import AdminParqueCrud from './Componentes/AdminParqueCrud';
+import AdminUserCrud from './Componentes/AdminUserCrud';
 
 
 
@@ -56,6 +57,8 @@ function App() {
       <UsuarioNuevo></UsuarioNuevo>
       <ParqueNuevo></ParqueNuevo>
       <AdminParqueCrud></AdminParqueCrud>
+      <AdminUserCrud></AdminUserCrud>
+
     </div>
   );
 }
