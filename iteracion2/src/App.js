@@ -41,6 +41,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<HomeAdmin/>}></Route>
+        <Route path={"/Usuario"} element={<AdminUserCrud></AdminUserCrud>}></Route>
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
         <Route path={"/editarUsuario/:id"} element={<UsReservaCancha/>}></Route>
       </Routes>

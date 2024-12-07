@@ -36,8 +36,8 @@ const UsuarioNuevo = () => {
               <input type="text" placeholder="Ingrese la cédula" className="in" />
             </div>
             <div className="form-group">
-              <label>Correo electrónico</label>
-              <input type="text" placeholder="Ingrese su correo electronico" className="in" />
+              <label>Contrasena</label>
+              <input type="text" placeholder="Ingrese su contrasena" className="in" />
             </div>
             <div className="rol">
               <div className="form-group1">
