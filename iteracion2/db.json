@@ -1,0 +1,29 @@
+{
+    "usuarios": [
+      {
+        "id": 1,
+        "nombre": "Jorge Ullauri",
+        "correo": "jhu@gmail.com",
+        "cedula": "1753758760",
+        "fechaNacimiento": "2024-05-17",
+        "password": "12345"
+      },
+      {
+        "id": 2,
+        "nombre": "María López",
+        "correo": "maria.lopez@example.com",
+        "cedula": "0957483921",
+        "fechaNacimiento": "1990-11-22",
+        "password": "67890"
+      },
+      {
+        "id": 3,
+        "nombre": "Carlos Pérez",
+        "correo": "carlos.perez@example.com",
+        "cedula": "0805467321",
+        "fechaNacimiento": "1985-07-15",
+        "password": "abcd1234"
+      }
+    ]
+  }
+  

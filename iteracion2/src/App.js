@@ -1,4 +1,5 @@
 import './App.css';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import "./Estilos/NuevoParque.css";
 import "./Estilos/NuevoUsuario.css";
 import "./Estilos/Registro.css";
@@ -37,31 +38,38 @@ import AdminCanchasenParqueCrud from './Componentes/AdminCanchasenParqueCrud';
 function App() {
   return (
     <div className="App">
-      <Inicio></Inicio>
-      <ListaParques></ListaParques>
-     <UsSeleccionarCancha></UsSeleccionarCancha>
-     <UsReservaCancha></UsReservaCancha>
-     <UsConfirmacion></UsConfirmacion>
-     <FormularioRegistro></FormularioRegistro>
-     <UsPerfil></UsPerfil>
-     <UsReservas></UsReservas>
-     <UsDisponibilidadH></UsDisponibilidadH>
-      <HomeAdmin></HomeAdmin>
-      <AdminCancha></AdminCancha>
-      <AdminNuevaCancha></AdminNuevaCancha>
-      <AdminPerfil></AdminPerfil>
-      <NuevoParque></NuevoParque>
-      <Nuevacancha></Nuevacancha>
-      <NuevoUsuario></NuevoUsuario>
-      <EditarCancha></EditarCancha>
-      <UsuarioNuevo></UsuarioNuevo>
-      <ParqueNuevo></ParqueNuevo>
-      <AdminParqueCrud></AdminParqueCrud>
-      <AdminUserCrud></AdminUserCrud>
-      <AdminCanchasenParqueCrud></AdminCanchasenParqueCrud> 
-
+      <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<HomeAdmin/>}></Route>
+        <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
+        <Route path={"/editarUsuario/:id"} element={<UsReservaCancha/>}></Route>
+      </Routes>
+    </BrowserRouter>
     </div>
   );
 }
+
+/*<Inicio></Inicio>
+<ListaParques></ListaParques>
+<UsSeleccionarCancha></UsSeleccionarCancha>
+<UsReservaCancha></UsReservaCancha>
+<UsConfirmacion></UsConfirmacion>
+<FormularioRegistro></FormularioRegistro>
+<UsPerfil></UsPerfil>
+<UsReservas></UsReservas>
+<UsDisponibilidadH></UsDisponibilidadH>
+<HomeAdmin></HomeAdmin>
+<AdminCancha></AdminCancha>
+<AdminNuevaCancha></AdminNuevaCancha>
+<AdminPerfil></AdminPerfil>
+<NuevoParque></NuevoParque>
+<Nuevacancha></Nuevacancha>
+<NuevoUsuario></NuevoUsuario>
+<EditarCancha></EditarCancha>
+<UsuarioNuevo></UsuarioNuevo>
+<ParqueNuevo></ParqueNuevo>
+<AdminParqueCrud></AdminParqueCrud>
+<AdminUserCrud></AdminUserCrud>
+<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud> */
 
 export default App;
