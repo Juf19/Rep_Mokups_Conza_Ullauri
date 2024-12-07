@@ -19,7 +19,7 @@ const AdimParqueCrud = () => {
     <div>
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
-      <TablasTodoAdmin items={item} data={parques}></TablasTodoAdmin>
+      <TablasTodoAdmin items={item} data={parques} showCanchasButton={true} />
     </div>
   );
 

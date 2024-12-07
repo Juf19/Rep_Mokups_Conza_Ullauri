@@ -1,6 +1,6 @@
 
 import React from "react";
-const TablasTodoAdmin = ({ items, data }) => {
+const TablasTodoAdmin = ({ items, data, showCanchasButton }) => {
     // Datos ficticios de la tabla
 
     return (
@@ -21,7 +21,8 @@ const TablasTodoAdmin = ({ items, data }) => {
                 <button>Actualizar</button>
                 <button>Borrar</button>
                 <button>Detalle</button>
-                <button>Canchas</button>
+                {/* Mostrar el botón "Canchas" solo si showCanchasButton es true */}
+                {showCanchasButton && <button>Canchas</button>}
                 </td>
               </tr>
             ))}

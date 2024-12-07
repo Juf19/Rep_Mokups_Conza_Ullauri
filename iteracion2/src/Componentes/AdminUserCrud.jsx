@@ -8,6 +8,7 @@ const AdimUserCrud = () => {
     { nombre: "Jorge Ullauri" },
     { nombre: "Jhuliet Conza" },
   ];
+
   const item = [
     { nombre: "Usuarios" },
     { accion: "Acción" }
