@@ -4,7 +4,7 @@ import ItemHeaderA from "./ItemHeaderA";
 import ItemBajoHeader from "./ItemBajoHeader";
 
 const AdimUserCrud = () => {
-  const parques = [
+  const usuarios = [
     { nombre: "Jorge Ullauri" },
     { nombre: "Jhuliet Conza" },
   ];
@@ -18,7 +18,7 @@ const AdimUserCrud = () => {
     <div>
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
-      <TablasTodoAdmin items={item} data={parques}></TablasTodoAdmin>
+      <TablasTodoAdmin items={item} data={usuarios}></TablasTodoAdmin>
     </div>
   );
 
