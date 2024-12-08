@@ -11,6 +11,7 @@ const AdminUsuarioEditar = () => {
         correoelectronico: "",
         cedula: "",
         contrasena: "",
+        fechaNacimiento: "",
         rol: "" // Añadimos el campo rol al estado
       });
 
@@ -59,20 +60,24 @@ const AdminUsuarioEditar = () => {
         <form onSubmit={handleActualizarUsuario} className="form">
           <div className="datos">
             <div className="form-group">
-              <label>Nombre</label>
+              <label>Nombre:</label>
               <input type="text"  className="in" name="nombre" value={usuario.nombre} onChange={handleUsuario} />
             </div>
             <div className="form-group">
-              <label>Correo electrónico</label>
+              <label>Correo electrónico:</label>
               <input type="email"  className="in" name="correoelectronico" value={usuario.correoelectronico} onChange={handleUsuario} />
             </div>
             <div className="form-group">
-              <label>Cédula</label>
+              <label>Cédula:</label>
               <input maxLength={10}
                 minLength={10} type="number"  className="in" name="cedula" value={usuario.cedula} onChange={handleUsuario} />
             </div>
             <div className="form-group">
-              <label>Contraseña</label>
+              <label>Fecha de nacimiento:</label>
+              <input type="date"  className="in" name="fechaNacimiento" value={usuario.fechaNacimiento} onChange={handleUsuario} />
+            </div>
+            <div className="form-group">
+              <label>Contraseña:</label>
               <input type="password"  className="in" name="contrasena" value={usuario.contrasena} onChange={handleUsuario} />
             </div>
             <div className="form-group">

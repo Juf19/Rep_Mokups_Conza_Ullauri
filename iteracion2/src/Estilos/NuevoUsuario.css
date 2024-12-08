@@ -23,8 +23,10 @@
   .form-group {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
     margin-bottom: 15px;
-    margin-right: 250px;
+    margin-right: 300px;
+
     
   }
   .form-group1 {
@@ -32,6 +34,7 @@
     flex-direction: column;
     margin-bottom: 15px;
     max-width: 500px;
+   
     
     
   }
@@ -43,7 +46,8 @@
  
     margin-bottom: 5px;
     font-size: 20px;
-    padding-right: 100px;
+    padding-right: 200px;
+    white-space: nowrap;
   }
   
   input,
@@ -96,4 +100,8 @@
     flex-direction: row;
     justify-content: space-evenly;
 
+  }
+
+  #titulos{
+    text-align: start;
   }

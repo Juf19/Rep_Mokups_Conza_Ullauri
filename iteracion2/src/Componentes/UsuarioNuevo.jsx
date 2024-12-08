@@ -10,6 +10,7 @@ const UsuarioNuevo = (props) => {
     nombre: "",
     correoelectronico: "",
     cedula: "",
+    fechaNacimiento: "",
     contrasena: "",
     rol: "" // Añadimos el campo rol al estado
   });
@@ -52,7 +53,7 @@ const UsuarioNuevo = (props) => {
         <form onSubmit={handleSubmitUsuario} className="form">
           <div className="datos">
             <div className="form-group">
-              <label>Nombre</label>
+              <label>Nombre:</label>
               <input
                 type="text"
                 placeholder="Ingrese el nombre"
@@ -63,34 +64,47 @@ const UsuarioNuevo = (props) => {
               />
             </div>
             <div className="form-group">
-              <label>Correo electrónico</label>
-              <input
-                type="email"
-                placeholder="Ingrese el correo"
-                className="in"
-                name="correoelectronico"
-                value={datosFormUsuario.correoelectronico}
-                onChange={handleAgregarUsuario}
-              />
+             
+                <label>Correo electrónico:</label>
+              
+                <input
+                  type="email"
+                  placeholder="Ingrese el correo"
+                  className="in"
+                  name="correoelectronico"
+                  value={datosFormUsuario.correoelectronico}
+                  onChange={handleAgregarUsuario}
+                />
+              
             </div>
             <div className="form-group">
-              <label>Cédula</label>
+              <label>Cédula:</label>
               <input
                 type="text"
                 placeholder="Ingrese la cédula"
                 className="in"
                 name="cedula"
                 maxLength={10}
-                minLength={10} 
+                minLength={10}
                 value={datosFormUsuario.cedula}
                 onChange={handleAgregarUsuario}
               />
             </div>
             <div className="form-group">
-              <label>Contraseña</label>
+              <label>Fecha de nacimiento:</label>
+              <input
+                type="date"
+                placeholder="Ingrese la fecha de nacimiento"
+                className="in"
+                name="fechanacimiento"
+                value={datosFormUsuario.fechaNacimiento}
+                onChange={handleAgregarUsuario}
+              />
+            </div>
+            <div className="form-group">
+              <label>Contraseña:</label>
               <input
                 type="password"
-                placeholder="Ingrese su contraseña"
                 className="in"
                 name="contrasena"
                 value={datosFormUsuario.contrasena}
