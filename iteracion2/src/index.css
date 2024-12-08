@@ -261,13 +261,7 @@ label, input{
   margin-left: 35px;
   font-size: 30px;
 }
-.rojo1{
-  margin: 20px;
-  background-color: #fd2b2b;
-}
-.rojo1:hover {
-  background-color: #e04343;
-}
+
 .rojo{
   height: 40px;
 }
