@@ -39,6 +39,8 @@ import AdminUserCrud from './Componentes/AdminUserCrud';
 import AdminCanchasenParqueCrud from './Componentes/AdminCanchasenParqueCrud';
 import AdminUsuarioEditar from './Componentes/AdminUsuarioEditar';
 import AdminUserDetalle from './Componentes/AdminUserDetalle';
+import ActualizarParque from './Componentes/ActualizarParque';
+
 
 
 function App() {
@@ -53,6 +55,10 @@ function App() {
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
         <Route path={"/EditarUsuario/:id"} element={<AdminUsuarioEditar></AdminUsuarioEditar>}></Route>
         <Route path={"/DetalleUsuario/:id"} element={<AdminUserDetalle />} />
+        <Route path={"/Parque"} element={<AdminParqueCrud></AdminParqueCrud>}></Route>
+        <Route path={"/nuevoParque"} element={<ParqueNuevo/>}></Route>
+        <Route path={"/editarParque/:id"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
+        <Route path={"/parques/update/:id"} element={<ActualizarParque />}></Route>
       </Routes>
     </BrowserRouter>
     </div>

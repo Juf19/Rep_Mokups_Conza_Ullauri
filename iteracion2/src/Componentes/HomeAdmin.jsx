@@ -30,7 +30,7 @@ const HomeAdmin = () => {
         </div>
       </div>
       <div className="buttons">
-        <button className="button">PARQUES</button>
+        <button onClick={()=>{navigate('/Parque')}} className="button">PARQUES</button>
         <button onClick={()=>{navigate('/Usuario')}} className="button">USUARIOS</button>
       </div>
     </div>
