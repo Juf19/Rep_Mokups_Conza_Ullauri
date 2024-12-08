@@ -40,6 +40,8 @@ import AdminCanchasenParqueCrud from './Componentes/AdminCanchasenParqueCrud';
 import AdminUsuarioEditar from './Componentes/AdminUsuarioEditar';
 import AdminUserDetalle from './Componentes/AdminUserDetalle';
 import ActualizarParque from './Componentes/ActualizarParque';
+import AddParque from './Componentes/AddParque';
+import AdminParqueDetalle from './Componentes/AdminParqueDetalle';
 
 
 
@@ -56,7 +58,8 @@ function App() {
         <Route path={"/EditarUsuario/:id"} element={<AdminUsuarioEditar></AdminUsuarioEditar>}></Route>
         <Route path={"/DetalleUsuario/:id"} element={<AdminUserDetalle />} />
         <Route path={"/Parque"} element={<AdminParqueCrud></AdminParqueCrud>}></Route>
-        <Route path={"/nuevoParque"} element={<ParqueNuevo/>}></Route>
+        <Route path={"/parques/detalle/:id"} element={<AdminParqueDetalle />}/>
+        <Route path={"/parques/new"} element={<AddParque/>}></Route>
         <Route path={"/editarParque/:id"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
         <Route path={"/parques/update/:id"} element={<ActualizarParque />}></Route>
       </Routes>

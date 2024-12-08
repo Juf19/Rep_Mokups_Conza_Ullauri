@@ -6,7 +6,7 @@ import "../Estilos/ActualizarParque.css";
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const ActualizarParque = () => {
+const AdminParqueDetalle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [parques, setParques] = useState({
@@ -27,49 +27,28 @@ const ActualizarParque = () => {
       });
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setParques(prevParques => ({
-      ...prevParques,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.put(`http://localhost:3001/parques/${id}`, parques)
-      .then(response => {
-        console.log('Parques actualizado:', response.data);
-        // navigate(`/setParquess/${id}`);
-        navigate(`/Parque`);
-      })
-      .catch(error => {
-        console.error('Error al actualizar el Parques:', error);
-      });
-  };
-
   return (
     <div>
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
-      <h3>Editar Parque</h3>
-      <form onSubmit={handleSubmit}>
+      <h3>Detalle Parque</h3>
+      <form>
     <div className="parque-informacion">
     
       <div className="perfil-item">
         <label>Nombre</label>
-        <input type="text" name="nombre" className="perfil-dato" value={parques.nombre} onChange={handleChange} />
+        <input type="text" name="nombre" className="perfil-dato" value={parques.nombre} disabled={true} />
       </div>
       <div className="perfil-item">
         <label>Descripcion</label>
-        <input type="text" name="descripcion" className="perfil-dato" value={parques.descripcion} onChange={handleChange}/>
+        <input type="text" name="descripcion" className="perfil-dato" value={parques.descripcion} disabled={true}/>
       </div>
       <div className="perfil-item">
         <label>URL</label>
-        <input type="text" name='url' className="perfil-dato" value={parques.url} onChange={handleChange}/>
+        <input type="text" name='url' className="perfil-dato" value={parques.url} disabled={true}/>
       </div>
       <div className="parte-btn">
-        <button type="submit" className="btn-actualizar">Actualizar</button>
+        <button onClick={() => navigate(`/Parque`)} className="btn-actualizar">Aceptar</button>
       </div>
     
     </div>
@@ -78,4 +57,5 @@ const ActualizarParque = () => {
   );
 };
 
-export default ActualizarParque;
+export default AdminParqueDetalle;
+
