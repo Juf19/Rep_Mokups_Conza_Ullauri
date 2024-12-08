@@ -33,6 +33,7 @@ import UsSeleccionarCancha from './Componentes/UsSeleccionarCancha';
 import AdminParqueCrud from './Componentes/AdminParqueCrud';
 import AdminUserCrud from './Componentes/AdminUserCrud';
 import AdminCanchasenParqueCrud from './Componentes/AdminCanchasenParqueCrud';
+import ActualizarParque from './Componentes/ActualizarParque';
 
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
         <Route path={"/Usuario"} element={<AdminUserCrud></AdminUserCrud>}></Route>
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
         <Route path={"/editarUsuario/:id"} element={<UsReservaCancha/>}></Route>
+        <Route path={"/Parque"} element={<AdminParqueCrud></AdminParqueCrud>}></Route>
+        <Route path={"/nuevoParque"} element={<ParqueNuevo/>}></Route>
+        <Route path={"/editarParque/:id"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
+        <Route path={"/ActulizarParque/:id"} element={<ActualizarParque />}></Route>
       </Routes>
     </BrowserRouter>
     </div>

@@ -2,13 +2,24 @@ import React from "react";
 import TablasTodoAdmin from "./TablasTodoAdmin";
 import ItemHeaderA from "./ItemHeaderA";
 import ItemBajoHeader from "./ItemBajoHeader";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const AdimParqueCrud = () => {
-  const parques = [
-    { nombre: "La Carolina" },
-    { nombre: "Inglés" },
-    { nombre: "Alameda" }
-  ];
+  const navigate=useNavigate();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/parques") // URL 
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los parques:", error);
+      })
+    }, []);
 
   const item = [
     { nombre: "Parques" },
@@ -19,7 +30,31 @@ const AdimParqueCrud = () => {
     <div>
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
-      <TablasTodoAdmin items={item} data={parques} showCanchasButton={true} />
+      <div style={{ padding: "20px" }}>
+        <table className="tabla-reservas">
+          <thead>
+            <tr>
+              <th>{item[0].nombre}</th>
+              <th>{item[1].accion}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((parque, index) => (
+              <tr key={index}>
+
+                <td>{parque.nombre} </td>
+                <td>
+                <button onClick={() => navigate(`/ActualizarParque/${parque.id}`)}>Actualizar</button>
+                <button>Borrar</button>
+                <button>Detalle</button>
+                <button>Canchas</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button className="boton-agregar">+</button>
+      </div>
     </div>
   );
 

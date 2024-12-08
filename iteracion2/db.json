@@ -24,6 +24,23 @@
         "fechaNacimiento": "1985-07-15",
         "password": "abcd1234"
       }
+    ],
+    "parques": [
+      { 
+        "id": 1,
+        "nombre": "La Carolina" ,
+        "descripcion": "Parque La Carolina"
+      },
+      { 
+        "id": 2,
+        "nombre": "Inglés" ,
+        "descripcion": "Parque Inglés"
+      },
+      { 
+        "id": 3,
+        "nombre": "Alameda",
+        "descripcion": "Parque Alameda"
+      }
     ]
   }
   
