@@ -53,7 +53,7 @@ const AddParque = () => {
         <input type="text" name='url' className="perfil-dato" value={nuevoParque.url} onChange={handleAddParque}/>
       </div>
       <div className="parte-btn">
-        <button type="submit" className="btn-actualizar">Agregar</button>
+      <button type="submit" className="btn-save">Guardar</button>
       </div>
     
     </div>

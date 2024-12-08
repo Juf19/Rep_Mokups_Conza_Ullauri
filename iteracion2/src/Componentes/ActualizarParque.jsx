@@ -58,18 +58,18 @@ const ActualizarParque = () => {
     
       <div className="perfil-item">
         <label>Nombre</label>
-        <input type="text" name="nombre" className="perfil-dato" value={parques.nombre} onChange={handleChange} />
+        <input type="text" name="nombre" className="perfil-dato1" value={parques.nombre} onChange={handleChange} />
       </div>
       <div className="perfil-item">
         <label>Descripcion</label>
-        <input type="text" name="descripcion" className="perfil-dato" value={parques.descripcion} onChange={handleChange}/>
+        <input type="text" name="descripcion" className="perfil-dato1" value={parques.descripcion} onChange={handleChange}/>
       </div>
       <div className="perfil-item">
         <label>URL</label>
-        <input type="text" name='url' className="perfil-dato" value={parques.url} onChange={handleChange}/>
+        <input type="text" name='url' className="perfil-dato1" value={parques.url} onChange={handleChange}/>
       </div>
       <div className="parte-btn">
-        <button type="submit" className="btn-actualizar">Actualizar</button>
+      <button type="submit" className="btn-save">Guardar</button>
       </div>
     
     </div>
