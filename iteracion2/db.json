@@ -16,7 +16,7 @@
       "cedula": "0957483921",
       "fechaNacimiento": "1990-11-22",
       "contrasena": "67890",
-      "rol": "Usuario"
+      "rol": "Administrador"
     },
     {
       "id": "3",
@@ -36,25 +36,21 @@
       "rol": "Usuario"
     }
   ],
-
-
-    "parques": [
-      { 
-        "id": 1,
-        "nombre": "La Carolina" ,
-        "descripcion": "Parque La Carolina"
-      },
-      { 
-        "id": 2,
-        "nombre": "Inglés" ,
-        "descripcion": "Parque Inglés"
-      },
-      { 
-        "id": 3,
-        "nombre": "Alameda",
-        "descripcion": "Parque Alameda"
-      }
-    ]
-  }
-  
-
+  "parques": [
+    {
+      "id": 1,
+      "nombre": "La Carolina",
+      "descripcion": "Parque La Carolina"
+    },
+    {
+      "id": 2,
+      "nombre": "Inglés",
+      "descripcion": "Parque Inglés"
+    },
+    {
+      "id": 3,
+      "nombre": "Alameda",
+      "descripcion": "Parque Alameda"
+    }
+  ]
+}
