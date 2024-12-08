@@ -48,7 +48,7 @@ function App() {
         <Route path={"/Parque"} element={<AdminParqueCrud></AdminParqueCrud>}></Route>
         <Route path={"/nuevoParque"} element={<ParqueNuevo/>}></Route>
         <Route path={"/editarParque/:id"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
-        <Route path={"/ActulizarParque/:id"} element={<ActualizarParque />}></Route>
+        <Route path={"/parques/update/:id"} element={<ActualizarParque />}></Route>
       </Routes>
     </BrowserRouter>
     </div>

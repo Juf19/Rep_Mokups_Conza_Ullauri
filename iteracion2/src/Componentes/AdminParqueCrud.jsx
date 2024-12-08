@@ -44,7 +44,7 @@ const AdimParqueCrud = () => {
 
                 <td>{parque.nombre} </td>
                 <td>
-                <button onClick={() => navigate(`/ActualizarParque/${parque.id}`)}>Actualizar</button>
+                <button onClick={() => navigate(`/parques/update/${parque.id}`)}>Actualizar</button>
                 <button>Borrar</button>
                 <button>Detalle</button>
                 <button>Canchas</button>
