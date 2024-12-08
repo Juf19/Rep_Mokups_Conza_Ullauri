@@ -1,0 +1,84 @@
+/* Botón Borrar (rojo) */
+.btnBorrar {
+    background-color: #ff4d4f;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btnBorrar:hover {
+    background-color: #d00000; /* Rojo más oscuro */
+}
+
+/* Botón Editar (celeste) */
+.btnEditar {
+    background-color: #1890ff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btnEditar:hover {
+    background-color: #0040ff; /* Azul más oscuro */
+}
+
+/* Botón Detalle (naranja) */
+.btnDetalle {
+    background-color: #ffa940; /* Naranja vibrante */
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btnDetalle:hover {
+    background-color: #d87a16; /* Naranja más oscuro */
+}
+
+/* Botón Agregar (verde) */
+.btnAgregar {
+    background-color: #52c41a; /* Verde vibrante */
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnAgregar:hover {
+    background-color: #389e0d; /* Verde más oscuro */
+}
+
+/* Ajustes comunes para íconos dentro de botones */
+.btnEditar svg,
+.btnDetalle svg,
+.btnAgregar svg,
+.btnBorrar svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Estilo para inputs solo lectura */
+.in[readonly] {
+    background-color: #f5f5f5; /* Gris claro */
+    color: #464646; /* Gris para texto */
+    border: 1px solid #dcdcdc; /* Borde gris */
+    cursor: not-allowed; /* Indica que no es editable */
+}
+
+
+
+

@@ -1,5 +1,8 @@
 import './App.css';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
+import axios from 'axios';
 import "./Estilos/NuevoParque.css";
 import "./Estilos/NuevoUsuario.css";
 import "./Estilos/Registro.css";
@@ -10,6 +13,7 @@ import "./Estilos/UsPerfil.css";
 import "./Estilos/UsReservas.css";
 import "./Estilos/UsDisponibilidadH.css";
 import "./Estilos/UsReservarCancha.css";
+import "./Estilos/BotonesCrud.css";
 
 import AdminCancha from './Componentes/AdminCancha';
 import FormularioRegistro from './Componentes/FormularioRegistro';
@@ -33,9 +37,13 @@ import UsSeleccionarCancha from './Componentes/UsSeleccionarCancha';
 import AdminParqueCrud from './Componentes/AdminParqueCrud';
 import AdminUserCrud from './Componentes/AdminUserCrud';
 import AdminCanchasenParqueCrud from './Componentes/AdminCanchasenParqueCrud';
+import AdminUsuarioEditar from './Componentes/AdminUsuarioEditar';
+import AdminUserDetalle from './Componentes/AdminUserDetalle';
 
 
 function App() {
+
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -43,7 +51,8 @@ function App() {
         <Route path={"/"} element={<HomeAdmin/>}></Route>
         <Route path={"/Usuario"} element={<AdminUserCrud></AdminUserCrud>}></Route>
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
-        <Route path={"/editarUsuario/:id"} element={<UsReservaCancha/>}></Route>
+        <Route path={"/EditarUsuario/:id"} element={<AdminUsuarioEditar></AdminUsuarioEditar>}></Route>
+        <Route path={"/DetalleUsuario/:id"} element={<AdminUserDetalle />} />
       </Routes>
     </BrowserRouter>
     </div>
