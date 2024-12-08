@@ -11,6 +11,7 @@ const AdminUserDetalle = () => {
     correoelectronico: null,
     cedula: null,
     contrasena: null,
+    fechaNacimiento: null,
     rol: null // Añadimos el campo rol al estado
   });
 
@@ -38,9 +39,10 @@ const AdminUserDetalle = () => {
           />
         </div>
         <form className="form">
+          <h1 id="titulos">Detalles</h1>
           <div className="datos">
             <div className="form-group">
-              <label>Nombre</label>
+              <label>Nombre:</label>
               <input
                 type="text"
                 className="in"
@@ -50,7 +52,7 @@ const AdminUserDetalle = () => {
               />
             </div>
             <div className="form-group">
-              <label>Correo electrónico</label>
+              <label>Correo electrónico:</label>
               <input
                 type="email"
                 className="in"
@@ -60,7 +62,7 @@ const AdminUserDetalle = () => {
               />
             </div>
             <div className="form-group">
-              <label>Cédula</label>
+              <label>Cédula:</label>
               <input
                 type="text"
                 className="in"
@@ -70,7 +72,18 @@ const AdminUserDetalle = () => {
               />
             </div>
             <div className="form-group">
-              <label>Contraseña</label>
+              <label>Fecha de nacimiento:</label>
+              <input
+                type="date"
+                placeholder="Ingrese la fecha de nacimiento"
+                className="in"
+                name="fechanacimiento" 
+                value={usuario.fechaNacimiento}
+                readOnly
+              />
+            </div>
+            <div className="form-group">
+              <label>Contraseña:</label>
               <input
                 type="password"
                 className="in"
