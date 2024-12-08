@@ -5,6 +5,8 @@ import ItemBajoHeader from "./ItemBajoHeader";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash,faPencilAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 const AdimParqueCrud = () => {
   const navigate=useNavigate();
@@ -44,9 +46,9 @@ const AdimParqueCrud = () => {
 
                 <td>{parque.nombre} </td>
                 <td>
-                <button onClick={() => navigate(`/parques/update/${parque.id}`)}>Actualizar</button>
-                <button>Borrar</button>
-                <button>Detalle</button>
+                <button className="btnEditar" onClick={() => navigate(`/parques/update/${parque.id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
+                <button className="btnBorrar"><FontAwesomeIcon icon={faTrash} /></button>
+                <button className="btnDetalle"><FontAwesomeIcon icon={faInfoCircle} /></button>
                 <button>Canchas</button>
                 </td>
               </tr>
