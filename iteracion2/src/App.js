@@ -50,7 +50,7 @@ function App() {
   
   return (
     <div className="App">
-     <ListaParques></ListaParques>
+     <UsSeleccionarCancha></UsSeleccionarCancha>
       <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<HomeAdmin/>}></Route>
