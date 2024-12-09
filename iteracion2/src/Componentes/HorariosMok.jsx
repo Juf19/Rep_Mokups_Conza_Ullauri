@@ -1,6 +1,5 @@
 import React from 'react';
 import ItemHorarios from './ItemHorarios';
-import BotonConFlecha from './BotonConFlecha';
 
 const UsDisponibilidadH = () => {
     return (

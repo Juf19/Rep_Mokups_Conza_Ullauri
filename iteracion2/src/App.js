@@ -50,7 +50,7 @@ function App() {
   
   return (
     <div className="App">
-      <UsDisponibilidadH></UsDisponibilidadH>
+     <ListaParques></ListaParques>
       <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<HomeAdmin/>}></Route>
