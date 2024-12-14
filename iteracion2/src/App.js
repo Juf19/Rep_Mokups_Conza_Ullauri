@@ -50,7 +50,7 @@ function App() {
   
   return (
     <div className="App">
-     <UsSeleccionarCancha></UsSeleccionarCancha>
+     <ParqueNuevo></ParqueNuevo>
       <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<HomeAdmin/>}></Route>
@@ -61,7 +61,7 @@ function App() {
         <Route path={"/Parque"} element={<AdminParqueCrud></AdminParqueCrud>}></Route>
         <Route path={"/parques/detalle/:id"} element={<AdminParqueDetalle />}/>
         <Route path={"/parques/new"} element={<AddParque/>}></Route>
-        <Route path={"/editarParque/:id"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
+        <Route path={"/Parque/canchas"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
         <Route path={"/parques/update/:id"} element={<ActualizarParque />}></Route>
       </Routes>
     </BrowserRouter>

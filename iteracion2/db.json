@@ -55,5 +55,25 @@
       "descripcion": "Parque Alameda",
       "url": "url"
     }
+  ],
+  "canchas": [
+    {
+      "id": "1",
+      "nombre": "La Carolina",
+      "descripcion": "Parque La Carolina",
+      "url": "url"
+    },
+    {
+      "id": "2",
+      "nombre": "Inglés",
+      "descripcion": "Parque Inglés",
+      "url": "url"
+    },
+    {
+      "id": "3",
+      "nombre": "Alameda",
+      "descripcion": "Parque Alameda",
+      "url": "url"
+    }
   ]
 }
