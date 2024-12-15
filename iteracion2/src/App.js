@@ -53,7 +53,6 @@ function App() {
   
   return (
     <div className="App">
-     <ParqueNuevo></ParqueNuevo>
       <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<HomeAdmin/>}></Route>
