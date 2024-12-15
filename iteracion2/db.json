@@ -28,7 +28,7 @@
       "rol": "Usuario"
     },
     {
-      "id": "",
+      "id": "4",
       "nombre": "Daniel Heredia",
       "correoelectronico": "exander515@gmail.com",
       "cedula": "1258568977",
@@ -41,36 +41,55 @@
       "id": "1",
       "nombre": "La Carolina",
       "descripcion": "Parque La Carolina",
-      "url": "url"
+      "url": "/carolina.jpg"
     },
     {
       "id": "2",
       "nombre": "Inglés",
       "descripcion": "Parque Inglés",
-      "url": "url"
+      "url": "/ingles.jpg"
     },
     {
       "id": "3",
       "nombre": "Alameda",
       "descripcion": "Parque Alameda",
-      "url": "url"
+      "url": "/alameda.jpg"
     }
   ],
   "canchas": [
     {
       "id": "1",
       "nombre": "C-F1",
-      "descripcion": "Cancha futbol 1"
+      "descripcion": "Cancha fútbol 1",
+      "idParque": "1"
     },
     {
       "id": "2",
-      "nombre": "C-B1",
-      "descripcion": "Cancha basquet 1"
+      "nombre": "C-F2",
+      "descripcion": "Cancha fútbol 2",
+      "idParque": "1"
     },
     {
       "id": "3",
-      "nombre": "C-F2",
-      "descripcion": "Cancha futbol 2"
+      "nombre": "I-B1",
+      "descripcion": "Cancha básquet 1",
+      "idParque": "2"
+    },
+    {
+      "id": "4",
+      "nombre": "A-T1",
+      "descripcion": "Cancha tenis 1",
+      "idParque": "3"
+    },
+    {
+      "id": "8e61",
+      "nombre": "A-B3",
+      "descripcion": "Cancha de basquet numero 3"
+    },
+    {
+      "id": "bc2a",
+      "nombre": "A-B3",
+      "descripcion": "Cancha de basquet numero 3"
     }
   ]
 }

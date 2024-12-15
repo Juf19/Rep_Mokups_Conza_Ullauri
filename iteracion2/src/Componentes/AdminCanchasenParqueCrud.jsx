@@ -1,107 +1,138 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ItemBajoHeader from './ItemBajoHeader';
 import ItemHeaderA from './ItemHeaderA';
-import TablasTodoAdmin from './TablasTodoAdmin';
-import { useState, useEffect } from 'react';
-import axios from 'axios';  
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 const AdminCanchaenParque = () => {
-    const { id } = useParams();
-    const navigate=useNavigate();
-   const [data, setData] = useState([]);
+    const { id } = useParams(); // id del parque actual
+    const navigate = useNavigate();
+    const [data, setData] = useState([]); // Canchas filtradas
     const [parques, setParques] = useState({
         id: '',
         nombre: '',
         descripcion: '',
         url: ''
-      });
-      
-      const handleEliminar =  async (id) => {
+    });
+
+    // Obtener detalles del parque actual
+    useEffect(() => {
+        axios
+            .get(`http://localhost:3001/parques/${id}`)
+            .then((response) => {
+                setParques(response.data);
+            })
+            .catch((error) => {
+                console.error("Error al obtener el parque:", error);
+            });
+    }, [id]);
+
+    // Obtener canchas filtradas por el parque actual
+    useEffect(() => {
+        axios
+            .get(`http://localhost:3001/canchas`)
+            .then((response) => {
+                const canchasFiltradas = response.data.filter(cancha => cancha.idParque === id);
+                setData(canchasFiltradas);
+            })
+            .catch((error) => {
+                console.error("Error al obtener las canchas:", error);
+            });
+    }, [id]);
+
+    // Eliminar una cancha
+    const handleEliminar = async (canchaId) => {
         const confirmDelete = window.confirm("¿Estás seguro que deseas borrar esta cancha?");
         if (confirmDelete) {
-          try {
-            await axios.delete("http://localhost:3001/canchas/" + id);
-            const updatedData = data.filter((cancha) => cancha.id !== id);
-            setData(updatedData);
-            alert("Cancha eliminada con éxito.");
-          } catch (error) {
-            console.error("Error al eliminar la cancha:", error);
-            alert("No se pudo eliminar la cancha.");
-          }
+            try {
+                await axios.delete(`http://localhost:3001/canchas/${canchaId}`);
+                const updatedData = data.filter((cancha) => cancha.id !== canchaId);
+                setData(updatedData);
+                alert("Cancha eliminada con éxito.");
+            } catch (error) {
+                console.error("Error al eliminar la cancha:", error);
+                alert("No se pudo eliminar la cancha.");
+            }
         }
-      };
+    };
 
-      useEffect(() => {
-        axios
-          .get(`http://localhost:3001/parques/${id}`) // URL 
-          .then((response) => {
-            setParques(response.data);
-          })
-          .catch((error) => {
-            console.error("Error al obtener los parques:", error);
-          });
-      }, [id]);
-      useEffect(() => {
-        axios
-          .get(`http://localhost:3001/canchas`) // URL 
-          .then((response) => {
-            setData(response.data);
-          })
-          .catch((error) => {
-            console.error("Error al obtener las canchas:", error);
-          });
-      })
     const item = [
         { nombre: "Canchas" },
         { accion: "Acción" }
     ];
+
     return (
         <div>
-            <ItemHeaderA></ItemHeaderA>
-            <ItemBajoHeader></ItemBajoHeader>
+            <ItemHeaderA />
+            <ItemBajoHeader />
             <div className="contenedor">
                 <div className="encabezado">
                     <label>Nombre</label>
                     <div className="nombre-parque">
-                    <input type="text" name="nombre" className="perfil-dato1" value={parques.nombre} disabled={true} />
+                        <input
+                            type="text"
+                            name="nombre"
+                            className="perfil-dato1"
+                            value={parques.nombre}
+                            disabled={true}
+                        />
                     </div>
                 </div>
 
                 <div className="seccion-imagen">
                     <img
-                        src="carolina.jpg"
+                        src={parques.url}
                         alt="Parque"
                         className="imagen-parque"
                     />
                 </div>
 
                 <div style={{ padding: "20px" }}>
-                        <table className="tabla-reservas">
-                          <thead>
+                    <table className="tabla-reservas">
+                        <thead>
                             <tr>
-                              <th>{item[0].nombre}</th>
-                              <th>{item[1].accion}</th>
+                                <th>{item[0].nombre}</th>
+                                <th>{item[1].accion}</th>
                             </tr>
-                          </thead>
-                          <tbody>
+                        </thead>
+                        <tbody>
                             {data.map((cancha, index) => (
-                              <tr key={index}>
-                
-                                <td>{cancha.nombre} </td>
-                                <td>
-                                <button className="btnEditar" onClick={() => navigate(`/canchas/update/${cancha.id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
-                                <button className="btnBorrar" onClick={() => handleEliminar(cancha.id)}><FontAwesomeIcon icon={faTrash} /></button>
-                                <button className="btnDetalle" onClick={() => navigate(`/canchas/detalle/${cancha.id}`)}><FontAwesomeIcon icon={faInfoCircle} /></button>
-                                </td>
-                              </tr>
+                                <tr key={index}>
+                                    <td>{cancha.nombre}</td>
+                                    <td>
+                                        <button
+                                            className="btnEditar"
+                                            onClick={() => navigate(`/canchas/update/${cancha.id}`)}
+                                        >
+                                            <FontAwesomeIcon icon={faPencilAlt} />
+                                        </button>
+                                        <button
+                                            className="btnBorrar"
+                                            onClick={() => handleEliminar(cancha.id)}
+                                        >
+                                            <FontAwesomeIcon icon={faTrash} />
+                                        </button>
+                                        <button
+                                            className="btnDetalle"
+                                            onClick={() => navigate(`/Parque/${cancha.idParque}/canchas/${cancha.id}/detalles`)}
+                                        >
+                                            <FontAwesomeIcon icon={faInfoCircle} />
+                                        </button>
+                                    </td>
+                                </tr>
                             ))}
-                          </tbody>
-                        </table>
-                        <button className="boton-agregar" onClick={() => navigate(`/canchas/new`)}>+</button>
-                      </div>
+                        </tbody>
+                    </table>
+                    {/* Botón para agregar cancha asignando idParque automáticamente */}
+                    <button
+                        className="boton-agregar"
+                        onClick={() => navigate(`/Parque/${id}/canchas/new`)}
+                    >
+                        +
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -66,7 +66,7 @@ const AdimParqueCrud = () => {
                 <button className="btnEditar" onClick={() => navigate(`/parques/update/${parque.id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
                 <button className="btnBorrar" onClick={() => handleEliminar(parque.id)}><FontAwesomeIcon icon={faTrash} /></button>
                 <button className="btnDetalle" onClick={() => navigate(`/parques/detalle/${parque.id}`)}><FontAwesomeIcon icon={faInfoCircle} /></button>
-                <button className="btnCanchas" onClick={() => navigate(`/Parque/canchas/${parque.id}`)}><svg
+                <button className="btnCanchas" onClick={() => navigate(`/Parque/${parque.id}/canchas`)}><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
