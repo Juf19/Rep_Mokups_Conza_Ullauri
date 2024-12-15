@@ -1,9 +1,15 @@
 import React from "react";
 import ItemBajoHeader from "./ItemBajoHeader";
 import ItemHeaderA from "./ItemHeaderA";
+import {useNavigate } from 'react-router-dom';
+
+
+
 
 
 const HomeAdmin = () => {
+  const navigate=useNavigate();
+
   return (
     <div className="App">
       <ItemHeaderA></ItemHeaderA>
@@ -18,21 +24,14 @@ const HomeAdmin = () => {
         </div>
         <div className="icon">
           <img
-            src="Cancha.jpeg" 
-            alt="Cancha"
-          />
-        </div>
-        <div className="icon">
-          <img
             src="Usuario.jpeg" 
             alt="Usuarios"
           />
         </div>
       </div>
       <div className="buttons">
-        <button className="button">PARQUES</button>
-        <button className="button">CANCHAS</button>
-        <button className="button">USUARIOS</button>
+        <button onClick={()=>{navigate('/Parque')}} className="button">PARQUES</button>
+        <button onClick={()=>{navigate('/Usuario')}} className="button">USUARIOS</button>
       </div>
     </div>
     </div>

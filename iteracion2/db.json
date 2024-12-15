@@ -1,0 +1,76 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Jorge Ullauri",
+      "correoelectronico": "jorge@gmail.com",
+      "cedula": "17536789",
+      "fechaNacimiento": "2002-05-25",
+      "contrasena": "123456789",
+      "rol": "Administrador"
+    },
+    {
+      "id": "2",
+      "nombre": "María López",
+      "correoelectronico": "maria.lopez@example.com",
+      "cedula": "0957483921",
+      "fechaNacimiento": "1990-11-22",
+      "contrasena": "67890",
+      "rol": "Administrador"
+    },
+    {
+      "id": "3",
+      "nombre": "Carlos Pérez",
+      "correoelectronico": "carlos.perez@example.com",
+      "cedula": "0805467321",
+      "fechaNacimiento": "1985-07-15",
+      "contrasena": "abcd1234",
+      "rol": "Usuario"
+    },
+    {
+      "id": "",
+      "nombre": "Daniel Heredia",
+      "correoelectronico": "exander515@gmail.com",
+      "cedula": "1258568977",
+      "contrasena": "1478582",
+      "rol": "Usuario"
+    }
+  ],
+  "parques": [
+    {
+      "id": "1",
+      "nombre": "La Carolina",
+      "descripcion": "Parque La Carolina",
+      "url": "url"
+    },
+    {
+      "id": "2",
+      "nombre": "Inglés",
+      "descripcion": "Parque Inglés",
+      "url": "url"
+    },
+    {
+      "id": "3",
+      "nombre": "Alameda",
+      "descripcion": "Parque Alameda",
+      "url": "url"
+    }
+  ],
+  "canchas": [
+    {
+      "id": "1",
+      "nombre": "C-F1",
+      "descripcion": "Cancha futbol 1"
+    },
+    {
+      "id": "2",
+      "nombre": "C-B1",
+      "descripcion": "Cancha basquet 1"
+    },
+    {
+      "id": "3",
+      "nombre": "C-F2",
+      "descripcion": "Cancha futbol 2"
+    }
+  ]
+}

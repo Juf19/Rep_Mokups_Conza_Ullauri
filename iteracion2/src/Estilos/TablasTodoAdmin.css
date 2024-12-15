@@ -1,0 +1,11 @@
+.boton-agregar{
+  font-size: 24px;
+  color: #fff;
+  border: none;
+  height: 300px;
+  padding: 20px 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #28a745;
+}
+

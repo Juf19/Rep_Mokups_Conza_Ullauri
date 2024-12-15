@@ -15,16 +15,13 @@ class UsSeleccionarCancha extends React.Component {
         <ItemHeader></ItemHeader>
         <ItemBajoHeader nombre={texto[0].nombre}></ItemBajoHeader>
         <div className="app-container">
-          <div className="left-content">
-          <SelectorCancha></SelectorCancha>
-          </div>
-          <div className="right-map">
+          
            <MapContainer></MapContainer>
-            <div className="cancha" style={{ top: '10%', left: '57%' }}>C-F1 ⚽</div>
-            <div className="cancha" style={{ top: '7%', left: '47%' }}>C-F2 ⚽</div>
-            <div className="cancha" style={{ top: '23%', left: '55%' }}>C-F3 ⚽</div>
-            <div className="cancha" style={{ top: '40%', left: '27%' }}>C-B1 🏀</div>
-          </div>
+            <div className="cancha" style={{ top: '30%', left: '53%' }}>C-F1 ⚽</div>
+            <div className="cancha" style={{ top: '25%', left: '47%' }}>C-F2 ⚽</div>
+            <div className="cancha" style={{ top: '55%', left: '50%' }}>C-F3 ⚽</div>
+            <div className="cancha" style={{ top: '60%', left: '35%' }}>C-B1 🏀</div>
+          
         </div>
 
       </div>
