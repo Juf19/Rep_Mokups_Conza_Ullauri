@@ -53,27 +53,6 @@ function App() {
   
   return (
     <div className="App">
-
-      <Inicio></Inicio>
-      <ListaParques></ListaParques>
-     <UsSeleccionarCancha></UsSeleccionarCancha>
-     <UsDisponibilidadH></UsDisponibilidadH>
-     <UsReservaCancha></UsReservaCancha>
-     <UsConfirmacion></UsConfirmacion>
-     <FormularioRegistro></FormularioRegistro>
-     <UsPerfil></UsPerfil>
-     <UsReservas></UsReservas>
-      <HomeAdmin></HomeAdmin>
-      <AdminCancha></AdminCancha>
-      <AdminNuevaCancha></AdminNuevaCancha>
-      <AdminPerfil></AdminPerfil>
-      <NuevoParque></NuevoParque>
-      <Nuevacancha></Nuevacancha>
-      <NuevoUsuario></NuevoUsuario>
-      <EditarCancha></EditarCancha>
-      <UsuarioNuevo></UsuarioNuevo>
-      <ParqueNuevo></ParqueNuevo>
-
       <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<HomeAdmin/>}></Route>
