@@ -8,17 +8,66 @@ import { useParams, useNavigate } from 'react-router-dom';
 const AdminAddCancha = () => {
   const { id } = useParams(); // Obtener el id del parque actual desde la URL
   const navigate = useNavigate();
-  
+
   const [nuevaCancha, setNuevaCancha] = useState({
     nombre: '',
     descripcion: '',
+    tipo: '',
+    horarios: [],
+    dias: [],
     idParque: id // Asociar la cancha al parque actual
   });
+
+  // Estado para controlar el modal de horarios
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedHorarios, setSelectedHorarios] = useState([]);
 
   // Manejar cambios en los inputs
   const handleAddCancha = (e) => {
     const { name, value } = e.target;
     setNuevaCancha({ ...nuevaCancha, [name]: value });
+  };
+
+  // Manejar cambios en los checkboxes de días
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    setNuevaCancha(prevCancha => {
+      const dias = checked
+        ? [...prevCancha.dias, value]
+        : prevCancha.dias.filter(dia => dia !== value);
+      return { ...prevCancha, dias };
+    });
+  };
+
+  // Abrir el modal para editar horarios
+  const openModal = () => {
+    setSelectedHorarios(nuevaCancha.horarios); // Cargar los horarios actuales
+    setIsModalOpen(true);
+  };
+
+  // Cerrar el modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // Manejar la selección de horarios
+  const handleHorarioSelection = (horario) => {
+    setSelectedHorarios(prevSelected => {
+      if (prevSelected.includes(horario)) {
+        return prevSelected.filter(h => h !== horario);
+      } else {
+        return [...prevSelected, horario];
+      }
+    });
+  };
+
+  // Guardar los horarios seleccionados
+  const saveHorarios = () => {
+    setNuevaCancha(prevCancha => ({
+      ...prevCancha,
+      horarios: selectedHorarios
+    }));
+    closeModal();
   };
 
   // Manejar envío del formulario
@@ -64,6 +113,47 @@ const AdminAddCancha = () => {
               required
             />
           </div>
+          <div className="perfil-item">
+            <label>Tipo de Cancha</label>
+            <select name="tipo" className="perfil-dato" value={nuevaCancha.tipo} onChange={handleAddCancha}>
+              <option value="Futbol">Fútbol</option>
+              <option value="Basquet">Básquet</option>
+              <option value="Tenis">Tenis</option>
+            </select>
+          </div>
+          <div className="perfil-item">
+            <label>Horarios</label>
+            <button type="button" onClick={openModal} className="btn-open-modal">
+              Editar Horarios
+            </button>
+            <div>
+              {Array.isArray(nuevaCancha.horarios) && nuevaCancha.horarios.length > 0 ? (
+                <ul>
+                  {nuevaCancha.horarios.map((hora, index) => (
+                    <li key={index}>{hora}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No hay horarios seleccionados.</p>
+              )}
+            </div>
+          </div>
+          <div className="perfil-item">
+            <label>Días Disponibles</label>
+            <div className="dias-container">
+              {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].map(dia => (
+                <div key={dia} className="dia-item">
+                  <input
+                    type="checkbox"
+                    value={dia}
+                    checked={nuevaCancha.dias.includes(dia)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label>{dia}</label>
+                </div>
+              ))}
+            </div>
+          </div>
           <div className="parte-btn">
             <button type="submit" className="btn-save">
               Guardar
@@ -71,6 +161,32 @@ const AdminAddCancha = () => {
           </div>
         </div>
       </form>
+
+      {/* Modal para horarios */}
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h4>Selecciona los horarios</h4>
+            <div className="horarios-list">
+              {Array.from({ length: 14 }, (_, i) => (
+                <div key={i} className="horario-item">
+                  <input
+                    type="checkbox"
+                    value={`${7 + i}:00-${8 + i}:00`}
+                    checked={selectedHorarios.includes(`${7 + i}:00-${8 + i}:00`)}
+                    onChange={() => handleHorarioSelection(`${7 + i}:00-${8 + i}:00`)}
+                  />
+                  <label>{`${7 + i}:00-${8 + i}:00`}</label>
+                </div>
+              ))}
+            </div>
+            <div className="modal-buttons">
+              <button onClick={saveHorarios} className="btn-save">Guardar</button>
+              <button onClick={closeModal} className="btn-cancel">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

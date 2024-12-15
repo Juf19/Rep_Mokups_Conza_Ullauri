@@ -111,6 +111,51 @@
         "Miércoles"
       ],
       "idParque": "3"
+    },
+    {
+      "id": "2450",
+      "nombre": "A-B3",
+      "descripcion": "Cancha de basquet numero 3",
+      "tipo": "Basquet",
+      "horarios": [
+        "7:00-8:00",
+        "8:00-9:00",
+        "9:00-10:00",
+        "10:00-11:00",
+        "11:00-12:00",
+        "12:00-13:00",
+        "13:00-14:00",
+        "14:00-15:00",
+        "15:00-16:00",
+        "16:00-17:00",
+        "17:00-18:00",
+        "18:00-19:00",
+        "19:00-20:00",
+        "20:00-21:00"
+      ],
+      "dias": [
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes"
+      ],
+      "idParque": "3"
+    },
+    {
+      "id": "e3c4",
+      "nombre": "A-T3",
+      "descripcion": "Cancha de tenis 3",
+      "tipo": "Tenis",
+      "horarios": [
+        "14:00-15:00"
+      ],
+      "dias": [
+        "Viernes",
+        "Martes",
+        "Lunes"
+      ],
+      "idParque": "3"
     }
   ]
 }
