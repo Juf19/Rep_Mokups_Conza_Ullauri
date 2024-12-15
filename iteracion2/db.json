@@ -59,21 +59,18 @@
   "canchas": [
     {
       "id": "1",
-      "nombre": "La Carolina",
-      "descripcion": "Parque La Carolina",
-      "url": "url"
+      "nombre": "C-F1",
+      "descripcion": "Cancha futbol 1"
     },
     {
       "id": "2",
-      "nombre": "Inglés",
-      "descripcion": "Parque Inglés",
-      "url": "url"
+      "nombre": "C-B1",
+      "descripcion": "Cancha basquet 1"
     },
     {
       "id": "3",
-      "nombre": "Alameda",
-      "descripcion": "Parque Alameda",
-      "url": "url"
+      "nombre": "C-F2",
+      "descripcion": "Cancha futbol 2"
     }
   ]
 }

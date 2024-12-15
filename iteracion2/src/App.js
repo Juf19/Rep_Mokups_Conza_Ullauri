@@ -42,6 +42,9 @@ import AdminUserDetalle from './Componentes/AdminUserDetalle';
 import ActualizarParque from './Componentes/ActualizarParque';
 import AddParque from './Componentes/AddParque';
 import AdminParqueDetalle from './Componentes/AdminParqueDetalle';
+import AdminActualizarCancha from './Componentes/AdminActualizarCancha';
+import AdminAddCancha from './Componentes/AdminAddCancha';
+import AdminCanchaDetalle from './Componentes/AdminCanchaDetalle';
 
 
 
@@ -61,8 +64,12 @@ function App() {
         <Route path={"/Parque"} element={<AdminParqueCrud></AdminParqueCrud>}></Route>
         <Route path={"/parques/detalle/:id"} element={<AdminParqueDetalle />}/>
         <Route path={"/parques/new"} element={<AddParque/>}></Route>
-        <Route path={"/Parque/canchas"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
+        <Route path={"/Parque/canchas/:id"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
         <Route path={"/parques/update/:id"} element={<ActualizarParque />}></Route>
+        <Route path={"/canchas/update/:id"} element={<AdminActualizarCancha></AdminActualizarCancha>}></Route>
+        <Route path={"/canchas/new"} element={<AdminAddCancha/>}></Route>
+        <Route path={"/canchas/detalle/:id"} element={<AdminCanchaDetalle />}/>
+
       </Routes>
     </BrowserRouter>
     

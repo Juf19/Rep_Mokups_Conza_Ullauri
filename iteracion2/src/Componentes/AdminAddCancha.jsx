@@ -6,28 +6,27 @@ import "../Estilos/ActualizarParque.css";
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const AddParque = () => {
+const AdminAddCancha = () => {
   const navigate = useNavigate();
-  const [nuevoParque, setNuevoParque] = useState({
+  const [nuevaCancha, setNuevaCancha] = useState({
     nombre: '',
-    descripcion: '',
-    url: ''
+    descripcion: ''
   });
 
-  const handleAddParque = (e) => {
+  const handleAddCancha = (e) => {
     const { name, value } = e.target;
-    setNuevoParque({ ...nuevoParque, [name]: value });
+    setNuevaCancha({ ...nuevaCancha, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:3001/parques`, nuevoParque)
+    axios.post(`http://localhost:3001/canchas`, nuevaCancha)
       .then(response => {
-        console.log('Parque Agregado:', response.data);
+        console.log('Cancha Agregado:', response.data);
         navigate(`/Parque`);
       })
       .catch(error => {
-        console.error('Error al agregar el Parque:', error);
+        console.error('Error al agregar la Cancha:', error);
       });
   };
 
@@ -35,21 +34,17 @@ const AddParque = () => {
     <div>
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
-      <h3>Agregar Parque</h3>
+      <h3>Agregar Cancha</h3>
       <form onSubmit={handleSubmit}>
     <div className="parque-informacion">
     
       <div className="perfil-item">
         <label>Nombre</label>
-        <input type="text" name="nombre" className="perfil-dato" value={nuevoParque.nombre} onChange={handleAddParque} />
+        <input type="text" name="nombre" className="perfil-dato" value={nuevaCancha.nombre} onChange={handleAddCancha} />
       </div>
       <div className="perfil-item">
         <label>Descripcion</label>
-        <input type="text" name="descripcion" className="perfil-dato" value={nuevoParque.descripcion} onChange={handleAddParque}/>
-      </div>
-      <div className="perfil-item">
-        <label>URL</label>
-        <input type="text" name='url' className="perfil-dato" value={nuevoParque.url} onChange={handleAddParque}/>
+        <input type="text" name="descripcion" className="perfil-dato" value={nuevaCancha.descripcion} onChange={handleAddCancha}/>
       </div>
       <div className="parte-btn">
       <button type="submit" className="btn-save">Guardar</button>
@@ -61,4 +56,4 @@ const AddParque = () => {
   );
 };
 
-export default AddParque;
+export default AdminAddCancha;

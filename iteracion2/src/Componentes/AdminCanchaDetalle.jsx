@@ -9,7 +9,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 const AdminParqueDetalle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [parques, setParques] = useState({
+  const [canchas, setCanchas] = useState({
     nombre: '',
     descripcion: '',
     url: ''
@@ -17,12 +17,12 @@ const AdminParqueDetalle = () => {
   
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/parques/${id}`) // URL 
+      .get(`http://localhost:3001/canchas/${id}`) // URL 
       .then((response) => {
-        setParques(response.data);
+        setCanchas(response.data);
       })
       .catch((error) => {
-        console.error("Error al obtener los parques:", error);
+        console.error("Error al obtener las canchas:", error);
       });
   }, [id]);
 
@@ -30,21 +30,17 @@ const AdminParqueDetalle = () => {
     <div>
       <ItemHeaderA></ItemHeaderA>
       <ItemBajoHeader></ItemBajoHeader>
-      <h3>Detalle Parque</h3>
+      <h3>Detalle Cancha</h3>
       <form>
     <div className="parque-informacion">
     
       <div className="perfil-item">
         <label>Nombre</label>
-        <input type="text" name="nombre" className="perfil-dato" value={parques.nombre} disabled={true} />
+        <input type="text" name="nombre" className="perfil-dato" value={canchas.nombre} disabled={true} />
       </div>
       <div className="perfil-item">
         <label>Descripcion</label>
-        <input type="text" name="descripcion" className="perfil-dato" value={parques.descripcion} disabled={true}/>
-      </div>
-      <div className="perfil-item">
-        <label>URL</label>
-        <input type="text" name='url' className="perfil-dato" value={parques.url} disabled={true}/>
+        <input type="text" name="descripcion" className="perfil-dato" value={canchas.descripcion} disabled={true}/>
       </div>
       <div className="parte-btn">
         <button className="btn-save"onClick={() => navigate(`/Parque`)} >Aceptar</button>
@@ -57,4 +53,3 @@ const AdminParqueDetalle = () => {
 };
 
 export default AdminParqueDetalle;
-
