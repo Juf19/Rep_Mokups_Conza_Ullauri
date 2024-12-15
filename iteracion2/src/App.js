@@ -38,12 +38,12 @@ function App() {
       <Inicio></Inicio>
       <ListaParques></ListaParques>
      <UsSeleccionarCancha></UsSeleccionarCancha>
+     <UsDisponibilidadH></UsDisponibilidadH>
      <UsReservaCancha></UsReservaCancha>
      <UsConfirmacion></UsConfirmacion>
      <FormularioRegistro></FormularioRegistro>
      <UsPerfil></UsPerfil>
      <UsReservas></UsReservas>
-     <UsDisponibilidadH></UsDisponibilidadH>
       <HomeAdmin></HomeAdmin>
       <AdminCancha></AdminCancha>
       <AdminNuevaCancha></AdminNuevaCancha>
