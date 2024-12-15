@@ -61,35 +61,47 @@
       "id": "1",
       "nombre": "C-F1",
       "descripcion": "Cancha fútbol 1",
+      "tipo": "Futbol",
+      "horarios": "11-13",
+      "dias": "",
       "idParque": "1"
     },
     {
       "id": "2",
       "nombre": "C-F2",
       "descripcion": "Cancha fútbol 2",
+      "tipo": "Futbol",
+      "horarios": "11-13",
+      "dias": "",
       "idParque": "1"
     },
     {
       "id": "3",
-      "nombre": "I-B1",
-      "descripcion": "Cancha básquet 1",
+      "nombre": "I-B2",
+      "descripcion": "Cancha básquet 2",
+      "tipo": "Basquet",
+      "horarios": "11-13",
+      "dias": "",
       "idParque": "2"
     },
     {
       "id": "4",
       "nombre": "A-T1",
       "descripcion": "Cancha tenis 1",
+      "tipo": "Tenis",
+      "horarios": [
+        "7:00-8:00",
+        "8:00-9:00",
+        "9:00-10:00",
+        "10:00-11:00",
+        "11:00-12:00"
+      ],
+      "dias": [
+        "Lunes",
+        "Martes",
+        "Miércoles"
+      ],
       "idParque": "3"
-    },
-    {
-      "id": "8e61",
-      "nombre": "A-B3",
-      "descripcion": "Cancha de basquet numero 3"
-    },
-    {
-      "id": "bc2a",
-      "nombre": "A-B3",
-      "descripcion": "Cancha de basquet numero 3"
     }
   ]
 }

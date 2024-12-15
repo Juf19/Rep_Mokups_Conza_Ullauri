@@ -14,6 +14,7 @@ import "./Estilos/UsReservas.css";
 import "./Estilos/UsDisponibilidadH.css";
 import "./Estilos/UsReservarCancha.css";
 import "./Estilos/BotonesCrud.css";
+import "./Estilos/HorariosyDias.css";
 
 import AdminCancha from './Componentes/AdminCancha';
 import FormularioRegistro from './Componentes/FormularioRegistro';
@@ -65,7 +66,7 @@ function App() {
         <Route path={"/parques/new"} element={<AddParque/>}></Route>
         <Route path={"/Parque/:id/canchas"} element={<AdminCanchasenParqueCrud></AdminCanchasenParqueCrud>}></Route>
         <Route path={"/parques/update/:id"} element={<ActualizarParque />}></Route>
-        <Route path={"/canchas/update/:id"} element={<AdminActualizarCancha></AdminActualizarCancha>}></Route>
+        <Route path={"/Parque/:id/canchas/:id/actualizar"} element={<AdminActualizarCancha></AdminActualizarCancha>}></Route>
         <Route path={"/Parque/:id/canchas/new"} element={<AdminAddCancha/>}></Route>
         <Route path={"/Parque/:id/canchas/:id/detalles"} element={<AdminCanchaDetalle />}/>
 
