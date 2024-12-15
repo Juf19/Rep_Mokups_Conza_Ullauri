@@ -19,6 +19,21 @@ const AdminCanchaenParque = () => {
         url: ''
       });
       
+      const handleEliminar =  async (id) => {
+        const confirmDelete = window.confirm("¿Estás seguro que deseas borrar esta cancha?");
+        if (confirmDelete) {
+          try {
+            await axios.delete("http://localhost:3001/canchas/" + id);
+            const updatedData = data.filter((cancha) => cancha.id !== id);
+            setData(updatedData);
+            alert("Cancha eliminada con éxito.");
+          } catch (error) {
+            console.error("Error al eliminar la cancha:", error);
+            alert("No se pudo eliminar la cancha.");
+          }
+        }
+      };
+
       useEffect(() => {
         axios
           .get(`http://localhost:3001/parques/${id}`) // URL 
@@ -78,7 +93,7 @@ const AdminCanchaenParque = () => {
                                 <td>{cancha.nombre} </td>
                                 <td>
                                 <button className="btnEditar" onClick={() => navigate(`/canchas/update/${cancha.id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
-                                <button className="btnBorrar" ><FontAwesomeIcon icon={faTrash} /></button>
+                                <button className="btnBorrar" onClick={() => handleEliminar(cancha.id)}><FontAwesomeIcon icon={faTrash} /></button>
                                 <button className="btnDetalle" onClick={() => navigate(`/canchas/detalle/${cancha.id}`)}><FontAwesomeIcon icon={faInfoCircle} /></button>
                                 </td>
                               </tr>
