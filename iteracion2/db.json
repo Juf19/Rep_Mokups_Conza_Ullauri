@@ -62,7 +62,7 @@
       "nombre": "C-F1",
       "descripcion": "Cancha fútbol 1",
       "tipo": "Futbol",
-      "horarios": "11-13",
+      "horarios": [],
       "dias": "",
       "idParque": "1"
     },
@@ -71,7 +71,7 @@
       "nombre": "C-F2",
       "descripcion": "Cancha fútbol 2",
       "tipo": "Futbol",
-      "horarios": "11-13",
+      "horarios": [],
       "dias": "",
       "idParque": "1"
     },
@@ -80,8 +80,17 @@
       "nombre": "I-B2",
       "descripcion": "Cancha básquet 2",
       "tipo": "Basquet",
-      "horarios": "11-13",
-      "dias": "",
+      "horarios": [
+        "11-13",
+        "14:00-15:00",
+        "15:00-16:00",
+        "16:00-17:00"
+      ],
+      "dias": [
+        "Sábado",
+        "Viernes",
+        "Domingo"
+      ],
       "idParque": "2"
     },
     {

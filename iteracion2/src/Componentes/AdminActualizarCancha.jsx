@@ -111,15 +111,15 @@ const AdminActualizarCancha = () => {
         <div className="parque-informacion">
           <div className="perfil-item">
             <label>Nombre</label>
-            <input type="text" name="nombre" className="perfil-dato1" value={canchas.nombre} onChange={handleChange} />
+            <input type="text" name="nombre" className="perfil-dato" value={canchas.nombre} onChange={handleChange} />
           </div>
           <div className="perfil-item">
             <label>Descripcion</label>
-            <input type="text" name="descripcion" className="perfil-dato1" value={canchas.descripcion} onChange={handleChange} />
+            <input type="text" name="descripcion" className="perfil-dato" value={canchas.descripcion} onChange={handleChange} />
           </div>
           <div className="perfil-item">
             <label>Tipo de Cancha</label>
-            <select name="tipo" className="perfil-dato1" value={canchas.tipo} onChange={handleChange}>
+            <select name="tipo" className="perfil-dato" value={canchas.tipo} onChange={handleChange}>
               <option value="Futbol">Fútbol</option>
               <option value="Basquet">Básquet</option>
               <option value="Tenis">Tenis</option>
