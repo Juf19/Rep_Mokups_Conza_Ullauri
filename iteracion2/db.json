@@ -62,8 +62,15 @@
       "nombre": "C-F1",
       "descripcion": "Cancha fútbol 1",
       "tipo": "Futbol",
-      "horarios": [],
-      "dias": "",
+      "horarios": [
+        "10:00-11:00",
+        "11:00-12:00",
+        "12:00-13:00"
+      ],
+      "dias": [
+        "Lunes",
+        "Jueves"
+      ],
       "idParque": "1"
     },
     {
