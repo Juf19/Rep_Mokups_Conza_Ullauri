@@ -84,7 +84,7 @@ const Inicio = () => {
                         />
                         <button type="submit" className="inicio-button">INGRESAR</button>
                     </form>
-                    <p className="inicio-register-link">Registrarse</p>
+                    <p className="inicio-register-link" onClick={() => navigate('/registrarse')}>Registrarse</p>
                 </div>
             </div>
             <TrianguloInf />

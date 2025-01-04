@@ -15,6 +15,7 @@ import "./Estilos/UsDisponibilidadH.css";
 import "./Estilos/UsReservarCancha.css";
 import "./Estilos/BotonesCrud.css";
 import "./Estilos/HorariosyDias.css";
+import "./Estilos/FormularioRegistro.css";
 
 import AdminCancha from './Componentes/AdminCancha';
 import FormularioRegistro from './Componentes/FormularioRegistro';
@@ -57,6 +58,7 @@ function App() {
       <BrowserRouter>
       <Routes>
       <Route path={"/"} element={<Inicio></Inicio>}></Route>
+      <Route path={"/registrarse"} element={<FormularioRegistro></FormularioRegistro>}></Route>
       <Route path={"/HomeUser"} element={<ListaParques></ListaParques>}></Route>
         <Route path={"/HomeAdmin"} element={<HomeAdmin/>}></Route>
         <Route path={"/Usuario"} element={<AdminUserCrud></AdminUserCrud>}></Route>
