@@ -7,8 +7,9 @@ const generateToken = (id) => {
 }
 
 module.exports.createUser = async (request, response) => {
-    const { email, password, cedula, fechaNacimiento, nombre } = request.body;
+    const { email, password, cedula, fechaNacimiento, nombre, rol } = request.body;
 
+    // Validar campos obligatorios
     if (!email || !password || !cedula || !fechaNacimiento || !nombre) {
         return response.status(400).json({ message: 'Todos los campos son obligatorios: email, password, cedula, fechaNacimiento, nombre' });
     }
@@ -27,13 +28,14 @@ module.exports.createUser = async (request, response) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        // Asignar rol o usar "Usuario" como valor predeterminado
         const nuevoUsuario = await Usuario.create({
             email,
             password: hashedPassword,
             cedula,
             fechaNacimiento,
             nombre,
-            rol: "Usuario",
+            rol: rol || "Usuario", // Asigna "Usuario" si no se proporciona un rol
         });
 
         return response.json({

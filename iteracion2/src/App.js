@@ -61,7 +61,7 @@ function App() {
       <Route path={"/registrarse"} element={<FormularioRegistro></FormularioRegistro>}></Route>
       <Route path={"/HomeUser"} element={<ListaParques></ListaParques>}></Route>
         <Route path={"/HomeAdmin"} element={<HomeAdmin/>}></Route>
-        <Route path={"/Usuario"} element={<AdminUserCrud></AdminUserCrud>}></Route>
+        <Route path={"/ListaUsuarios"} element={<AdminUserCrud></AdminUserCrud>}></Route>
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
         <Route path={"/EditarUsuario/:id"} element={<AdminUsuarioEditar></AdminUsuarioEditar>}></Route>
         <Route path={"/DetalleUsuario/:id"} element={<AdminUserDetalle />} />

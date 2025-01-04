@@ -6,13 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 const UsuarioNuevo = (props) => {
   const [datosFormUsuario, setDatosFormUsuario] = useState({
-    id: "",
+    email: "", // Cambiado de correoelectronico a email
     nombre: "",
-    correoelectronico: "",
     cedula: "",
     fechaNacimiento: "",
-    contrasena: "",
-    rol: "" // Añadimos el campo rol al estado
+    password: "", // Cambiado de contrasena a password
+    rol: "Usuario" // Valor por defecto
   });
 
   const navigate = useNavigate();
@@ -28,13 +27,13 @@ const UsuarioNuevo = (props) => {
   const handleSubmitUsuario = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/usuarios', datosFormUsuario) // Asegúrate de que esta URL sea la correcta
+      .post('http://localhost:8000/register', datosFormUsuario) // Cambiado a /register
       .then((res) => {
-        console.log("Inserción Exitosa");
-        navigate("/Usuario");
+        console.log("Inserción Exitosa", res.data);
+        navigate("/ListaUsuarios");
       })
       .catch((err) => {
-        console.log("Inserción Fallida", err);
+        console.log("Inserción Fallida", err.response.data);
       });
   };
 
@@ -64,18 +63,15 @@ const UsuarioNuevo = (props) => {
               />
             </div>
             <div className="form-group">
-             
-                <label>Correo electrónico:</label>
-              
-                <input
-                  type="email"
-                  placeholder="Ingrese el correo"
-                  className="in"
-                  name="correoelectronico"
-                  value={datosFormUsuario.correoelectronico}
-                  onChange={handleAgregarUsuario}
-                />
-              
+              <label>Correo electrónico:</label>
+              <input
+                type="email"
+                placeholder="Ingrese el correo"
+                className="in"
+                name="email" // Cambiado a email
+                value={datosFormUsuario.email}
+                onChange={handleAgregarUsuario}
+              />
             </div>
             <div className="form-group">
               <label>Cédula:</label>
@@ -96,7 +92,7 @@ const UsuarioNuevo = (props) => {
                 type="date"
                 placeholder="Ingrese la fecha de nacimiento"
                 className="in"
-                name="fechanacimiento"
+                name="fechaNacimiento" // Cambiado a fechaNacimiento
                 value={datosFormUsuario.fechaNacimiento}
                 onChange={handleAgregarUsuario}
               />
@@ -106,17 +102,17 @@ const UsuarioNuevo = (props) => {
               <input
                 type="password"
                 className="in"
-                name="contrasena"
-                value={datosFormUsuario.contrasena}
+                name="password" // Cambiado a password
+                value={datosFormUsuario.password}
                 onChange={handleAgregarUsuario}
               />
             </div>
             <div className="form-group">
-              <label className="l">Rol</label>
+              <label>Rol</label>
               <select
                 name="rol"
-                value={datosFormUsuario.rol} // Aquí guardamos el rol seleccionado
-                onChange={handleAgregarUsuario} // Actualizamos el estado con el valor seleccionado
+                value={datosFormUsuario.rol} 
+                onChange={handleAgregarUsuario} 
               >
                 <option value="Administrador">Administrador</option>
                 <option value="Usuario">Usuario</option>
