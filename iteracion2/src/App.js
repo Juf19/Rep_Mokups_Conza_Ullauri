@@ -56,7 +56,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-        <Route path={"/"} element={<HomeAdmin/>}></Route>
+      <Route path={"/"} element={<Inicio></Inicio>}></Route>
+      <Route path={"/HomeUser"} element={<ListaParques></ListaParques>}></Route>
+        <Route path={"/HomeAdmin"} element={<HomeAdmin/>}></Route>
         <Route path={"/Usuario"} element={<AdminUserCrud></AdminUserCrud>}></Route>
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
         <Route path={"/EditarUsuario/:id"} element={<AdminUsuarioEditar></AdminUsuarioEditar>}></Route>
