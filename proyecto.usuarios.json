@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "6778a95bcd864c702912d040"
+  },
+  "email": "abigail@gmail.com",
+  "password": "$2a$10$pbw0sUj49BhPyVOegDpA.OBwObq0Vyoghyk79ymOgfbmciBW8tKc6",
+  "cedula": "1258568977",
+  "fechaNacimiento": {
+    "$date": "2003-11-21T00:00:00.000Z"
+  },
+  "nombre": "abigail",
+  "rol": "Usuario",
+  "createdAt": {
+    "$date": "2025-01-04T03:22:03.660Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-04T03:22:03.660Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6778aa1934072f57b9d80493"
+  },
+  "email": "jorge@gmail.com",
+  "password": "$2a$10$BfNqbRa0jQZYbbpBsVIo7eQoyjYXuOSeG8IKarek.pIJcbho1qFxy",
+  "cedula": "17536789",
+  "fechaNacimiento": {
+    "$date": "2000-11-03T00:00:00.000Z"
+  },
+  "nombre": "jorge ullauri",
+  "rol": "Administrador",
+  "createdAt": {
+    "$date": "2025-01-04T03:25:13.265Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-04T03:25:13.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6778b0b920926717bbb50819"
+  },
+  "email": "juan@gmail.com",
+  "password": "$2a$10$jeglpBJgTsxE26DAtDN0zOHUHVC0Gp2J.mCE07ymYxrhJaB7UcDOu",
+  "cedula": "1753758770",
+  "fechaNacimiento": {
+    "$date": "2002-03-15T00:00:00.000Z"
+  },
+  "nombre": "juan",
+  "rol": "Usuario",
+  "createdAt": {
+    "$date": "2025-01-04T03:53:29.289Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-04T03:53:29.289Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6778b0f520926717bbb5081e"
+  },
+  "email": "ana@example.com",
+  "password": "$2a$10$N92RUiCwxbFeHS1BgsbjjenJlxF3b5OSR5QSClYP/ZqaPIav/o9Wu",
+  "cedula": "1001693802",
+  "fechaNacimiento": {
+    "$date": "2002-03-05T00:00:00.000Z"
+  },
+  "nombre": "ana",
+  "rol": "Administrador",
+  "createdAt": {
+    "$date": "2025-01-04T03:54:29.898Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-04T03:54:29.898Z"
+  },
+  "__v": 0
+}]
