@@ -13,6 +13,9 @@ app.use(express.urlencoded({extended:true}));
 const allRestaurantesRoutes = require("./routes/usuario.route");
 allRestaurantesRoutes(app);
 
+const allParquesRoutes = require("./routes/parque.route");
+allParquesRoutes(app);
+
 app.listen(port, () => {
     console.log('server.js escuchando en el puerto', port);
 });

@@ -20,7 +20,7 @@ const AdimParqueCrud = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/parques") // URL 
+      .get("http://localhost:8000/parques") // URL 
       .then((response) => {
         setData(response.data);
       })

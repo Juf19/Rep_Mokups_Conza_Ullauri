@@ -1,0 +1,15 @@
+[{
+  "nombre": "La Carolina",
+  "descripcion": "Parque La Carolina",
+  "url": "/carolina.jpg"
+},
+{
+  "nombre": "Inglés",
+  "descripcion": "Parque Inglés",
+  "url": "/ingles.jpg"
+},
+{
+  "nombre": "Alameda",
+  "descripcion": "Parque Alameda",
+  "url": "/alameda.jpg"
+}]
