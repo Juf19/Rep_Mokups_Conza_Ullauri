@@ -17,7 +17,7 @@ const AdminParqueDetalle = () => {
   
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/parques/${id}`) // URL 
+      .get(`http://localhost:8000/parques/${id}`) // URL 
       .then((response) => {
         setParques(response.data);
       })

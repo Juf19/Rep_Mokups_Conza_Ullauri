@@ -73,3 +73,31 @@ module.exports.actualizarParque = async (req, res) => {
       return res.status(500).json({ mensaje: "Error al actualizar el parque." });
     }
 }
+
+module.exports.detalleParque = async (req, res) => {
+  try {
+    const { id } = req.params; // Obtener el id del parque desde los parámetros de la URL
+
+    console.log("ID recibido:", id); // Para verificar que el id esté llegando correctamente
+
+    // Verificar si el ID es válido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ mensaje: "ID no válido." });
+    }
+
+    // Buscar el parque por ID
+    const parque = await Parque.findById(id);
+
+    if (!parque) {
+      return res.status(404).json({ mensaje: "Parque no encontrado." });
+    }
+
+    // Enviar el parque encontrado como respuesta
+    return res.status(200).json(parque);
+
+  } catch (error) {
+    // Manejo de errores
+    console.error("Error al obtener los detalles del parque:", error);
+    return res.status(500).json({ mensaje: "Error al obtener los detalles del parque." });
+  }
+}
