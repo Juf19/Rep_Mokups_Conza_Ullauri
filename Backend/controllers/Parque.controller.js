@@ -101,3 +101,32 @@ module.exports.detalleParque = async (req, res) => {
     return res.status(500).json({ mensaje: "Error al obtener los detalles del parque." });
   }
 }
+
+module.exports.addParque = async (req, res) => {
+  try {
+    // Obtener los datos del nuevo parque desde el cuerpo de la solicitud
+    const { nombre, descripcion, url } = req.body;
+
+    // Verificar que se recibieron todos los datos necesarios
+    if (!nombre || !descripcion || !url) {
+      return res.status(400).json({ mensaje: "Faltan datos para crear el parque." });
+    }
+
+    // Crear un nuevo objeto parque
+    const nuevoParque = new Parque({
+      nombre,
+      descripcion,
+      url
+    });
+
+    // Guardar el parque en la base de datos
+    const parqueGuardado = await nuevoParque.save();
+
+    // Responder con el parque recién creado
+    return res.status(201).json(parqueGuardado);
+  } catch (error) {
+    // Manejo de errores
+    console.error("Error al agregar el parque:", error);
+    return res.status(500).json({ mensaje: "Error al agregar el parque." });
+  }
+}
