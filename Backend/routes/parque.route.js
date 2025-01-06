@@ -6,4 +6,5 @@ module.exports = function(app){
     app.put('/parques/:id', ParqueController.actualizarParque);
     app.get('/parques/detalle/:id', ParqueController.detalleParque);
     app.post('/parques', ParqueController.addParque);
+    app.delete('/parques/:id', ParqueController.deleteParque);
 }

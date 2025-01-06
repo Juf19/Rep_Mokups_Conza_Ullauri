@@ -33,8 +33,8 @@ const AdimParqueCrud = () => {
       const confirmDelete = window.confirm("¿Estás seguro que deseas borrar este parque?");
       if (confirmDelete) {
         try {
-          await axios.delete("http://localhost:3001/parques/" + id);
-          const updatedData = data.filter((parque) => parque.id !== id);
+          await axios.delete("http://localhost:8000/parques/" + id);
+          const updatedData = data.filter((parque) => parque._id !== id);
           setData(updatedData);
           alert("Parque eliminado con éxito.");
         } catch (error) {

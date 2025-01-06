@@ -130,3 +130,29 @@ module.exports.addParque = async (req, res) => {
     return res.status(500).json({ mensaje: "Error al agregar el parque." });
   }
 }
+
+module.exports.deleteParque = async (req, res) => {
+  try {
+    const { id } = req.params; // Obtener el id del parque desde los parámetros de la URL
+
+    // Verificar si el ID es un ObjectId válido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ mensaje: "ID no válido." });
+    }
+
+    // Eliminar el parque con el ID proporcionado
+    const parqueEliminado = await Parque.findByIdAndDelete(id);
+
+    // Verificar si el parque existe
+    if (!parqueEliminado) {
+      return res.status(404).json({ mensaje: "Parque no encontrado." });
+    }
+
+    // Responder con el parque eliminado
+    return res.status(200).json({ mensaje: "Parque eliminado con éxito.", parqueEliminado });
+  } catch (error) {
+    console.error("Error al eliminar el parque:", error);
+    return res.status(500).json({ mensaje: "Error al eliminar el parque." });
+  }
+}
+
