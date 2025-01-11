@@ -12,7 +12,7 @@ const AdminAddCancha = () => {
   const [nuevaCancha, setNuevaCancha] = useState({
     nombre: '',
     descripcion: '',
-    tipo: '',
+    tipo: 'Futbol',  // Establecer el valor por defecto para el select
     horarios: [],
     dias: [],
     idParque: id // Asociar la cancha al parque actual
@@ -73,14 +73,38 @@ const AdminAddCancha = () => {
   // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    // Validar campos requeridos
+    if (!nuevaCancha.nombre || !nuevaCancha.descripcion || !nuevaCancha.tipo) {
+      alert("Por favor, completa todos los campos obligatorios.");
+      return;
+    }
+  
+    if (!Array.isArray(nuevaCancha.horarios) || nuevaCancha.horarios.length === 0) {
+      alert("Por favor, selecciona al menos un horario.");
+      return;
+    }
+  
+    if (!Array.isArray(nuevaCancha.dias) || nuevaCancha.dias.length === 0) {
+      alert("Por favor, selecciona al menos un día.");
+      return;
+    }
+  
+    if (!nuevaCancha.idParque || !/^[0-9a-fA-F]{24}$/.test(nuevaCancha.idParque)) {
+      alert("ID del parque no es válido.");
+      return;
+    }
+  
+    // Enviar datos al backend
     axios
-      .post(`http://localhost:3001/canchas`, nuevaCancha)
+      .post(`http://localhost:8000/canchas`, nuevaCancha)
       .then(response => {
-        console.log('Cancha Agregada:', response.data);
-        navigate(`/Parque`); // Redirigir al listado de canchas del parque
+        console.log("Cancha Agregada:", response.data);
+        navigate(`/Parque`);
       })
       .catch(error => {
-        console.error('Error al agregar la Cancha:', error);
+        console.error("Error al agregar la Cancha:", error.response?.data || error.message);
+        alert(error.response?.data?.mensaje || "Error inesperado al agregar la cancha.");
       });
   };
 

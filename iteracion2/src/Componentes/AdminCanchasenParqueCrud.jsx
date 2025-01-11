@@ -20,7 +20,7 @@ const AdminCanchaenParque = () => {
     // Obtener detalles del parque actual
     useEffect(() => {
         axios
-            .get(`http://localhost:3001/parques/${id}`)
+            .get(`http://localhost:8000/parques/${id}`)
             .then((response) => {
                 setParques(response.data);
             })
@@ -32,7 +32,7 @@ const AdminCanchaenParque = () => {
     // Obtener canchas filtradas por el parque actual
     useEffect(() => {
         axios
-            .get(`http://localhost:3001/canchas`)
+            .get(`http://localhost:8000/canchas`)
             .then((response) => {
                 const canchasFiltradas = response.data.filter(cancha => cancha.idParque === id);
                 setData(canchasFiltradas);
@@ -47,8 +47,8 @@ const AdminCanchaenParque = () => {
         const confirmDelete = window.confirm("¿Estás seguro que deseas borrar esta cancha?");
         if (confirmDelete) {
             try {
-                await axios.delete(`http://localhost:3001/canchas/${canchaId}`);
-                const updatedData = data.filter((cancha) => cancha.id !== canchaId);
+                await axios.delete(`http://localhost:8000/canchas/${canchaId}`);
+                const updatedData = data.filter((cancha) => cancha._id !== canchaId);
                 setData(updatedData);
                 alert("Cancha eliminada con éxito.");
             } catch (error) {
@@ -104,19 +104,19 @@ const AdminCanchaenParque = () => {
                                     <td>
                                         <button
                                             className="btnEditar"
-                                            onClick={() => navigate(`/Parque/${cancha.idParque}/canchas/${cancha.id}/actualizar`)}
+                                            onClick={() => navigate(`/Parque/${cancha.idParque}/canchas/${cancha._id}/actualizar`)}
                                         >
                                             <FontAwesomeIcon icon={faPencilAlt} />
                                         </button>
                                         <button
                                             className="btnBorrar"
-                                            onClick={() => handleEliminar(cancha.id)}
+                                            onClick={() => handleEliminar(cancha._id)}
                                         >
                                             <FontAwesomeIcon icon={faTrash} />
                                         </button>
                                         <button
                                             className="btnDetalle"
-                                            onClick={() => navigate(`/Parque/${cancha.idParque}/canchas/${cancha.id}/detalles`)}
+                                            onClick={() => navigate(`/Parque/${cancha.idParque}/canchas/${cancha._id}/detalles`)}
                                         >
                                             <FontAwesomeIcon icon={faInfoCircle} />
                                         </button>
