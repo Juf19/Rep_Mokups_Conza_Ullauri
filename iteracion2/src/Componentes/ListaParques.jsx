@@ -12,6 +12,7 @@ class ListaParques extends Component {
             { name: "Ejido", img: "ejido.jpg" },
             { name: "Ingles", img: "ingles.jpg" },
             { name: "Metropolitano", img: "metropolitano.jpg" }
+            
         ];
 
         return (
@@ -19,7 +20,7 @@ class ListaParques extends Component {
               <ItemHeader></ItemHeader>
               <ItemBajoHeader></ItemBajoHeader>
                 <div className="parques-list">
-                    <h2>PARQUES</h2>
+                    <h2>Selecciona el parque en donde deseas reservar</h2>
                     <div className="parques">
                         {parques.map((parque, index) => (
                             <UsParques key={index} name={parque.name} img={parque.img}></UsParques>

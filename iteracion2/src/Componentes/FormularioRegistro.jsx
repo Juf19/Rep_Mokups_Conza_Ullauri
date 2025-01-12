@@ -63,13 +63,7 @@ const RegistroUsuario = () => {
             <h1 className="titulo-registro">Ingrese sus datos para el registro</h1>
 
             <form className="formulario-registro" onSubmit={handleSubmit}>
-                <div className="imagen-usuario-registro">
-                    <img
-                        src="logo_persona.png"
-                        alt="Usuario"
-                        className="icono-usuario-registro"
-                    />
-                </div>
+                
 
                 <div className="campos-registro">
                     <input
@@ -111,9 +105,11 @@ const RegistroUsuario = () => {
                         value={formData.fechaNacimiento}
                         onChange={handleChange}
                     />
+                    <div>
                     <button type="submit" className="boton-registro">
                         Crear cuenta
                     </button>
+                    </div>
                 </div>
             </form>
 

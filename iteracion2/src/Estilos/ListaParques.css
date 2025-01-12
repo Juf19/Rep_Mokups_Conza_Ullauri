@@ -32,9 +32,7 @@
     gap: 20px;
     max-height: 500px; /* Altura máxima para la sección */
     overflow-y: auto; /* Habilita el scroll vertical si hay más contenido */
-    border: 1px solid #ccc; /* Opcional: agrega un borde para visualización */
     padding: 10px;
-    background-color: #f9f9f9; /* Fondo opcional */
   }
   
   .parque {

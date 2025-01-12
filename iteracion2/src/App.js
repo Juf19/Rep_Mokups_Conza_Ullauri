@@ -57,10 +57,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-      <Route path={"/"} element={<Inicio></Inicio>}></Route>
+      <Route path={"/"} element={<UsReservas></UsReservas>}></Route>
       <Route path={"/registrarse"} element={<FormularioRegistro></FormularioRegistro>}></Route>
-      <Route path={"/HomeUser"} element={<ListaParques></ListaParques>}></Route>
+      <Route path={"/HomeUser"} element={<UsReservas></UsReservas>}></Route>
         <Route path={"/HomeAdmin"} element={<HomeAdmin/>}></Route>
+        <Route path={"/ListaParques"} element={<ListaParques></ListaParques>}></Route>
         <Route path={"/ListaUsuarios"} element={<AdminUserCrud></AdminUserCrud>}></Route>
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
         <Route path={"/EditarUsuario/:id"} element={<AdminUsuarioEditar></AdminUsuarioEditar>}></Route>
@@ -76,13 +77,14 @@ function App() {
 
       </Routes>
     </BrowserRouter>
-    
+ 
 
     </div>
   );
 }
 
 /*<Inicio></Inicio>
+<Route path={"/"} element={<Inicio></Inicio>}></Route>
 <ListaParques></ListaParques>
 <UsSeleccionarCancha></UsSeleccionarCancha>
 <UsReservaCancha></UsReservaCancha>
