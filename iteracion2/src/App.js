@@ -57,14 +57,18 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-      <Route path={"/"} element={<UsReservas></UsReservas>}></Route>
+      <Route path={"/"} element={<Inicio></Inicio>}></Route>
       <Route path={"/registrarse"} element={<FormularioRegistro></FormularioRegistro>}></Route>
       <Route path={"/HomeUser"} element={<UsReservas></UsReservas>}></Route>
         <Route path={"/HomeAdmin"} element={<HomeAdmin/>}></Route>
         <Route path={"/ListaParques"} element={<ListaParques></ListaParques>}></Route>
         <Route path={"/detalles"} element={<UsSeleccionarCancha></UsSeleccionarCancha>}></Route>
         <Route path={"/reserva"} element={<UsReservaCancha></UsReservaCancha>}></Route>
-        <Route path={"/ListaUsuarios"} element={<AdminUserCrud></AdminUserCrud>}></Route>
+        <Route path={"/confirmacion"} element={<UsConfirmacion></UsConfirmacion>}></Route>
+        <Route path={"/perfil"} element={<UsPerfil></UsPerfil>}></Route>
+        <Route path={"/AdminPerfil"} element={<AdminPerfil></AdminPerfil>}></Route>
+        <Route path={"/disponibilidad"} element={<UsDisponibilidadH></UsDisponibilidadH>}></Route>
+        <Route path={"/Usuario"} element={<AdminUserCrud></AdminUserCrud>}></Route>
         <Route path={"/nuevoUsuario"} element={<UsuarioNuevo/>}></Route>
         <Route path={"/EditarUsuario/:id"} element={<AdminUsuarioEditar></AdminUsuarioEditar>}></Route>
         <Route path={"/DetalleUsuario/:id"} element={<AdminUserDetalle />} />

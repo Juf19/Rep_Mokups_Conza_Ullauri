@@ -37,6 +37,75 @@
   .ckb, .txt{
     flex:1;
   }
+  .menuh {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.horario {
+    color: black;
+    padding: 16px 24px; /* Tamaño más grande */
+    font-size: 16px; /* Texto más grande */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Sin bordes redondeados para que se vean pegados */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 0; /* Eliminar espacio entre botones */
+}
+
+.horario:not(:last-child) {
+    border-right: none; /* Eliminar borde derecho entre botones consecutivos */
+}
+
+.horario:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05); /* Animación ligera al pasar el mouse */
+}
+
+.horario.selected {
+    background-color: green;
+    color: white;
+    border: 1px solid darkgreen;
+    transform: scale(1); /* Mantener el tamaño al estar seleccionado */
+}
+
+.terminos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.terminos input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.terminos span {
+  font-size: 30px;
+  line-height: 1.5;
+  
+}
+
+.reserva {
+  padding: 15px 30px; /* Aumentar el tamaño del padding */
+  font-size: 36px; /* Aumentar el tamaño de la fuente */
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block; /* Cambiar a bloque para poder centrarlo */
+  margin-top: 150px; /* Centrar el botón */
+}
+
+.reserva:hover {
+  background-color: #0056b3;
+}
 
   
 

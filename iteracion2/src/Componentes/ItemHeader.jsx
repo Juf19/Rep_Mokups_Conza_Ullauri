@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ItemHeader = () => {
+  const navigate = useNavigate();
   return (
     <div className="app">
       <header className="header">
@@ -11,12 +13,12 @@ const ItemHeader = () => {
         </div>
         <div className="menu">
           <div className="menu-item">
-            <img src="/file.png" alt="Reserva" className="icono" />
-            <button className="menu-text">Reservas</button>
+            <img src="/file.png" alt="Reserva" className="icono" onClick={() => navigate('/HomeUser')} />
+            <button className="menu-text" onClick={() => navigate('/HomeUser')}>Reservas</button>
           </div>
           <div className="menu-item">
-            <img src="/file2.png" alt="Perfil" className="icono" />
-            <button className="menu-text">Perfil</button>
+            <img src="/file2.png" alt="Perfil" className="icono" onClick={() => navigate('/Perfil')} />
+            <button className="menu-text" onClick={() => navigate('/Perfil')}>Perfil</button>
           </div>
         </div>
       </header>

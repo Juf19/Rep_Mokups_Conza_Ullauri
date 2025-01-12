@@ -1,9 +1,10 @@
 import React from 'react';
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
+import { useNavigate } from 'react-router-dom';
 
 const UsConfirmacion = () => {
-
+    const navigate = useNavigate();
     return (
         <div>
             <ItemHeader></ItemHeader>
@@ -16,7 +17,7 @@ const UsConfirmacion = () => {
                     de la fecha programada.
                 </div>
                 <div className='item1'>
-                    <button className="disponibilidad-button"> Volver al inicio </button>
+                    <button className="disponibilidad-button" onClick={() => navigate('/HomeUser')}> Volver al inicio </button>
                 </div>
             </div>
         </div>
