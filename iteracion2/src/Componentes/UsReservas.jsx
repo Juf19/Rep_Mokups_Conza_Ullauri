@@ -20,7 +20,7 @@ function UsReservas() {
             <TablaReservas></TablaReservas>
             <div className="espacio">
                 <div>
-                    <button className="azul" onClick={() => navigate('/ListaParques')}>Reservar</button>
+                    <button className="reserva-button" onClick={() => navigate('/ListaParques')}>Reservar</button>
                 </div>
                 <div className='derecha'>
                     <button className='rojo'>Cancelar</button>

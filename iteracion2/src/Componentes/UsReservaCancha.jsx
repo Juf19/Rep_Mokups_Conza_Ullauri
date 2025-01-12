@@ -43,19 +43,7 @@ class UsReservaCancha extends Component {
                 </div>
                 
                 <div className='app'>
-                    <h3>Seleccione el número de horas que desea reservar</h3>
-                    <div className='radioB'>
-                        <div className='radio1'>
-                            <label className='radiosPrimeros'>
-                                <input type="radio" value="1" checked={this.state.horas === '1'} onChange={this.handleHorasChange} /> 1
-                            </label>
-                        </div>
-                        <div className='radio2'>
-                            <label className='radiosPrimeros'>
-                                <input type="radio" value="2" checked={this.state.horas === '2'} onChange={this.handleHorasChange} />  2
-                            </label>
-                        </div>
-                    </div>
+                    
                     <h3>Seleccione el horario</h3>
                     <div className='menuh'>
                         <button className='horario'>8-9</button>
@@ -78,12 +66,9 @@ class UsReservaCancha extends Component {
                             checked={this.state.aceptarTerminos}
                             onChange={this.handleTerminosChange}
                         />
-                        <span> Usted está aceptando que cumplirá con el horario establecido y que en caso de cancelar lo realizará con al menos 48 horas de antelación</span>
+                        <div> Usted está aceptando que cumplirá con el horario establecido y que en caso de cancelar lo realizará con al menos 48 horas de antelación</div>
                     </label>
                     <div className="form1">
-                        <div className='item1'>
-                            <BotonConFlecha></BotonConFlecha>
-                        </div>
                         <div className='item1'>
                             <button className="reserva-button" onClick={this.handleReserva}>Reservar</button>
                         </div>

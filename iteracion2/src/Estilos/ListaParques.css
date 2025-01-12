@@ -53,4 +53,10 @@
     font-size: 20px;
   }
   
-  
+  .parques-button {
+    border: none;           /* Sin borde */
+    background: none;      /* Sin fondo */
+    padding: 0;            /* Sin padding */
+    cursor: pointer;       /* Cambia el cursor al pasar sobre el botón */
+    display: inline-block;  /* Para que se comporte como un bloque en línea */
+}
