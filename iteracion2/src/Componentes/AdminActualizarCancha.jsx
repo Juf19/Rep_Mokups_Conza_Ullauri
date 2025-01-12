@@ -25,7 +25,7 @@ const AdminActualizarCancha = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/canchas/${id}`)
+      .get(`http://localhost:8000/canchas/${id}`)
       .then((response) => {
         const canchasData = response.data;
         
@@ -61,7 +61,7 @@ const AdminActualizarCancha = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/canchas/${id}`, canchas)
+    axios.put(`http://localhost:8000/canchas/${id}`, canchas)
       .then(response => {
         console.log('Cancha actualizada:', response.data);
         navigate(`/Parque/${canchas.idParque}/canchas`);

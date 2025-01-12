@@ -20,7 +20,7 @@ const AdminParqueDetalle = () => {
   // Obtener los detalles de la cancha
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/canchas/${id}`) // URL
+      .get(`http://localhost:8000/canchas/${id}`) // URL
       .then((response) => {
         setCancha(response.data);
       })

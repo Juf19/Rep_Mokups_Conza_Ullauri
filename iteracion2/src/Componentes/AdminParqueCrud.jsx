@@ -10,7 +10,6 @@ import { faTrash, faPencilAlt, faInfoCircle } from "@fortawesome/free-solid-svg-
 import { useParams } from "react-router-dom";
 
 const AdimParqueCrud = () => {
-  const { id } = useParams();
   const navigate=useNavigate();
   const [data, setData] = useState([]);
   const item = [
@@ -34,8 +33,8 @@ const AdimParqueCrud = () => {
       const confirmDelete = window.confirm("¿Estás seguro que deseas borrar este parque?");
       if (confirmDelete) {
         try {
-          await axios.delete("http://localhost:3001/parques/" + id);
-          const updatedData = data.filter((parque) => parque.id !== id);
+          await axios.delete("http://localhost:8000/parques/" + id);
+          const updatedData = data.filter((parque) => parque._id !== id);
           setData(updatedData);
           alert("Parque eliminado con éxito.");
         } catch (error) {
@@ -63,10 +62,10 @@ const AdimParqueCrud = () => {
 
                 <td>{parque.nombre} </td>
                 <td>
-                <button className="btnEditar" onClick={() => navigate(`/parques/update/${parque.id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
-                <button className="btnBorrar" onClick={() => handleEliminar(parque.id)}><FontAwesomeIcon icon={faTrash} /></button>
-                <button className="btnDetalle" onClick={() => navigate(`/parques/detalle/${parque.id}`)}><FontAwesomeIcon icon={faInfoCircle} /></button>
-                <button className="btnCanchas" onClick={() => navigate(`/Parque/${parque.id}/canchas`)}><svg
+                <button className="btnEditar" onClick={() => navigate(`/parques/update/${parque._id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
+                <button className="btnBorrar" onClick={() => handleEliminar(parque._id)}><FontAwesomeIcon icon={faTrash} /></button>
+                <button className="btnDetalle" onClick={() => navigate(`/parques/detalle/${parque._id}`)}><FontAwesomeIcon icon={faInfoCircle} /></button>
+                <button className="btnCanchas" onClick={() => navigate(`/Parque/${parque._id}/canchas`)}><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"

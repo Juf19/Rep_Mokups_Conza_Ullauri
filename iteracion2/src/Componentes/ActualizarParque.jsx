@@ -8,9 +8,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const ActualizarParque = () => {
   const { id } = useParams();
+  console.log("ID recuperado de useParams:", id); // Agrega esto para depurar
   const navigate = useNavigate();
   const [parques, setParques] = useState({
-    id: '',
+    _id: '',
     nombre: '',
     descripcion: '',
     url: ''
@@ -18,8 +19,9 @@ const ActualizarParque = () => {
   
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/parques/${id}`) // URL 
+      .get(`http://localhost:8000/parques/${id}`) // URL 
       .then((response) => {
+        console.log("Datos del parque recibidos:", response.data); // Log para depurar
         setParques(response.data);
       })
       .catch((error) => {
@@ -37,7 +39,7 @@ const ActualizarParque = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3001/parques/${id}`, parques)
+    axios.put(`http://localhost:8000/parques/${id}`, parques)
       .then(response => {
         console.log('Parques actualizado:', response.data);
         // navigate(`/setParquess/${id}`);

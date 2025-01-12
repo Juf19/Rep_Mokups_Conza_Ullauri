@@ -21,7 +21,7 @@ const AddParque = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:3001/parques`, nuevoParque)
+    axios.post(`http://localhost:8000/parques`, nuevoParque)
       .then(response => {
         console.log('Parque Agregado:', response.data);
         navigate(`/Parque`);
