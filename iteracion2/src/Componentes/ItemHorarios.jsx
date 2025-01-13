@@ -3,7 +3,7 @@ import React from 'react';
 const ItemHorarios = () => {
 
   return (
-    <div className='app'>
+    <div className='app1'>
       <div className='menuh'>
 
         <button className='horario'>8-9</button>

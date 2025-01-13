@@ -143,18 +143,17 @@ h2 {
 }
 
 .menuh{
-  flex: 11;
-  margin: 20px;
-  gap: 20px;
+  display: flex; /* Alineación horizontal */
+  gap: 8px; /* Espaciado entre botones */
+  flex-wrap: nowrap; /* Evita que los botones se muevan a otra línea */
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+  padding: 5px;
 }
 
 .botones{
   flex:2;
 }
 
-.horario{
-  margin: 20px;
-}
 
 .menu-item {
   display: flex;
@@ -464,4 +463,152 @@ body {
 .formulario-registro{
   margin: 0;
   padding: 10px;
+}
+
+/* Contenedor principal */
+.us-disponibilidad-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* Encabezado e ítems debajo del encabezado */
+.us-disponibilidad-container > * {
+  margin-bottom: 10px;
+}
+
+/* Contenido dividido en izquierda (1/3) y derecha (2/3) */
+.us-disponibilidad-content {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 120px); /* Resta espacio para encabezado */
+}
+
+/* Sección izquierda (calendario) */
+.us-disponibilidad-left {
+  flex: 1;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin-top: 30%;
+}
+
+.custom-calendar {
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 15px;
+}
+
+.fecha-seleccionada {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+/* Sección derecha (contenido) */
+.us-disponibilidad-right {
+  flex: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background-color: #fff;
+}
+/* Contenedor principal */
+.us-disponibilidad {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+/* Contenedor de filas */
+.disponibilidad-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre filas */
+}
+
+/* Fila */
+.disponibilidad-row {
+  display: flex;
+  align-items: center; /* Alinea el contenido verticalmente */
+  justify-content: space-between; /* Separa label y botones */
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Label */
+.disponibilidad-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+/* Botones en ItemHorarios deben estar alineados horizontalmente */
+.item-horarios {
+  display: flex;
+  gap: 8px; /* Espacio entre botones */
+}
+
+/* Ajusta los botones si es necesario */
+.item-horarios button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.item-horarios button:hover {
+  background-color: #0056b3;
+}
+.app1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  margin: 0;
+}
+
+.menuh {
+  display: flex; /* Alineación horizontal */
+  gap: 8px; /* Espaciado entre botones */
+  flex-wrap: nowrap; /* Evita que los botones se muevan a otra línea */
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+  padding: 5px;
+}
+
+/* Estilo de botones */
+button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0;
+}
+
+.horario {
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
