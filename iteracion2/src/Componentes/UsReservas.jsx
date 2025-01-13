@@ -15,7 +15,7 @@ function UsReservas() {
             <ItemHeader></ItemHeader>
             <ItemBajoHeader nombre={texto[0].nombre}></ItemBajoHeader>
             <div className='derecha'>
-                <CalendarioRectangulo></CalendarioRectangulo>
+            
             </div>
             <TablaReservas></TablaReservas>
             <div className="espacio">
