@@ -5,6 +5,7 @@ import ItemBajoHeader from "./ItemBajoHeader";
 import { useNavigate} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash,faPencilAlt, faInfoCircle, faPlus } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 
 const AdimUserCrud = () => {
@@ -36,10 +37,20 @@ const AdimUserCrud = () => {
         await axios.delete("http://localhost:3001/usuarios/" + id);
         const updatedData = data.filter((usuario) => usuario.id !== id);
         setData(updatedData);
-        alert("Usuario eliminado con éxito.");
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Usuario eliminado correctamente.',
+        });
+        
       } catch (error) {
         console.error("Error al eliminar el usuario:", error);
-        alert("No se pudo eliminar el usuario.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo eliminar el usuario.',
+        });
+        
       }
     }
   };

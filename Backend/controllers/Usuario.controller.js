@@ -11,7 +11,7 @@ module.exports.createUser = async (request, response) => {
 
     // Validar campos obligatorios
     if (!email || !password || !cedula || !fechaNacimiento || !nombre) {
-        return response.status(400).json({ message: 'Todos los campos son obligatorios: email, password, cedula, fechaNacimiento, nombre' });
+        return response.status(400).json({ message: 'Todos los campos son obligatorios: email, contrasena, cedula, fecha de nacimiento, nombre' });
     }
 
     try {

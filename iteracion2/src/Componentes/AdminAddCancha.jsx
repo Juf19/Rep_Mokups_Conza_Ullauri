@@ -4,6 +4,7 @@ import ItemBajoHeader from './ItemBajoHeader';
 import axios from 'axios';
 import "../Estilos/ActualizarParque.css";
 import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AdminAddCancha = () => {
   const { id } = useParams(); // Obtener el id del parque actual desde la URL
@@ -76,22 +77,42 @@ const AdminAddCancha = () => {
   
     // Validar campos requeridos
     if (!nuevaCancha.nombre || !nuevaCancha.descripcion || !nuevaCancha.tipo) {
-      alert("Por favor, completa todos los campos obligatorios.");
+          Swal.fire({
+                title: 'Error',
+                text: 'Por favor, completa todos los campos obligatorios',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar'
+            });
       return;
     }
   
     if (!Array.isArray(nuevaCancha.horarios) || nuevaCancha.horarios.length === 0) {
-      alert("Por favor, selecciona al menos un horario.");
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, selecciona al menos un horario',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+    });
       return;
     }
   
     if (!Array.isArray(nuevaCancha.dias) || nuevaCancha.dias.length === 0) {
-      alert("Por favor, selecciona al menos un día.");
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, selecciona al menos un día',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+    });
       return;
     }
   
     if (!nuevaCancha.idParque || !/^[0-9a-fA-F]{24}$/.test(nuevaCancha.idParque)) {
-      alert("ID del parque no es válido.");
+      Swal.fire({
+        title: 'Error',
+        text: 'ID del parque no es válido',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+    });
       return;
     }
   

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 const AdminCanchaenParque = () => {
     const { id } = useParams(); // id del parque actual
@@ -50,10 +51,18 @@ const AdminCanchaenParque = () => {
                 await axios.delete(`http://localhost:8000/canchas/${canchaId}`);
                 const updatedData = data.filter((cancha) => cancha._id !== canchaId);
                 setData(updatedData);
-                alert("Cancha eliminada con éxito.");
+                Swal.fire({
+                          icon: 'success',
+                          title: 'Éxito',
+                          text: 'Cancha eliminado con exito',
+                        });
             } catch (error) {
                 console.error("Error al eliminar la cancha:", error);
-                alert("No se pudo eliminar la cancha.");
+                Swal.fire({
+                         icon: 'error',
+                         title: 'Error',
+                         text: 'No se pudo eliminar la cancha',
+                       });
             }
         }
     };

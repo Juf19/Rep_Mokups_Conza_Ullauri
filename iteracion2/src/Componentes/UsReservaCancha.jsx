@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
 import CalendarioRectangulo from './CalendarioRectangulo';
+import Swal from 'sweetalert2';
+
 
 const UsReservaCancha = () => {
     const [horariosSeleccionados, setHorariosSeleccionados] = useState([]);
@@ -19,7 +21,12 @@ const UsReservaCancha = () => {
         } else if (horariosSeleccionados.length < 2) {
             setHorariosSeleccionados((prev) => [...prev, horario]);
         } else {
-            alert('No puede seleccionar más de dos horarios.');
+            Swal.fire({
+                title: 'Error',
+                text: 'No puede seleccionar más de dos horarios',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar'
+            });
         }
     };
 
@@ -29,7 +36,13 @@ const UsReservaCancha = () => {
                 state: { cancha: texto[0].nombre, horarios: horariosSeleccionados },
             });
         } else {
-            alert('Debe seleccionar al menos un horario y aceptar los términos y condiciones.');
+            Swal.fire({
+                title: 'Error',
+                text: 'Debe seleccionar al menos un horario y aceptar los términos y condiciones.',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar'
+            });
+           
         }
     };
 

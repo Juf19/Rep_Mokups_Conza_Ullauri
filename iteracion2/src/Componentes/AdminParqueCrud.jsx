@@ -7,10 +7,10 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AdimParqueCrud = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const item = [
     { nombre: "Parques" },
@@ -26,23 +26,31 @@ const AdimParqueCrud = () => {
       .catch((error) => {
         console.error("Error al obtener los parques:", error);
       })
-    }, []);
+  }, []);
 
- 
-  const handleEliminar =  async (id) => {
-      const confirmDelete = window.confirm("¿Estás seguro que deseas borrar este parque?");
-      if (confirmDelete) {
-        try {
-          await axios.delete("http://localhost:8000/parques/" + id);
-          const updatedData = data.filter((parque) => parque._id !== id);
-          setData(updatedData);
-          alert("Parque eliminado con éxito.");
-        } catch (error) {
-          console.error("Error al eliminar el parque:", error);
-          alert("No se pudo eliminar el parque.");
-        }
+
+  const handleEliminar = async (id) => {
+    const confirmDelete = window.confirm("¿Estás seguro que deseas borrar este parque?");
+    if (confirmDelete) {
+      try {
+        await axios.delete("http://localhost:8000/parques/" + id);
+        const updatedData = data.filter((parque) => parque._id !== id);
+        setData(updatedData);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Parque eliminado con exito',
+        });
+      } catch (error) {
+        console.error("Error al eliminar el parque:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo eliminar el parque',
+        });
       }
-    };
+    }
+  };
 
   return (
     <div>
@@ -62,22 +70,22 @@ const AdimParqueCrud = () => {
 
                 <td>{parque.nombre} </td>
                 <td>
-                <button className="btnEditar" onClick={() => navigate(`/parques/update/${parque._id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
-                <button className="btnBorrar" onClick={() => handleEliminar(parque._id)}><FontAwesomeIcon icon={faTrash} /></button>
-                <button className="btnDetalle" onClick={() => navigate(`/parques/detalle/${parque._id}`)}><FontAwesomeIcon icon={faInfoCircle} /></button>
-                <button className="btnCanchas" onClick={() => navigate(`/Parque/${parque._id}/canchas`)}><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="white"
-                    >
-                      <rect x="3" y="3" width="18" height="18" fill="none" stroke="white" strokeWidth="2"/>
-                      <line x1="3" y1="12" x2="21" y2="12" stroke="white" strokeWidth="2" />
-                      <circle cx="12" cy="12" r="2" fill="white" />
-                      <line x1="3" y1="3" x2="3" y2="21" stroke="white" strokeWidth="2" />
-                      <line x1="21" y1="3" x2="21" y2="21" stroke="white" strokeWidth="2" />
-                    </svg>
+                  <button className="btnEditar" onClick={() => navigate(`/parques/update/${parque._id}`)}><FontAwesomeIcon icon={faPencilAlt} /></button>
+                  <button className="btnBorrar" onClick={() => handleEliminar(parque._id)}><FontAwesomeIcon icon={faTrash} /></button>
+                  <button className="btnDetalle" onClick={() => navigate(`/parques/detalle/${parque._id}`)}><FontAwesomeIcon icon={faInfoCircle} /></button>
+                  <button className="btnCanchas" onClick={() => navigate(`/Parque/${parque._id}/canchas`)}><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                  >
+                    <rect x="3" y="3" width="18" height="18" fill="none" stroke="white" strokeWidth="2" />
+                    <line x1="3" y1="12" x2="21" y2="12" stroke="white" strokeWidth="2" />
+                    <circle cx="12" cy="12" r="2" fill="white" />
+                    <line x1="3" y1="3" x2="3" y2="21" stroke="white" strokeWidth="2" />
+                    <line x1="21" y1="3" x2="21" y2="21" stroke="white" strokeWidth="2" />
+                  </svg>
                   </button>
                 </td>
               </tr>
