@@ -1,0 +1,44 @@
+.horarios-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaciado entre los círculos */
+    margin-top: 10px;
+  }
+  
+  .horario-item {
+    position: relative; /* Importante para posicionar elementos como la "X" */
+    display: flex;
+    background-color: #007bff; /* Azul para el fondo */
+    color: white;
+    border-radius: 50%; /* Hace que sea un círculo */
+    width: 60px; /* Tamaño del círculo */
+    height: 60px; /* Tamaño del círculo */
+    font-size: 14px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita para los números */
+    line-height: normal; /* Asegura que no afecte el centrado */
+   
+  }
+  
+  .horario-text {
+    font-size: inherit; /* Hereda el tamaño definido en .horario-item */
+  
+    top: 50%;
+    left: 50%;
+  }
+  
+  .horario-remove-btn {
+    position: absolute;
+    top: -8px; /* Ajusta la posición en la esquina superior derecha */
+    right: -8px;
+    background: none;
+    border: none;
+    color: red; /* Color rojo para la "X" */
+    font-size: 16px; /* Tamaño ajustado de la "X" */
+    cursor: pointer;
+  }
+  
+  .horario-remove-btn:hover {
+    color: darkred; /* Cambia a un rojo más oscuro al pasar el cursor */
+  }
+  
+  

@@ -83,13 +83,9 @@ body {
   padding: 10px;
   margin: 0;
 }
-.celeste {
-  background-color: #1575ba;
-  margin: 0;
-}
 
 .azul {
-  height: 20px;
+  height: 38px;
   width: 50%;
   background-color: #27357d;
   padding: 5px 20px;
@@ -107,24 +103,6 @@ h2 {
 .logo {
   width: 100px;
   height: 97px;
-}
-
-.search-bar input {
-  padding: 5px;
-  width: 450px;
-  height: 25px;
-  border-radius: 30px;
-  background-color: none;
-   font-size: 20px;
-   text-align: inherit;
-   font-family: "Pathway Extreme";
-    
-}
-
-.search-button {
-  margin-left: 5px;
-  cursor: pointer;
-  background-color: #1575ba;
 }
 
 .menu button {
@@ -612,3 +590,10 @@ button {
   margin: 0;
   padding: 0;
 }
+
+
+
+
+
+
+

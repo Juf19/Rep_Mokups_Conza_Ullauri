@@ -15,6 +15,7 @@ code {
 }
 .app {
   font-family: Arial, sans-serif;
+  
 }
 
 .header {
@@ -36,21 +37,7 @@ code {
   gap: 20px;    
 }
 
-.azul {
-  height: 20px;
-  width: 50%;
-  background-color: #27357d;
-  padding: 5px 20px;
-  color: white;
-  margin: 0;
-  text-align: center;
-}
 
-h2 {
-  margin: 0;
-  font-size: 24px;
-  color: white;
-}
 
 .logo {
   width: 100px;

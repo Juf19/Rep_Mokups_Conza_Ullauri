@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IconButton, TextField, } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const ItemHeader = () => {
   const navigate = useNavigate();
@@ -8,8 +10,19 @@ const ItemHeader = () => {
       <header className="header">
         <img src="/LOGOA.svg" alt="Quito" className="logo" />
         <div className="search-bar">
-          <input type="text" placeholder="Buscar" />
-          <button className="search-button">🔍</button>
+            <TextField  
+                placeholder="Buscar"
+                size="small"
+                fullWidth
+                className="search-input" // Clase para el campo de entrada
+                InputProps={{
+                    endAdornment: (
+                        <IconButton type="submit" aria-label="search" className="search-button">
+                            <SearchIcon />
+                        </IconButton>
+                    ),
+                }}
+            />
         </div>
         <div className="menu">
           <div className="menu-item">

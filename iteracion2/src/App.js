@@ -3,19 +3,24 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
+import "./Estilos/ActualizarParque.css";
+import "./Estilos/AdminAddCancha.css";
+import "./Estilos/AdminParqueDetalle.css";
+import "./Estilos/BotonesCrud.css";
+import "./Estilos/Registro.css";
+import "./Estilos/HorariosyDias.css";
+import "./Estilos/Inicio.css";
+import "./Estilos/ListaParques.css";
 import "./Estilos/NuevoParque.css";
 import "./Estilos/NuevoUsuario.css";
 import "./Estilos/Registro.css";
-import "./Estilos/Inicio.css";
-import "./Estilos/ListaParques.css";
+import "./Estilos/TablasTodoAdmin.css";
 import "./Estilos/UsConfirmacion.css";
-import "./Estilos/UsPerfil.css";
-import "./Estilos/UsReservas.css";
 import "./Estilos/UsDisponibilidadH.css";
+import "./Estilos/UsPerfil.css";
 import "./Estilos/UsReservarCancha.css";
-import "./Estilos/BotonesCrud.css";
-import "./Estilos/HorariosyDias.css";
-import "./Estilos/FormularioRegistro.css";
+import "./Estilos/UsReservas.css";
+
 
 import AdminCancha from './Componentes/AdminCancha';
 import FormularioRegistro from './Componentes/FormularioRegistro';
@@ -57,7 +62,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-      <Route path={"/"} element={<HomeAdmin/>}></Route>
+      <Route path={"/"} element={<Inicio></Inicio>}></Route>
       <Route path={"/registrarse"} element={<FormularioRegistro></FormularioRegistro>}></Route>
       <Route path={"/HomeUser"} element={<UsReservas></UsReservas>}></Route>
       <Route path={"/Disponibilidad"} element={<UsDisponibilidadH></UsDisponibilidadH>}></Route>

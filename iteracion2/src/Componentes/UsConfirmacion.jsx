@@ -2,24 +2,33 @@ import React from 'react';
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
 import { useNavigate } from 'react-router-dom';
+import { Button, Container, Typography } from '@mui/material'; // Importar componentes de Material UI
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importar Bootstrap
 
 const UsConfirmacion = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <ItemHeader></ItemHeader>
-            <ItemBajoHeader></ItemBajoHeader>
-            <div className='app'>
-                <div className='contenedorp'>
-                    Reserva confirmada. Revisa tu correo para
-                    verificar la validez de tu reserva. Recuerda
-                    que puedes cancelarla hasta un día antes
-                    de la fecha programada.
+            <ItemHeader />
+            <ItemBajoHeader />
+            <Container className="app py-5">
+                <div className="contenedorp">
+                    <Typography variant="h10" gutterBottom>
+                        Reserva confirmada. Revisa tu correo para verificar la validez de tu reserva.
+                        Recuerda que puedes cancelarla hasta un día antes de la fecha programada.
+                    </Typography>
                 </div>
-                <div className='item1'>
-                    <button className="disponibilidad-button" onClick={() => navigate('/HomeUser')}> Volver al inicio </button>
+                <div className="item1">
+                    {/* Usando Material UI Button */}
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => navigate('/HomeUser')}
+                    >
+                        Volver al inicio
+                    </Button>
                 </div>
-            </div>
+            </Container>
         </div>
     );
 };
