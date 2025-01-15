@@ -2,7 +2,7 @@ import './App.css';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
-import axios from 'axios';
+
 import "./Estilos/ActualizarParque.css";
 import "./Estilos/AdminAddCancha.css";
 import "./Estilos/AdminParqueDetalle.css";

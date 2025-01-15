@@ -59,4 +59,5 @@
     padding: 0;            /* Sin padding */
     cursor: pointer;       /* Cambia el cursor al pasar sobre el botón */
     display: inline-block;  /* Para que se comporte como un bloque en línea */
+    background-color: white;
 }

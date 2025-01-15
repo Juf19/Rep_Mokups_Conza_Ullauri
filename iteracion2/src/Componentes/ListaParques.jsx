@@ -16,6 +16,11 @@ const ListaParques = () => {
         { name: "Ingles", img: "ingles.jpg" },
         { name: "Metropolitano", img: "metropolitano.jpg" },
         { name: "Metropolitano", img: "metropolitano.jpg" },
+        { name: "Metropolitano", img: "metropolitano.jpg" },
+        { name: "Metropolitano", img: "metropolitano.jpg" },
+        { name: "Metropolitano", img: "metropolitano.jpg" },
+        { name: "Metropolitano", img: "metropolitano.jpg" },
+        { name: "Metropolitano", img: "metropolitano.jpg" },
         { name: "Metropolitano", img: "metropolitano.jpg" }
     ];
 
