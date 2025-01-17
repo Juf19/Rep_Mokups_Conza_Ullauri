@@ -53,7 +53,7 @@ const UsSeleccionarCancha = () => {
                             key={cancha._id}
                             className="cancha"
                             style={ubicaciones[cancha.nombre] || {}} // Ubicación según el nombre de la cancha
-                            onClick={() => navigate('/reserva', { state: { cancha } })}
+                            onClick={() => navigate('/reserva', { state: { parque, cancha } })}
                         >
                             {cancha.nombre} {cancha.tipo === "Futbol" ? "⚽" : "🏀"}
                         </button>
