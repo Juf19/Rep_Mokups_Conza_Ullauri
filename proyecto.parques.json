@@ -1,14 +1,26 @@
 [{
+  "_id": {
+    "$oid": "677af4ed9444651ae3674a76"
+  },
   "nombre": "La Carolina",
   "descripcion": "Parque La Carolina",
-  "url": "/carolina.jpg"
+  "url": "/carolina.jpg",
+  "updatedAt": {
+    "$date": "2025-01-13T20:56:54.728Z"
+  }
 },
 {
+  "_id": {
+    "$oid": "677af4ed9444651ae3674a77"
+  },
   "nombre": "Inglés",
   "descripcion": "Parque Inglés",
   "url": "/ingles.jpg"
 },
 {
+  "_id": {
+    "$oid": "677af4ed9444651ae3674a78"
+  },
   "nombre": "Alameda",
   "descripcion": "Parque Alameda",
   "url": "/alameda.jpg"

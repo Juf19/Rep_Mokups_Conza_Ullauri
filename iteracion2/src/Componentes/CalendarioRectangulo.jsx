@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Importa los estilos del calendario
 
-const CalendarioRectangulo = () => {
-  // Estado para manejar si el calendario está visible o no
+const CalendarioRectangulo = ({ onDateSelect }) => {
   const [mostrarCalendario, setMostrarCalendario] = useState(false);
 
   // Función para manejar el clic y alternar la visibilidad del calendario
@@ -11,10 +10,17 @@ const CalendarioRectangulo = () => {
     setMostrarCalendario(!mostrarCalendario);
   };
 
+  // Función para manejar la selección de una fecha en el calendario
+  const handleDateChange = (date) => {
+    // Llamar a la función onDateSelect con la fecha seleccionada
+    onDateSelect(date.toISOString().split('T')[0]); // Asegúrate de pasar solo la fecha en formato YYYY-MM-DD
+    setMostrarCalendario(false); // Opcional: Cerrar el calendario al seleccionar una fecha
+  };
+
   return (
     <div>
       {/* El rectángulo que cuando se hace clic despliega el calendario */}
-      <div 
+      <div
         style={{
           width: '500px',
           height: '30px',
@@ -25,7 +31,7 @@ const CalendarioRectangulo = () => {
           alignItems: 'center',
           cursor: 'pointer',
           borderRadius: '8px',
-          marginLeft:"850px",
+          marginLeft: "850px",
         }}
         onClick={toggleCalendario}
       >
@@ -35,7 +41,7 @@ const CalendarioRectangulo = () => {
       {/* Condición para mostrar el calendario solo si `mostrarCalendario` es true */}
       {mostrarCalendario && (
         <div style={{ padding: '20px' }}>
-          <Calendar />
+          <Calendar onChange={handleDateChange} />
         </div>
       )}
     </div>

@@ -18,6 +18,9 @@ allParquesRoutes(app);
 
 const allCanchaRoutes = require("./routes/cancha.route");
 allCanchaRoutes(app);
+    
+const allReservaRoutes = require("./routes/reserva.route");
+allReservaRoutes(app);
 
 app.listen(port, () => {
     console.log('server.js escuchando en el puerto', port);
