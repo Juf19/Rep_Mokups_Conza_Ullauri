@@ -60,6 +60,15 @@ const UsSeleccionarCancha = () => {
                     ))
                 )}
             </div>
+            {/* Botón "Disponibilidad" */}
+            <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                <button
+                    className="boton-disponibilidad"
+                    onClick={() => navigate('/Disponibilidad', { state: { parque } })}
+                >
+                    Disponibilidad
+                </button>
+            </div>
         </div>
     );
 };
