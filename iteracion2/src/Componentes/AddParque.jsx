@@ -3,8 +3,9 @@ import ItemHeaderA from './ItemHeaderA';
 import ItemBajoHeader from './ItemBajoHeader';
 import axios from 'axios';
 import "../Estilos/ActualizarParque.css";
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 
 const AddParque = () => {
   const navigate = useNavigate();
@@ -21,6 +22,29 @@ const AddParque = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validar que todos los campos estén llenos
+    const { nombre, descripcion, url } = nuevoParque;
+
+    if (!nombre || !descripcion || !url) {
+      Swal.fire({
+        title: 'Campos incompletos',
+        text: 'Por favor completa todos los campos.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Regresar',
+        cancelButtonText: 'Continuar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+          navigate('/Parque'); // Regresa a la página anterior
+        } else if (result.isDismissed) {
+          return;
+        }
+      });
+    }
+
+    // Si todos los campos están llenos, procede a enviar el formulario
     axios.post(`http://localhost:8000/parques`, nuevoParque)
       .then(response => {
         console.log('Parque Agregado:', response.data);
@@ -33,30 +57,28 @@ const AddParque = () => {
 
   return (
     <div>
-      <ItemHeaderA></ItemHeaderA>
-      <ItemBajoHeader></ItemBajoHeader>
+      <ItemHeaderA />
+      <ItemBajoHeader />
       <h3>Agregar Parque</h3>
       <form onSubmit={handleSubmit}>
-    <div className="parque-informacion">
-    
-      <div className="perfil-item">
-        <label>Nombre</label>
-        <input type="text" name="nombre" className="perfil-dato" value={nuevoParque.nombre} onChange={handleAddParque} />
-      </div>
-      <div className="perfil-item">
-        <label>Descripcion</label>
-        <input type="text" name="descripcion" className="perfil-dato" value={nuevoParque.descripcion} onChange={handleAddParque}/>
-      </div>
-      <div className="perfil-item">
-        <label>URL</label>
-        <input type="text" name='url' className="perfil-dato" value={nuevoParque.url} onChange={handleAddParque}/>
-      </div>
-      <div className="parte-btn">
-      <button type="submit" className="btn-save">Guardar</button>
-      </div>
-    
-    </div>
-    </form>
+        <div className="parque-informacion">
+          <div className="perfil-item">
+            <label>Nombre</label>
+            <input type="text" name="nombre" className="perfil-dato" value={nuevoParque.nombre} onChange={handleAddParque} />
+          </div>
+          <div className="perfil-item">
+            <label>Descripción</label>
+            <input type="text" name="descripcion" className="perfil-dato" value={nuevoParque.descripcion} onChange={handleAddParque}/>
+          </div>
+          <div className="perfil-item">
+            <label>URL</label>
+            <input type="text" name='url' className="perfil-dato" value={nuevoParque.url} onChange={handleAddParque}/>
+          </div>
+          <div className="parte-btn">
+            <button type="submit" className="btn-save">Guardar</button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };
