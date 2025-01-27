@@ -11,32 +11,29 @@ const UsReservaCancha = () => {
   const [horariosSeleccionados, setHorariosSeleccionados] = useState([]);
   const [aceptarTerminos, setAceptarTerminos] = useState(false);
   const [horarios, setHorarios] = useState([]);
+  const [reservas, setReservas] = useState([]); // Reservas para la fecha seleccionada
   const [loading, setLoading] = useState(true);
   const [fechaSeleccionada, setFechaSeleccionada] = useState(() => {
     const hoy = new Date();
     return new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
   });
-   // Inicializar como objeto Date
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { parque, cancha } = location.state || {}; // Datos del parque y la cancha
+  const { parque, cancha } = location.state || {};
 
-  // Función para manejar el cambio de fecha en el calendario
   const handleDateChange = (date) => {
-    setFechaSeleccionada(date); // Cambiar la fecha seleccionada
-    console.log("Fecha seleccionada1:", date); // Log de la fecha seleccionada
+    setFechaSeleccionada(date);
   };
 
-  // Cargar horarios desde la base de datos
   useEffect(() => {
     const fetchHorarios = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/canchas/${cancha._id}`);
         setHorarios(response.data.horarios || []);
-        setLoading(false);
       } catch (error) {
         console.error('Error al cargar horarios:', error);
+      } finally {
         setLoading(false);
       }
     };
@@ -44,9 +41,38 @@ const UsReservaCancha = () => {
     if (cancha?._id) {
       fetchHorarios();
     }
-  }, [cancha]); // Cambiar cuando cambia la cancha
+  }, [cancha]);
 
-  // Función para manejar la selección de un horario
+  useEffect(() => {
+    const fetchReservas = async () => {
+      try {
+        const fechaISO = fechaSeleccionada.toISOString().split('T')[0]; // Convertir fecha seleccionada a formato ISO
+        const response = await axios.get(
+          `http://localhost:8000/reservas?canchaId=${cancha._id}&fecha=${fechaISO}`
+        );
+        setReservas(response.data || []);
+      } catch (error) {
+        console.error('Error al cargar reservas:', error);
+        setReservas([]);
+      }
+    };
+
+    if (cancha?._id && fechaSeleccionada) {
+      fetchReservas();
+    }
+  }, [cancha, fechaSeleccionada]);
+
+  const isHorarioReservado = (horario) => {
+    return reservas.some((reserva) => {
+      const fechaReserva = new Date(reserva.fecha).toISOString().split('T')[0];
+      const fechaSeleccionadaISO = fechaSeleccionada.toISOString().split('T')[0];
+      return (
+        fechaReserva === fechaSeleccionadaISO && // Comparar fechas
+        reserva.horarios.includes(horario) // Verificar si el horario está reservado
+      );
+    });
+  };
+
   const handleHorarioClick = (horario) => {
     if (horariosSeleccionados.includes(horario)) {
       setHorariosSeleccionados((prev) => prev.filter((h) => h !== horario));
@@ -62,7 +88,6 @@ const UsReservaCancha = () => {
     }
   };
 
-  // Función para manejar la reserva
   const handleReserva = () => {
     if (aceptarTerminos && horariosSeleccionados.length > 0) {
       navigate('/confirmacion', {
@@ -70,7 +95,7 @@ const UsReservaCancha = () => {
           parqueId: parque?._id,
           canchaId: cancha?._id,
           horariosSeleccionados,
-          fecha: fechaSeleccionada.toISOString(), // Convertir la fecha a formato ISO (2025-01-26T00:00:00.000+00:00)
+          fecha: fechaSeleccionada.toISOString(),
         },
       });
     } else {
@@ -87,7 +112,7 @@ const UsReservaCancha = () => {
     <div className="espaciadocancha">
       <ItemHeader />
       <ItemBajoHeader nombre={`${parque?.nombre} - ${cancha?.nombre}`} />
-      <div className='calendario'>
+      <div className="calendario">
         <Calendar
           onChange={handleDateChange}
           value={fechaSeleccionada}
@@ -95,7 +120,7 @@ const UsReservaCancha = () => {
         />
       </div>
       <p className="fecha-seleccionada">
-        Fecha seleccionada: {fechaSeleccionada.toISOString().split('T')[0]} {/* Mostrar en formato yyyy-mm-dd */}
+        Fecha seleccionada: {fechaSeleccionada.toISOString().split('T')[0]}
       </p>
 
       <div className="app">
@@ -104,18 +129,34 @@ const UsReservaCancha = () => {
           <p>Cargando horarios...</p>
         ) : (
           <div className="menuh">
-            {horarios.map((time, index) => (
-              <button
-                key={index}
-                className={horariosSeleccionados.includes(time) ? 'horario selected' : 'horario'}
-                onClick={() => handleHorarioClick(time)}
-                style={{
-                  backgroundColor: '#4CAF50', // Color verde si no está reservado
-                }}
-              >
-                {time}
-              </button>
-            ))}
+            {horarios.map((time, index) => {
+              const reservado = isHorarioReservado(time);
+              const seleccionado = horariosSeleccionados.includes(time);
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleHorarioClick(time)}
+                  disabled={reservado}
+                  style={{
+                    backgroundColor: reservado
+                      ? '#f44336' // Rojo para horarios reservados
+                      : seleccionado
+                      ? '#4CAF50' // Verde para horarios seleccionados
+                      : '#e0e0e0', // Gris claro para horarios disponibles
+                    color: reservado ? '#ffffff' : '#000000',
+                    cursor: reservado ? 'not-allowed' : 'pointer',
+                    padding: '10px 15px',
+                    margin: '5px',
+                    borderRadius: '5px',
+                    border: '1px solid #ccc',
+                    fontSize: '14px',
+                  }}
+                >
+                  {time}
+                </button>
+              );
+            })}
           </div>
         )}
         <h3>Aceptar términos y condiciones</h3>

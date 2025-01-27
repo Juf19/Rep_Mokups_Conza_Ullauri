@@ -612,6 +612,14 @@ button {
   height: 100%;           /* Asegura que el contenedor ocupe toda la altura de la ventana */
 }
 
+.horario.ocupado {
+  background-color: #f44336; /* Rojo */
+  cursor: not-allowed;
+}
+
+.horario.selected {
+  background-color: #4CAF50; /* Verde */
+}
 
 
 
