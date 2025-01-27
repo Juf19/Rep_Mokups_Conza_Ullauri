@@ -11,9 +11,12 @@ const UsReservaCancha = () => {
   const [horariosSeleccionados, setHorariosSeleccionados] = useState([]);
   const [aceptarTerminos, setAceptarTerminos] = useState(false);
   const [horarios, setHorarios] = useState([]);
-  const [reservas, setReservas] = useState([]); // Para almacenar las reservas de la fecha seleccionada
   const [loading, setLoading] = useState(true);
-  const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date()); // Inicializar como objeto Date
+  const [fechaSeleccionada, setFechaSeleccionada] = useState(() => {
+    const hoy = new Date();
+    return new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+  });
+   // Inicializar como objeto Date
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,15 +25,7 @@ const UsReservaCancha = () => {
   // Función para manejar el cambio de fecha en el calendario
   const handleDateChange = (date) => {
     setFechaSeleccionada(date); // Cambiar la fecha seleccionada
-    console.log("Fecha seleccionada:", date); // Log de la fecha seleccionada
-  };
-
-  // Función para formatear la fecha como yyyy-mm-dd
-  const formatDateToDisplay = (date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    console.log("Fecha seleccionada1:", date); // Log de la fecha seleccionada
   };
 
   // Cargar horarios desde la base de datos
@@ -46,22 +41,10 @@ const UsReservaCancha = () => {
       }
     };
 
-    const fetchReservas = async () => {
-      try {
-        const fechaFormateada = formatDateToDisplay(fechaSeleccionada); // Usar formatDateToDisplay para formatear
-        const response = await axios.get(`http://localhost:8000/reservas?parqueId=${parque._id}&fecha=${fechaFormateada}`);
-        setReservas(response.data); // Guardar las reservas de esa fecha
-        console.log('Reservas de la fecha seleccionada:', response.data); // Log de las reservas
-      } catch (error) {
-        console.error('Error al cargar reservas:', error);
-      }
-    };
-
     if (cancha?._id) {
       fetchHorarios();
-      fetchReservas(); // Llamar para obtener las reservas cuando la fecha cambia
     }
-  }, [cancha, parque, fechaSeleccionada]); // Cambiar cuando cambia la fecha seleccionada
+  }, [cancha]); // Cambiar cuando cambia la cancha
 
   // Función para manejar la selección de un horario
   const handleHorarioClick = (horario) => {
@@ -79,21 +62,6 @@ const UsReservaCancha = () => {
     }
   };
 
-  // Función para comparar solo la parte de la fecha sin considerar la hora ni la zona horaria
-  const isHorarioReservado = (horario) => {
-    const fechaSeleccionadaString = formatDateToDisplay(fechaSeleccionada); // Fecha seleccionada en formato 'yyyy-mm-dd'
-    console.log('Fecha seleccionada:', fechaSeleccionadaString); // Log de la fecha seleccionada
-
-    return reservas.some((reserva) => {
-      // Convertir la fecha de reserva en 'yyyy-mm-dd'
-      const reservaFechaString = new Date(reserva.fecha).toISOString().split('T')[0];
-      console.log('Fecha de reserva:', reservaFechaString); // Log de la fecha de la reserva
-
-      // Verificar si las fechas coinciden y si el horario está reservado
-      return reservaFechaString === fechaSeleccionadaString && reserva.horarios.includes(horario);
-    });
-  };
-
   // Función para manejar la reserva
   const handleReserva = () => {
     if (aceptarTerminos && horariosSeleccionados.length > 0) {
@@ -102,7 +70,7 @@ const UsReservaCancha = () => {
           parqueId: parque?._id,
           canchaId: cancha?._id,
           horariosSeleccionados,
-          fecha: formatDateToDisplay(fechaSeleccionada), // Enviar fecha formateada
+          fecha: fechaSeleccionada.toISOString(), // Convertir la fecha a formato ISO (2025-01-26T00:00:00.000+00:00)
         },
       });
     } else {
@@ -127,7 +95,7 @@ const UsReservaCancha = () => {
         />
       </div>
       <p className="fecha-seleccionada">
-        Fecha seleccionada: {formatDateToDisplay(fechaSeleccionada)} {/* Mostrar en yyyy-mm-dd */}
+        Fecha seleccionada: {fechaSeleccionada.toISOString().split('T')[0]} {/* Mostrar en formato yyyy-mm-dd */}
       </p>
 
       <div className="app">
@@ -141,9 +109,8 @@ const UsReservaCancha = () => {
                 key={index}
                 className={horariosSeleccionados.includes(time) ? 'horario selected' : 'horario'}
                 onClick={() => handleHorarioClick(time)}
-                disabled={isHorarioReservado(time)} // Deshabilitar si el horario está reservado
                 style={{
-                  backgroundColor: isHorarioReservado(time) ? '#fd2b2b' : '#4CAF50', // Color rojo si está reservado
+                  backgroundColor: '#4CAF50', // Color verde si no está reservado
                 }}
               >
                 {time}
