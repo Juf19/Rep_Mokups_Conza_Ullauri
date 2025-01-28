@@ -6,19 +6,19 @@ module.exports.obtenerReservas = async (req, res) => {
     try {
       const reservas = await Reserva.find()
         .populate("parqueId", "nombre")  // Poblamos solo el campo 'nombre' de parque
-        .populate("canchaId", "nombre"); // Poblamos solo el campo 'nombre' de cancha
-  
+        .populate("canchaId", "nombre")  // Poblamos solo el campo 'nombre' de cancha
+        .populate("usuarioId", "nombre email"); // Poblamos nombre y email del usuario
+
       if (reservas.length === 0) {
         return res.status(404).json({ mensaje: "No se encontraron reservas." });
       }
-  
+
       return res.status(200).json(reservas);
     } catch (error) {
       console.error("Error al obtener las reservas:", error);
       return res.status(500).json({ mensaje: "Error al obtener las reservas." });
     }
-  };
-  
+};
 
 // Función para obtener una reserva por ID
 module.exports.obtenerReservaPorId = async (req, res) => {
@@ -29,7 +29,10 @@ module.exports.obtenerReservaPorId = async (req, res) => {
       return res.status(400).json({ mensaje: "ID no válido." });
     }
 
-    const reserva = await Reserva.findById(id);
+    const reserva = await Reserva.findById(id)
+      .populate("parqueId", "nombre")
+      .populate("canchaId", "nombre")
+      .populate("usuarioId", "nombre email");
 
     if (!reserva) {
       return res.status(404).json({ mensaje: "Reserva no encontrada." });
@@ -45,9 +48,9 @@ module.exports.obtenerReservaPorId = async (req, res) => {
 // Función para agregar una nueva reserva
 module.exports.agregarReserva = async (req, res) => {
   try {
-    const { fecha, parqueId, canchaId, horarios } = req.body;
+    const { fecha, parqueId, canchaId, horarios, usuarioId } = req.body;
 
-    if (!fecha || !parqueId || !canchaId || !horarios || horarios.length === 0) {
+    if (!fecha || !parqueId || !canchaId || !horarios || horarios.length === 0 || !usuarioId) {
       return res.status(400).json({ mensaje: "Faltan datos para crear la reserva." });
     }
 
@@ -56,6 +59,7 @@ module.exports.agregarReserva = async (req, res) => {
       parqueId,
       canchaId,
       horarios,
+      usuarioId,
     });
 
     const reservaGuardada = await nuevaReserva.save();
@@ -70,7 +74,7 @@ module.exports.agregarReserva = async (req, res) => {
 module.exports.actualizarReserva = async (req, res) => {
   try {
     const { id } = req.params;
-    const { fecha, parqueId, canchaId, horarios } = req.body;
+    const { fecha, parqueId, canchaId, horarios, usuarioId } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ mensaje: "ID no válido." });
@@ -84,9 +88,11 @@ module.exports.actualizarReserva = async (req, res) => {
 
     const reservaActualizada = await Reserva.findByIdAndUpdate(
       id,
-      { fecha, parqueId, canchaId, horarios },
+      { fecha, parqueId, canchaId, horarios, usuarioId },
       { new: true }
-    );
+    ).populate("parqueId", "nombre")
+     .populate("canchaId", "nombre")
+     .populate("usuarioId", "nombre email");
 
     return res.status(200).json(reservaActualizada);
   } catch (error) {

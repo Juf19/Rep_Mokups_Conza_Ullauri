@@ -64,8 +64,10 @@ module.exports.loginUser = async (req, res) => {
                 message: 'Login exitoso',
                 email: userFound.email,
                 rol: userFound.rol,
+                _id: userFound._id, // Asegúrate de incluir esto
                 token: generateToken(userFound._id),
             });
+            
         } else {
             return res.status(400).json({ message: 'Credenciales incorrectas' });
         }

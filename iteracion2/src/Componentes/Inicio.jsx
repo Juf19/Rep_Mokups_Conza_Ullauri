@@ -24,10 +24,13 @@ const Inicio = () => {
 
             // Guardar token y redirigir según el rol
             localStorage.setItem('token', data.token);
+
             if (data.rol === 'Administrador') {
                 navigate('/HomeAdmin'); // Redirigir a admin
             } else {
-                navigate('/HomeUser'); // Redirigir a usuario
+                navigate('/HomeUser', { state: { usuarioId: data._id } });
+                console.log("Id de usuario recibido:", data._id);
+                
             }
         } catch (error) {
             // Manejo del error
@@ -66,7 +69,7 @@ const Inicio = () => {
                         <img src="logo_persona.png" alt="logoPersona" id="inicio-icon" />
                     </div>
                     <h3>Iniciar sesión</h3>
-                    {errorMessage && <p>{errorMessage}</p>}
+                    {errorMessage && <p className="error">{errorMessage}</p>}
                     <form onSubmit={handleSubmit}>
                         <input 
                             type="text" 
@@ -84,7 +87,12 @@ const Inicio = () => {
                         />
                         <button type="submit" className="inicio-button">INGRESAR</button>
                     </form>
-                    <p className="inicio-register-link" onClick={() => navigate('/registrarse')}>Registrarse</p>
+                    <p 
+                        className="inicio-register-link" 
+                        onClick={() => navigate('/registrarse')}
+                    >
+                        Registrarse
+                    </p>
                 </div>
             </div>
             <TrianguloInf />
