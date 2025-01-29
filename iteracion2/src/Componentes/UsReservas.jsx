@@ -20,27 +20,26 @@ function UsReservas() {
     useEffect(() => {
         const fetchReservas = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/reservas`, {
-                    params: { usuarioId }, // Envía el usuarioId como parámetro
-                });
-                console.log("Reservas obtenidas:", response.data); // Para depurar
-                setReservas(response.data); // Guardamos las reservas en el estado
-                setLoading(false); // Terminamos el estado de carga
+                const response = await axios.get(`http://localhost:8000/reservas/usuario/${usuarioId}`);
+                console.log("Reservas obtenidas:", response.data);
+                setReservas(response.data);
+                setLoading(false);
             } catch (error) {
                 console.error("Error al obtener las reservas:", error);
-                setError("No se pudieron cargar las reservas."); // Establecemos un error si ocurre
-                setLoading(false); // Terminamos el estado de carga
+                setError("No se pudieron cargar las reservas.");
+                setLoading(false);
             }
         };
-
+    
         if (usuarioId) {
-            fetchReservas(); // Llama a la función solo si hay un usuarioId disponible
+            fetchReservas();
         } else {
             console.error("No se proporcionó usuarioId");
             setError("No se pudo cargar el usuario. Por favor, inicie sesión nuevamente.");
             setLoading(false);
         }
-    }, [usuarioId]); // Se ejecuta cuando cambia el usuarioId
+    }, [usuarioId]);
+    
 
     const formatDate = (date) => {
         const newDate = new Date(date);

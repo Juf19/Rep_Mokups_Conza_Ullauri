@@ -20,6 +20,33 @@ module.exports.obtenerReservas = async (req, res) => {
     }
 };
 
+// Obtener reservas por usuarioId
+module.exports.obtenerReservasPorUsuario = async (req, res) => {
+  try {
+      const { usuarioId } = req.params;
+
+      // Verifica si el ID es válido
+      if (!mongoose.Types.ObjectId.isValid(usuarioId)) {
+          return res.status(400).json({ mensaje: "ID de usuario no válido." });
+      }
+
+      // Buscar reservas asociadas al usuarioId
+      const reservas = await Reserva.find({ usuarioId })
+          .populate("parqueId", "nombre")
+          .populate("canchaId", "nombre");
+
+      if (reservas.length === 0) {
+          return res.status(404).json({ mensaje: "No se encontraron reservas para este usuario." });
+      }
+
+      return res.status(200).json(reservas);
+  } catch (error) {
+      console.error("Error al obtener reservas por usuario:", error);
+      return res.status(500).json({ mensaje: "Error al obtener las reservas." });
+  }
+};
+
+
 // Función para obtener una reserva por ID
 module.exports.obtenerReservaPorId = async (req, res) => {
   try {
