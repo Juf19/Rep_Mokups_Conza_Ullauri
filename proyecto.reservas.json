@@ -21,7 +21,10 @@
   "updatedAt": {
     "$date": "2025-01-18T23:06:38.229Z"
   },
-  "__v": 0
+  "__v": 0,
+  "usuarioId": {
+    "$oid": "6778a95bcd864c702912d040"
+  }
 },
 {
   "_id": {
@@ -45,6 +48,142 @@
   },
   "updatedAt": {
     "$date": "2025-01-18T23:14:20.692Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "679701e3cb2849cc9d39ec18"
+  },
+  "fecha": {
+    "$date": "2025-01-26T05:00:00.000Z"
+  },
+  "parqueId": {
+    "$oid": "677af4ed9444651ae3674a76"
+  },
+  "canchaId": {
+    "$oid": "6781ebcde89df7a987efe61a"
+  },
+  "horarios": [
+    "10-11",
+    "11-12"
+  ],
+  "createdAt": {
+    "$date": "2025-01-27T03:47:47.999Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-27T03:47:47.999Z"
+  },
+  "__v": 0,
+  "usuarioId": {
+    "$oid": "6778a95bcd864c702912d040"
+  }
+},
+{
+  "_id": {
+    "$oid": "679ac68de994635ca19a6fa5"
+  },
+  "fecha": {
+    "$date": "2025-01-29T05:00:00.000Z"
+  },
+  "parqueId": {
+    "$oid": "677af4ed9444651ae3674a76"
+  },
+  "canchaId": {
+    "$oid": "6781ebcde89df7a987efe61a"
+  },
+  "horarios": [
+    "10-11"
+  ],
+  "usuarioId": {
+    "$oid": "6778a95bcd864c702912d040"
+  },
+  "createdAt": {
+    "$date": "2025-01-30T00:23:41.299Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-30T00:23:41.299Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "679ad04ee994635ca19a6fdf"
+  },
+  "fecha": {
+    "$date": "2025-01-29T05:00:00.000Z"
+  },
+  "parqueId": {
+    "$oid": "677af4ed9444651ae3674a76"
+  },
+  "canchaId": {
+    "$oid": "6781ebcde89df7a987efe61a"
+  },
+  "horarios": [
+    "11-12"
+  ],
+  "usuarioId": {
+    "$oid": "6778a95bcd864c702912d040"
+  },
+  "createdAt": {
+    "$date": "2025-01-30T01:05:18.655Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-30T01:05:18.655Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "679ad715e994635ca19a71c2"
+  },
+  "fecha": {
+    "$date": "2025-01-29T05:00:00.000Z"
+  },
+  "parqueId": {
+    "$oid": "677af4ed9444651ae3674a76"
+  },
+  "canchaId": {
+    "$oid": "6781ebcde89df7a987efe61a"
+  },
+  "horarios": [
+    "12-13"
+  ],
+  "usuarioId": {
+    "$oid": "6778b0b920926717bbb50819"
+  },
+  "createdAt": {
+    "$date": "2025-01-30T01:34:13.132Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-30T01:34:13.132Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "679ad729e994635ca19a71e6"
+  },
+  "fecha": {
+    "$date": "2025-01-30T05:00:00.000Z"
+  },
+  "parqueId": {
+    "$oid": "677af4ed9444651ae3674a76"
+  },
+  "canchaId": {
+    "$oid": "6781ebcde89df7a987efe61a"
+  },
+  "horarios": [
+    "11-12"
+  ],
+  "usuarioId": {
+    "$oid": "6778b0b920926717bbb50819"
+  },
+  "createdAt": {
+    "$date": "2025-01-30T01:34:33.583Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-30T01:34:33.583Z"
   },
   "__v": 0
 }]
