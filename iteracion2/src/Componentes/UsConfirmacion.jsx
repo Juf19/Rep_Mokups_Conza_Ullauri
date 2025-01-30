@@ -17,26 +17,35 @@ const UsConfirmacion = () => {
 
   // Función para crear la reserva solo cuando el usuario hace clic en el botón
   const crearReserva = async () => {
+    console.log("Enviando reserva con usuarioId:", usuarioId);
+
+    if (!usuarioId) {
+        console.error("Error: usuarioId es undefined o null en UsConfirmacion");
+        return;
+    }
+
     try {
         const response = await axios.post('http://localhost:8000/reservas', {
             parqueId,
             canchaId,
             horarios: horariosSeleccionados,
             fecha,
-            usuarioId,
+            usuarioId,  // Asegurar que se envía el usuarioId
         });
 
         console.log('Reserva creada exitosamente:', response.data);
         setReservaCreada(true);
 
-        // Enviar datos de la reserva a UsReservas para actualización
-        navigate('/HomeUser', {
-            state: { nuevaReserva: response.data, usuarioId },
-        });
+        // Emitir evento para actualizar reservas
+        window.dispatchEvent(new Event("reservaCreada"));
+
+        // Redirigir al usuario sin necesidad de enviar estado extra
+        navigate('/HomeUser');
     } catch (error) {
         console.error('Error al crear la reserva:', error.response?.data || error.message);
     }
 };
+
 
 
   return (

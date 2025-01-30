@@ -1,52 +1,91 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 const texto = [{ nombre: "RESERVAS" }];
 
 function UsReservas() {
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     // Obtener usuarioId del estado de navegación o localStorage
-    const [usuarioId] = useState(() => {
+    const [usuarioId, setUsuarioId] = useState(() => {
         return location.state?.usuarioId || localStorage.getItem("usuarioId");
     });
 
-    // Estado para las reservas
     const [reservas, setReservas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [actualizar, setActualizar] = useState(false);  // Estado para forzar actualización
 
     // Guardar usuarioId en localStorage si no está almacenado
     useEffect(() => {
+        console.log("Verificando usuarioId en useEffect:", usuarioId);
+        
         if (usuarioId) {
             localStorage.setItem("usuarioId", usuarioId);
         }
     }, [usuarioId]);
+    
+
+    // Detectar si location.state solicita actualización
+    useEffect(() => {
+        if (location.state?.actualizarReservas) {
+            setActualizar(true); // Se activa la actualización de reservas
+        }
+    }, [location.state?.actualizarReservas]);
 
     // Recuperar reservas del usuario
     useEffect(() => {
-        const fetchReservas = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8000/reservas/usuario/${usuarioId}`);
-                console.log("Reservas obtenidas:", response.data);
-                setReservas(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error al obtener las reservas:", error);
-                setError("No se pudieron cargar las reservas.");
-                setLoading(false);
-            }
-        };
+        console.log("Cargando reservas para usuarioId:", usuarioId);
     
-        if (usuarioId) {
-            fetchReservas();
+        if (!usuarioId) {
+            console.error("Error: usuarioId es undefined o null en UsReservas");
+            setError("No se pudo cargar el usuario. Por favor, inicie sesión nuevamente.");
+            setLoading(false);
+            return;
         }
     
-    }, [usuarioId, location.state?.nuevaReserva]);  // Dependencia adicional para actualizar cuando haya una nueva reserva
+        const fetchReservas = async (intentos = 5) => {
+            for (let i = 0; i < intentos; i++) {
+                try {
+                    console.log(`Intento ${i + 1}: Cargando reservas para usuarioId:`, usuarioId);
+                    const response = await axios.get(`http://localhost:8000/reservas/usuario/${usuarioId}`);
+        
+                    if (response.data.length > 0) {
+                        console.log("Reservas obtenidas:", response.data);
+                        setReservas(response.data);
+                        setLoading(false);
+                        return;
+                    }
+                } catch (error) {
+                    console.error(`Error al obtener reservas (intento ${i + 1}):`, error);
+                }
+                
+                await new Promise((resolve) => setTimeout(resolve, 1000)); // Esperar 1 segundo antes de reintentar
+            }
+        
+            setError("No se pudieron cargar las reservas.");
+            setLoading(false);
+        };
+        
+    
+        fetchReservas();
+    
+        const handleReservaCreada = () => {
+            console.log("Evento reservaCreada detectado. Actualizando reservas...");
+            fetchReservas();
+        };
+    
+        window.addEventListener("reservaCreada", handleReservaCreada);
+    
+        return () => {
+            window.removeEventListener("reservaCreada", handleReservaCreada);
+        };
+    }, [usuarioId]);
+    
     
 
     const formatDate = (date) => {
@@ -96,7 +135,7 @@ function UsReservas() {
                     </button>
                 </div>
                 <div className='derecha'>
-                    <button className='rojo'>Cerrar Sesion</button>
+                    <button className='rojo'>Cancelar</button>
                 </div>
             </div>
         </div>
