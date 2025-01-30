@@ -11,7 +11,7 @@ function UsReservas() {
     const location = useLocation();
     
     // Obtener usuarioId del estado de navegación o localStorage
-    const [usuarioId, setUsuarioId] = useState(() => {
+    const [usuarioId] = useState(() => {
         return location.state?.usuarioId || localStorage.getItem("usuarioId");
     });
 
@@ -41,15 +41,13 @@ function UsReservas() {
                 setLoading(false);
             }
         };
-
+    
         if (usuarioId) {
             fetchReservas();
-        } else {
-            console.error("No se proporcionó usuarioId");
-            setError("No se pudo cargar el usuario. Por favor, inicie sesión nuevamente.");
-            setLoading(false);
         }
-    }, [usuarioId]);
+    
+    }, [usuarioId, location.state?.nuevaReserva]);  // Dependencia adicional para actualizar cuando haya una nueva reserva
+    
 
     const formatDate = (date) => {
         const newDate = new Date(date);
@@ -98,7 +96,7 @@ function UsReservas() {
                     </button>
                 </div>
                 <div className='derecha'>
-                    <button className='rojo'>Cancelar</button>
+                    <button className='rojo'>Cerrar Sesion</button>
                 </div>
             </div>
         </div>
