@@ -11,7 +11,7 @@ const UsReservaCancha = () => {
   const [horariosSeleccionados, setHorariosSeleccionados] = useState([]);
   const [aceptarTerminos, setAceptarTerminos] = useState(false);
   const [horarios, setHorarios] = useState([]);
-  const [reservas, setReservas] = useState([]); // Reservas para la fecha seleccionada
+  const [reservas, setReservas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fechaSeleccionada, setFechaSeleccionada] = useState(() => {
     const hoy = new Date();
@@ -20,7 +20,7 @@ const UsReservaCancha = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { parque, cancha } = location.state || {};
+  const { parque, cancha, usuarioId } = location.state || {}; // Recibir usuarioId
 
   const handleDateChange = (date) => {
     setFechaSeleccionada(date);
@@ -46,7 +46,7 @@ const UsReservaCancha = () => {
   useEffect(() => {
     const fetchReservas = async () => {
       try {
-        const fechaISO = fechaSeleccionada.toISOString().split('T')[0]; // Convertir fecha seleccionada a formato ISO
+        const fechaISO = fechaSeleccionada.toISOString().split('T')[0];
         const response = await axios.get(
           `http://localhost:8000/reservas?canchaId=${cancha._id}&fecha=${fechaISO}`
         );
@@ -66,10 +66,7 @@ const UsReservaCancha = () => {
     return reservas.some((reserva) => {
       const fechaReserva = new Date(reserva.fecha).toISOString().split('T')[0];
       const fechaSeleccionadaISO = fechaSeleccionada.toISOString().split('T')[0];
-      return (
-        fechaReserva === fechaSeleccionadaISO && // Comparar fechas
-        reserva.horarios.includes(horario) // Verificar si el horario está reservado
-      );
+      return fechaReserva === fechaSeleccionadaISO && reserva.horarios.includes(horario);
     });
   };
 
@@ -92,6 +89,7 @@ const UsReservaCancha = () => {
     if (aceptarTerminos && horariosSeleccionados.length > 0) {
       navigate('/confirmacion', {
         state: {
+          usuarioId, // Pasamos usuarioId
           parqueId: parque?._id,
           canchaId: cancha?._id,
           horariosSeleccionados,
@@ -140,10 +138,10 @@ const UsReservaCancha = () => {
                   disabled={reservado}
                   style={{
                     backgroundColor: reservado
-                      ? '#f44336' // Rojo para horarios reservados
+                      ? '#f44336'
                       : seleccionado
-                      ? '#4CAF50' // Verde para horarios seleccionados
-                      : '#e0e0e0', // Gris claro para horarios disponibles
+                      ? '#4CAF50'
+                      : '#e0e0e0',
                     color: reservado ? '#ffffff' : '#000000',
                     cursor: reservado ? 'not-allowed' : 'pointer',
                     padding: '10px 15px',

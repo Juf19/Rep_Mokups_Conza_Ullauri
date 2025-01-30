@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom'; // Importa useLocation
 import axios from 'axios';
 import UsParques from './UsParques';
 import ItemBajoHeader from './ItemBajoHeader';
@@ -8,6 +8,11 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const ListaParques = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    // Recibir usuarioId desde UsReservas
+    const { usuarioId } = location.state || {};
+
     const [parques, setParques] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -48,7 +53,7 @@ const ListaParques = () => {
                                     className="parques-button w-100"
                                     onClick={() =>
                                         navigate('/detalles', {
-                                            state: { parque }, // Pasamos el objeto parque como parámetro
+                                            state: { parque, usuarioId }, // Pasamos usuarioId a Detalles
                                         })
                                     }
                                 >

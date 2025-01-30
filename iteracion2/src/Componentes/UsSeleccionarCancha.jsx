@@ -8,15 +8,15 @@ import axios from 'axios';
 const UsSeleccionarCancha = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { parque } = location.state || {}; // Obtener el parque desde el estado
-    const [canchas, setCanchas] = useState([]); // Estado para almacenar las canchas
-    const [loading, setLoading] = useState(true); // Estado de carga
+    const { parque, usuarioId } = location.state || {}; // Recibir usuarioId
+
+    const [canchas, setCanchas] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchCanchas = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/canchas'); // Obtener todas las canchas
-                // Filtrar canchas por idParque, considerando conversiones a texto
+                const response = await axios.get('http://localhost:8000/canchas');
                 const canchasFiltradas = response.data.filter(
                     cancha => String(cancha.idParque).trim() === String(parque._id).trim()
                 );
@@ -28,10 +28,11 @@ const UsSeleccionarCancha = () => {
             }
         };
 
-        fetchCanchas();
+        if (parque) {
+            fetchCanchas();
+        }
     }, [parque]);
 
-    // Definir estilos específicos para cada cancha
     const ubicaciones = {
         "C-F1": { top: "30%", left: "53%" },
         "C-F2": { top: "25%", left: "47%" },
@@ -52,19 +53,20 @@ const UsSeleccionarCancha = () => {
                         <button
                             key={cancha._id}
                             className="cancha"
-                            style={ubicaciones[cancha.nombre] || {}} // Ubicación según el nombre de la cancha
-                            onClick={() => navigate('/reserva', { state: { parque, cancha } })}
+                            style={ubicaciones[cancha.nombre] || {}}
+                            onClick={() =>
+                                navigate('/reserva', { state: { parque, cancha, usuarioId } }) // Pasamos usuarioId
+                            }
                         >
                             {cancha.nombre} {cancha.tipo === "Futbol" ? "⚽" : "🏀"}
                         </button>
                     ))
                 )}
             </div>
-            {/* Botón "Disponibilidad" */}
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <button
                     className="boton-disponibilidad"
-                    onClick={() => navigate('/Disponibilidad', { state: { parque } })}
+                    onClick={() => navigate('/Disponibilidad', { state: { parque, usuarioId } })} // Pasamos usuarioId
                 >
                     Disponibilidad
                 </button>

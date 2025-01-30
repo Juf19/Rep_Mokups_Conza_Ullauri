@@ -11,7 +11,7 @@ const UsConfirmacion = () => {
   const location = useLocation();
 
   // Guardar los datos recibidos
-  const { parqueId, canchaId, horariosSeleccionados, fecha } = location.state || {};
+  const { parqueId, canchaId, horariosSeleccionados, fecha, usuarioId } = location.state || {};
 
   const [reservaCreada, setReservaCreada] = useState(false); // Estado para saber si la reserva fue creada
 
@@ -23,6 +23,7 @@ const UsConfirmacion = () => {
         canchaId,
         horarios: horariosSeleccionados,
         fecha,
+        usuarioId, // Agregar usuarioId al hacer la reserva
       });
 
       console.log('Reserva creada exitosamente:', response.data);
@@ -58,7 +59,7 @@ const UsConfirmacion = () => {
                 crearReserva(); // Crear la reserva solo cuando el usuario hace clic
               }
               navigate('/HomeUser', {
-                state: { parqueId, canchaId, horariosSeleccionados, fecha }, // Navega con los datos actualizados
+                state: { parqueId, canchaId, horariosSeleccionados, fecha, usuarioId }, // Navega con los datos actualizados
               });
             }}
           >

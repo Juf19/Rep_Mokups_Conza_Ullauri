@@ -2,21 +2,32 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
-import { useNavigate, useLocation } from 'react-router-dom'; // Importa useLocation
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const texto = [{ nombre: "RESERVAS" }];
 
 function UsReservas() {
     const navigate = useNavigate();
-    const location = useLocation(); // Accede a los datos del estado de navegación
-    const { usuarioId } = location.state || {}; // Extrae el usuarioId
+    const location = useLocation();
+    
+    // Obtener usuarioId del estado de navegación o localStorage
+    const [usuarioId, setUsuarioId] = useState(() => {
+        return location.state?.usuarioId || localStorage.getItem("usuarioId");
+    });
 
     // Estado para las reservas
     const [reservas, setReservas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Recuperar las reservas desde la base de datos al cargar el componente
+    // Guardar usuarioId en localStorage si no está almacenado
+    useEffect(() => {
+        if (usuarioId) {
+            localStorage.setItem("usuarioId", usuarioId);
+        }
+    }, [usuarioId]);
+
+    // Recuperar reservas del usuario
     useEffect(() => {
         const fetchReservas = async () => {
             try {
@@ -30,7 +41,7 @@ function UsReservas() {
                 setLoading(false);
             }
         };
-    
+
         if (usuarioId) {
             fetchReservas();
         } else {
@@ -39,11 +50,10 @@ function UsReservas() {
             setLoading(false);
         }
     }, [usuarioId]);
-    
 
     const formatDate = (date) => {
         const newDate = new Date(date);
-        return newDate.toISOString().split('T')[0]; // Retorna la fecha en formato "YYYY-MM-DD"
+        return newDate.toISOString().split('T')[0];
     };
 
     return (
@@ -82,7 +92,10 @@ function UsReservas() {
             </div>
             <div className="espacio">
                 <div>
-                    <button className="reserva-button" onClick={() => navigate('/ListaParques', { state: { usuarioId } })}>Reservar</button>
+                    <button className="reserva-button" 
+                        onClick={() => navigate('/ListaParques', { state: { usuarioId } })}>
+                        Reservar
+                    </button>
                 </div>
                 <div className='derecha'>
                     <button className='rojo'>Cancelar</button>
