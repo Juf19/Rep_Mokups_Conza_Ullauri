@@ -25,9 +25,9 @@ function UsDisponibilidadH() {
   const parqueId = parque?._id; // Obtener parqueId desde parque si existe
 
   const handleDateChange = (date) => {
-    const fechaFormateadaConZona = `${date.toISOString().split('T')[0]}T05:00:00.000+00:00`;
     setFechaSeleccionada(date);
   };
+  
 
   const formatDate = (date) => {
     return date.toISOString().split('T')[0];
@@ -137,7 +137,8 @@ function UsDisponibilidadH() {
 
     // Agregar T05:00:00.000+00:00 a la fecha seleccionada
     const fechaFormateada = new Date(fechaSeleccionada);
-    const fechaFinal = `${fechaFormateada.toISOString().split('T')[0]}T05:00:00.000+00:00`;
+    const fechaFinal = formatDate(fechaSeleccionada); // Solo el formato YYYY-MM-DD
+
 
     // Crear la estructura de los datos para enviar al servidor
     const horarios = horariosSeleccionados.flatMap(item => item.horarios);  // Obtener todos los horarios seleccionados
