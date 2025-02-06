@@ -54,21 +54,33 @@ function UsDisponibilidadH() {
         setLoading(false);
         return;
       }
-
+  
+      console.log("ID del parque recibido:", parque._id); // Log para verificar el ID del parque
+  
       try {
         // Obtener todas las canchas asociadas a este parque
         const responseCanchas = await axios.get(`http://localhost:8000/canchas?parqueId=${parque._id}`);
-        console.log("Canchas cargadas:", responseCanchas.data);
-        console.log("usuarioId:",usuarioId);
-        setCanchas(responseCanchas.data);
-
+        console.log("Canchas cargadas desde el backend:", responseCanchas.data); // Log de todas las canchas obtenidas
+  
+        // Filtrar canchas para asegurarse de que solo sean del parque actual
+        const canchasFiltradas = responseCanchas.data.filter(cancha => {
+          console.log(`Verificando cancha: ${cancha.nombre}, parqueId: ${cancha.idParque}`);
+          return cancha.idParque === parque._id;
+        });
+  
+        console.log("Canchas filtradas:", canchasFiltradas); // Log para ver qué canchas se están guardando
+        setCanchas(canchasFiltradas);
+  
         // Obtener todas las reservas de este parque para la fecha seleccionada
         const fechaFormateada = formatDate(fechaSeleccionada);
+        console.log("Fecha formateada para consulta de reservas:", fechaFormateada);
+  
         const responseReservas = await axios.get(
           `http://localhost:8000/reservas?parqueId=${parque._id}&fecha=${fechaFormateada}`
         );
-        console.log("Reservas cargadas para la fecha:", responseReservas.data);
+        console.log("Reservas cargadas para la fecha:", responseReservas.data); // Log de las reservas obtenidas
         setReservas(responseReservas.data);
+  
         setLoading(false);
       } catch (error) {
         console.error("Error al cargar los datos:", error);
@@ -76,9 +88,10 @@ function UsDisponibilidadH() {
         setLoading(false);
       }
     };
-
+  
     fetchDatos();
   }, [parque, fechaSeleccionada]);
+  
 
   // Normalizar fecha de reserva (solo fecha, sin hora)
   const normalizeDate = (date) => {
