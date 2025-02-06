@@ -28,4 +28,4 @@ class MapContainer extends Component {
   }
 }
 
-export default MapContainer;
+export default MapContainer; 

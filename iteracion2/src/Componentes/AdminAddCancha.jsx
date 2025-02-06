@@ -7,6 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { FaTimes } from 'react-icons/fa';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const AdminAddCancha = () => {
@@ -19,6 +20,8 @@ const AdminAddCancha = () => {
     tipo: 'Futbol',  // Establecer el valor por defecto para el select
     horarios: [],
     dias: [],
+    latitud: '',
+    longitud: '',
     idParque: id // Asociar la cancha al parque actual
   });
 
@@ -237,7 +240,33 @@ const AdminAddCancha = () => {
           ))}
         </div>
       </div>
+      <div className="perfil-item mb-4">
+        <label htmlFor="latitud" className="form-label">Latitud</label>
+        <input
+          type="text"
+          id="latitud"
+          name="latitud"
+          className="form-control"
+          placeholder="Ingrese una latitud"
+          value={nuevaCancha.latitud}
+          onChange={handleAddCancha}
+          required
+        />
 
+        <button className='f' onClick={ () => navigate('/cancha/mapa')}>Selecionar en mapa</button>
+
+        <label htmlFor="longitud" className="form-label">Longitud</label>
+        <input
+          type="text"
+          id="longitud"
+          name="longitud"
+          className="form-control"
+          placeholder="Ingrese una longitud"
+          value={nuevaCancha.longitud}
+          onChange={handleAddCancha}
+          required
+        />
+      </div> 
       {/* Botón Guardar */}
       <div className="parte-btn">
         <button type="submit" className="btn btn-success">

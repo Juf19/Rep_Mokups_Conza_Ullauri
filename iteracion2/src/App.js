@@ -52,6 +52,8 @@ import AdminParqueDetalle from './Componentes/AdminParqueDetalle';
 import AdminActualizarCancha from './Componentes/AdminActualizarCancha';
 import AdminAddCancha from './Componentes/AdminAddCancha';
 import AdminCanchaDetalle from './Componentes/AdminCanchaDetalle';
+import MapContainer from './Componentes/MapContainer';
+import MapComponent from './Componentes/MapComponent';
 
 
 
@@ -86,6 +88,7 @@ function App() {
         <Route path={"/Parque/:id/canchas/:id/actualizar"} element={<AdminActualizarCancha></AdminActualizarCancha>}></Route>
         <Route path={"/Parque/:id/canchas/new"} element={<AdminAddCancha/>}></Route>
         <Route path={"/Parque/:id/canchas/:id/detalles"} element={<AdminCanchaDetalle />}/>
+        <Route path={"/cancha/mapa"} element={<MapComponent />}/>
 
       </Routes>
     </BrowserRouter>

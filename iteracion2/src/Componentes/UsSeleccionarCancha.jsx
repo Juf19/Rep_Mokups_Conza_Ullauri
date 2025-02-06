@@ -9,6 +9,7 @@ const UsSeleccionarCancha = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { parque, usuarioId } = location.state || {}; // Recibir usuarioId
+    console.log("UsuarioId:", usuarioId);
 
     const [canchas, setCanchas] = useState([]);
     const [loading, setLoading] = useState(true);

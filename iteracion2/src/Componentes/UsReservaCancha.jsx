@@ -23,6 +23,7 @@ const UsReservaCancha = () => {
   const { parque, cancha, usuarioId } = location.state || {}; // Recibir usuarioId
 
   const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
+  console.log("UsuarioId:", usuarioId);
 
   // Obtener encabezados con el token
   const obtenerHeadersConToken = () => {

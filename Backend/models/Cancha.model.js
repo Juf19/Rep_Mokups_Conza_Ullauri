@@ -24,6 +24,16 @@ const CanchaSchema = new mongoose.Schema({
         type: [String], // Array de cadenas para los días
         required: [true, "Los días de la cancha son requeridos"],
     },
+    latitud: {
+        type: String,
+        required: [true, "El tipo de cancha es requerido"],
+        trim: true,
+    },
+    longitud: {
+        type: String,
+        required: [true, "El tipo de cancha es requerido"],
+        trim: true,
+    },
     idParque: {
         type: mongoose.Schema.Types.ObjectId, // Referencia al modelo Parque
         required: [true, "El ID del parque asociado es requerido"],

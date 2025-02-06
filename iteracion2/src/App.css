@@ -637,7 +637,7 @@ button {
   font-size: 12px;
 }
 
-.res {
+.res:hover {
   background-color: #0056b3;
 }
 

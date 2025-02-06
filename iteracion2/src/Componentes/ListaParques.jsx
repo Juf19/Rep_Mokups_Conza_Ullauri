@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import UsParques from './UsParques';
 import ItemBajoHeader from './ItemBajoHeader';
@@ -8,10 +8,13 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const ListaParques = () => {
     const navigate = useNavigate();
+     const location = useLocation();
     const [parques, setParques] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(''); // Estado de búsqueda
     const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
+    const {usuarioId} = location.state || {}; // Recibir usuarioId
+    console.log("UsuarioId:", usuarioId);
 
     // Función para obtener los encabezados con el token
     const obtenerHeadersConToken = () => {
@@ -65,7 +68,7 @@ const ListaParques = () => {
                                         className="parques-button w-100"
                                         onClick={() =>
                                             navigate('/detalles', {
-                                                state: { parque },
+                                                state: { parque, usuarioId },
                                             })
                                         }
                                     >

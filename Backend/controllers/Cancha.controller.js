@@ -42,11 +42,11 @@ module.exports.obtenerCanchaPorId = async (req, res) => {
 // Función para agregar una nueva cancha
 module.exports.agregarCancha = async (req, res) => {
     try {
-      const { nombre, descripcion, tipo, horarios, dias, idParque } = req.body;
+      const { nombre, descripcion, tipo, horarios, dias, latitud, longitud, idParque } = req.body;
   
       console.log("Datos recibidos en el backend:", req.body); // Log para inspección
   
-      if (!nombre || !descripcion || !tipo || !horarios || !dias || !idParque) {
+      if (!nombre || !descripcion || !tipo || !horarios || !dias || !latitud || !longitud || !idParque ) {
         return res.status(400).json({ mensaje: "Faltan datos para crear la cancha." });
       }
   
@@ -56,6 +56,8 @@ module.exports.agregarCancha = async (req, res) => {
         tipo,
         horarios,
         dias,
+        latitud,
+        longitud,
         idParque,
       });
   
@@ -72,7 +74,7 @@ module.exports.agregarCancha = async (req, res) => {
 module.exports.actualizarCancha = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, descripcion, tipo, horarios, dias, idParque } = req.body;
+    const { nombre, descripcion, tipo, horarios, dias, latitud, longitud, idParque } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ mensaje: "ID no válido." });
@@ -86,7 +88,7 @@ module.exports.actualizarCancha = async (req, res) => {
 
     const canchaActualizada = await Cancha.findByIdAndUpdate(
       id,
-      { nombre, descripcion, tipo, horarios, dias, idParque },
+      { nombre, descripcion, tipo, horarios, dias, idParque, latitud, longitud, },
       { new: true }
     );
 
