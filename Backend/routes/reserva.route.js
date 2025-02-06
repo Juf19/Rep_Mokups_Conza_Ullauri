@@ -3,10 +3,10 @@ const { protect, role } = require('../middleware/protect');
 
 module.exports = function(app) {
     // Ruta para obtener todas las reservas
-    app.get('/reservas',protect, ReservaController.obtenerReservas);
+    app.get('/reservas', ReservaController.obtenerReservas);
 
     // Ruta para obtener una reserva por ID
-    app.get('/reservas/:id',protect, ReservaController.obtenerReservaPorId);
+    app.get('/reservas/:id', ReservaController.obtenerReservaPorId);
 
     // Ruta para agregar una nueva reserva
     app.post('/reservas', protect,ReservaController.agregarReserva);

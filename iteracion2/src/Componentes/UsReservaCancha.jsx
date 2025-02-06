@@ -81,9 +81,15 @@ const UsReservaCancha = () => {
     return reservas.some((reserva) => {
       const fechaReserva = new Date(reserva.fecha).toISOString().split('T')[0];
       const fechaSeleccionadaISO = fechaSeleccionada.toISOString().split('T')[0];
-      return fechaReserva === fechaSeleccionadaISO && reserva.horarios.includes(horario);
+      const canchaCoincide = reserva.canchaId._id === cancha._id; // Asegúrate de que la reserva es para la cancha correcta
+      console.log("canchaID",reserva.canchaId._id)
+      // Depuración: Verifica la comparación
+      console.log(`Comparando reserva con fecha: ${fechaReserva} y canchaId: ${reserva.canchaId._id} con fecha seleccionada: ${fechaSeleccionadaISO} y canchaId seleccionada: ${cancha._id}`);
+  
+      return fechaReserva === fechaSeleccionadaISO && canchaCoincide && reserva.horarios.includes(horario);
     });
   };
+  
 
   const handleHorarioClick = (horario) => {
     if (horariosSeleccionados.includes(horario)) {
@@ -143,33 +149,33 @@ const UsReservaCancha = () => {
         ) : (
           <div className="menuh">
             {horarios.map((time, index) => {
-              const reservado = isHorarioReservado(time);
-              const seleccionado = horariosSeleccionados.includes(time);
+  const reservado = isHorarioReservado(time); // Verifica si el horario está reservado
+  const seleccionado = horariosSeleccionados.includes(time); // Verifica si el horario está seleccionado
 
-              return (
-                <button
-                  key={index}
-                  onClick={() => handleHorarioClick(time)}
-                  disabled={reservado}
-                  style={{
-                    backgroundColor: reservado
-                      ? '#f44336'
-                      : seleccionado
-                      ? '#4CAF50'
-                      : '#e0e0e0',
-                    color: reservado ? '#ffffff' : '#000000',
-                    cursor: reservado ? 'not-allowed' : 'pointer',
-                    padding: '10px 15px',
-                    margin: '5px',
-                    borderRadius: '5px',
-                    border: '1px solid #ccc',
-                    fontSize: '14px',
-                  }}
-                >
-                  {time}
-                </button>
-              );
-            })}
+  return (
+    <button
+      key={index}
+      onClick={() => handleHorarioClick(time)}
+      disabled={reservado} // Deshabilita el botón si está reservado
+      style={{
+        backgroundColor: reservado
+          ? '#f44336'  // Rojo si está reservado
+          : seleccionado
+          ? '#4CAF50'  // Verde si está seleccionado
+          : '#e0e0e0', // Gris si está disponible
+        color: reservado ? '#ffffff' : '#000000',
+        cursor: reservado ? 'not-allowed' : 'pointer',
+        padding: '10px 15px',
+        margin: '5px',
+        borderRadius: '5px',
+        border: '1px solid #ccc',
+        fontSize: '14px',
+      }}
+    >
+      {time}
+    </button>
+  );
+})}
           </div>
         )}
         <h3>Aceptar términos y condiciones</h3>
