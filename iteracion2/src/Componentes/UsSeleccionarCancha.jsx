@@ -12,11 +12,24 @@ const UsSeleccionarCancha = () => {
 
     const [canchas, setCanchas] = useState([]);
     const [loading, setLoading] = useState(true);
+    const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
+
+    // Obtener encabezados con el token
+    const obtenerHeadersConToken = () => {
+        if (!token) {
+            throw new Error("No se encontró el token de autorización.");
+        }
+        return {
+            Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+        };
+    };
 
     useEffect(() => {
         const fetchCanchas = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/canchas');
+                const response = await axios.get('http://localhost:8000/canchas', {
+                    headers: obtenerHeadersConToken() // Usar los encabezados con el token
+                });
                 const canchasFiltradas = response.data.filter(
                     cancha => String(cancha.idParque).trim() === String(parque._id).trim()
                 );
@@ -31,7 +44,7 @@ const UsSeleccionarCancha = () => {
         if (parque) {
             fetchCanchas();
         }
-    }, [parque]);
+    }, [parque, token]);
 
     const ubicaciones = {
         "C-F1": { top: "30%", left: "53%" },

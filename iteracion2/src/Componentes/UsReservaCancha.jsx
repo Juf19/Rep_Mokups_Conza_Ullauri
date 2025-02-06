@@ -22,6 +22,18 @@ const UsReservaCancha = () => {
   const location = useLocation();
   const { parque, cancha, usuarioId } = location.state || {}; // Recibir usuarioId
 
+  const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
+
+  // Obtener encabezados con el token
+  const obtenerHeadersConToken = () => {
+    if (!token) {
+      throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+  };
+
   const handleDateChange = (date) => {
     setFechaSeleccionada(date);
   };
@@ -29,7 +41,9 @@ const UsReservaCancha = () => {
   useEffect(() => {
     const fetchHorarios = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/canchas/${cancha._id}`);
+        const response = await axios.get(`http://localhost:8000/canchas/${cancha._id}`, {
+          headers: obtenerHeadersConToken() // Usar los encabezados con el token
+        });
         setHorarios(response.data.horarios || []);
       } catch (error) {
         console.error('Error al cargar horarios:', error);
@@ -41,14 +55,15 @@ const UsReservaCancha = () => {
     if (cancha?._id) {
       fetchHorarios();
     }
-  }, [cancha]);
+  }, [cancha, token]);
 
   useEffect(() => {
     const fetchReservas = async () => {
       try {
         const fechaISO = fechaSeleccionada.toISOString().split('T')[0];
         const response = await axios.get(
-          `http://localhost:8000/reservas?canchaId=${cancha._id}&fecha=${fechaISO}`
+          `http://localhost:8000/reservas?canchaId=${cancha._id}&fecha=${fechaISO}`,
+          { headers: obtenerHeadersConToken() } // Usar los encabezados con el token
         );
         setReservas(response.data || []);
       } catch (error) {
@@ -60,7 +75,7 @@ const UsReservaCancha = () => {
     if (cancha?._id && fechaSeleccionada) {
       fetchReservas();
     }
-  }, [cancha, fechaSeleccionada]);
+  }, [cancha, fechaSeleccionada, token]);
 
   const isHorarioReservado = (horario) => {
     return reservas.some((reserva) => {
