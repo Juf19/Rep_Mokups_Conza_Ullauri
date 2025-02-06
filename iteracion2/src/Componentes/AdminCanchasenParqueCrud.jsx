@@ -161,7 +161,7 @@ const AdminCanchaenParque = () => {
                     </table>
                     {/* Botón para agregar cancha asignando idParque automáticamente */}
                     <button
-                        onClick={() => navigate(`/Parque/${id}/canchas/new`)}
+                        onClick={() => navigate(`/Parque/${id}/canchas/new`, { state: { id } })}
                         className="btnAgregar"
                     >
                         <FontAwesomeIcon icon={faPlus} />

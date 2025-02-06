@@ -3,7 +3,7 @@ import ItemHeaderA from './ItemHeaderA';
 import ItemBajoHeader from './ItemBajoHeader';
 import axios from 'axios';
 import "../Estilos/ActualizarParque.css";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { FaTimes } from 'react-icons/fa';
@@ -11,8 +11,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const AdminAddCancha = () => {
-  const { id } = useParams(); // Obtener el id del parque actual desde la URL
+
   const navigate = useNavigate();
+  const location = useLocation();
+  const {lat, lng, id} = location.state || {}; // Recibir 
+  console.log("Latitud:", lat);
+  console.log("Longitud:", lng);
+  console.log("ID del parque actual:", id);
 
   const [nuevaCancha, setNuevaCancha] = useState({
     nombre: '',
@@ -20,15 +25,15 @@ const AdminAddCancha = () => {
     tipo: 'Futbol',  // Establecer el valor por defecto para el select
     horarios: [],
     dias: [],
-    latitud: '',
-    longitud: '',
+    latitud: lat || '',  // Usar lat si está disponible, de lo contrario dejar vacío
+    longitud: lng || '',
     idParque: id // Asociar la cancha al parque actual
   });
 
   // Estado para controlar el modal de horarios
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedHorarios, setSelectedHorarios] = useState([]);
-
+ 
   // Manejar cambios en los inputs
   const handleAddCancha = (e) => {
     const { name, value } = e.target;
@@ -141,8 +146,37 @@ const AdminAddCancha = () => {
   <ItemBajoHeader />
   <h3 className="mb-4">Agregar Cancha</h3>
   <form onSubmit={handleSubmit}>
+    {/* Campo Ubicación */}
     <div className="parque-informacion">
-      
+    <div className="perfil-item mb-4">
+        <label htmlFor="latitud" className="form-label">Latitud</label>
+        <input
+        disabled={true}
+          type="text"
+          id="latitud"
+          name="latitud"
+          className="form-control"
+          placeholder="Selecione en el mapa"
+          value={nuevaCancha.latitud}
+          onChange={handleAddCancha}
+          required
+        />
+
+        <button className='f' onClick={ () => navigate('/cancha/mapa', { state: { id } })}>Selecionar en mapa</button>
+
+        <label htmlFor="longitud" className="form-label">Longitud</label>
+        <input
+        disabled={true}
+          type="text"
+          id="longitud"
+          name="longitud"
+          className="form-control"
+          placeholder="Selecione en el mapa"
+          value={nuevaCancha.longitud}
+          onChange={handleAddCancha}
+          required
+        />
+      </div> 
       {/* Campo Nombre */}
       <div className="perfil-item mb-4">
         <label htmlFor="nombre" className="form-label">Nombre</label>
@@ -240,33 +274,6 @@ const AdminAddCancha = () => {
           ))}
         </div>
       </div>
-      <div className="perfil-item mb-4">
-        <label htmlFor="latitud" className="form-label">Latitud</label>
-        <input
-          type="text"
-          id="latitud"
-          name="latitud"
-          className="form-control"
-          placeholder="Ingrese una latitud"
-          value={nuevaCancha.latitud}
-          onChange={handleAddCancha}
-          required
-        />
-
-        <button className='f' onClick={ () => navigate('/cancha/mapa')}>Selecionar en mapa</button>
-
-        <label htmlFor="longitud" className="form-label">Longitud</label>
-        <input
-          type="text"
-          id="longitud"
-          name="longitud"
-          className="form-control"
-          placeholder="Ingrese una longitud"
-          value={nuevaCancha.longitud}
-          onChange={handleAddCancha}
-          required
-        />
-      </div> 
       {/* Botón Guardar */}
       <div className="parte-btn">
         <button type="submit" className="btn btn-success">
