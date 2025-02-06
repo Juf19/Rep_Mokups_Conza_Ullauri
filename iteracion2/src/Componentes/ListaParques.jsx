@@ -11,11 +11,24 @@ const ListaParques = () => {
     const [parques, setParques] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(''); // Estado de búsqueda
+    const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
 
+    // Función para obtener los encabezados con el token
+    const obtenerHeadersConToken = () => {
+        if (!token) {
+            throw new Error("No se encontró el token de autorización.");
+        }
+        return {
+            Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+        };
+    };
+    
     useEffect(() => {
         const fetchParques = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/parques');
+                const response = await axios.get('http://localhost:8000/parques', {
+                    headers: obtenerHeadersConToken() // Agregar el token en los headers
+                });
                 setParques(response.data);
                 setLoading(false);
             } catch (error) {
@@ -23,10 +36,10 @@ const ListaParques = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchParques();
     }, []);
-
+    
     // Filtrar parques según el término de búsqueda
     const parquesFiltrados = parques.filter(parque =>
         parque.nombre.toLowerCase().includes(searchQuery.toLowerCase())

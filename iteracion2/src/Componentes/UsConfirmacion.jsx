@@ -15,6 +15,18 @@ const UsConfirmacion = () => {
 
   const [reservaCreada, setReservaCreada] = useState(false); // Estado para saber si la reserva fue creada
 
+  const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
+
+  // Función para obtener los encabezados con el token
+  const obtenerHeadersConToken = () => {
+    if (!token) {
+      throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+  };
+
   // Función para crear la reserva solo cuando el usuario hace clic en el botón
   const crearReserva = async () => {
     console.log("Enviando reserva con usuarioId:", usuarioId);
@@ -31,6 +43,8 @@ const UsConfirmacion = () => {
             horarios: horariosSeleccionados,
             fecha,
             usuarioId,  // Asegurar que se envía el usuarioId
+        }, {
+            headers: obtenerHeadersConToken() // Usar los encabezados con el token
         });
 
         console.log('Reserva creada exitosamente:', response.data);
@@ -44,9 +58,7 @@ const UsConfirmacion = () => {
     } catch (error) {
         console.error('Error al crear la reserva:', error.response?.data || error.message);
     }
-};
-
-
+  };
 
   return (
     <div>

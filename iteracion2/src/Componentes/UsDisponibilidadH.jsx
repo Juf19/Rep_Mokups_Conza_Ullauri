@@ -23,18 +23,6 @@ function UsDisponibilidadH() {
   const { parque, usuarioId } = location.state || {}; 
 
   const parqueId = parque?._id; // Obtener parqueId desde parque si existe
-  const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
-
-// Función para obtener los encabezados con el token
-const obtenerHeadersConToken = () => {
-  if (!token) {
-    throw new Error("No se encontró el token de autorización.");
-  }
-  return {
-    Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
-  };
-};
-
 
   const handleDateChange = (date) => {
     setFechaSeleccionada(date);
@@ -167,15 +155,12 @@ const obtenerHeadersConToken = () => {
     try {
         // Enviar la solicitud POST al servidor
         const response = await axios.post('http://localhost:8000/reservas', {
-          parqueId,
-          fecha: fechaFinal, // Usar fecha formateada
-          usuarioId,
-          canchaId: horariosSeleccionados[0]?.canchaId, // Usar el canchaId de la primera selección
-          horarios, // Array de horarios
-      }, {
-          headers: obtenerHeadersConToken() // Usar los encabezados con el token
-      });
-      
+            parqueId,
+            fecha: fechaFinal, // Usar fecha formateada
+            usuarioId,
+            canchaId: horariosSeleccionados[0]?.canchaId, // Usar el canchaId de la primera selección
+            horarios, // Array de horarios
+        });
 
         console.log('Reserva creada exitosamente:', response.data);
         setSetReservaCreada(true);
