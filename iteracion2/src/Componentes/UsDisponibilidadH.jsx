@@ -1,90 +1,113 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import ItemHeader from "./ItemHeader";
 import ItemBajoHeader from "./ItemBajoHeader";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const texto = [{ nombre: "HORARIO" }];
 
 function UsDisponibilidadH() {
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date());
-  const [canchas, setCanchas] = useState([]); // Estado para almacenar todas las canchas
-  const [reservas, setReservas] = useState([]); // Estado para almacenar reservas
-  const [loading, setLoading] = useState(true); // Estado de carga
-  const [error, setError] = useState(null); // Estado de error
+  const [canchas, setCanchas] = useState([]);
+  const [reservas, setReservas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [horariosSeleccionados, setHorariosSeleccionados] = useState([]);
+  const [setReservaCreada, setSetReservaCreada] = useState(false); // Definir setReservaCreada
 
   const location = useLocation();
-  const { parque } = location.state || {}; // Recibir el objeto parque desde el estado
+  const navigate = useNavigate();
+  const { parque, usuarioId } = location.state || {}; 
 
-  // Función para cambiar la fecha seleccionada
+  const parqueId = parque?._id; // Obtener parqueId desde parque si existe
+
   const handleDateChange = (date) => {
-    setFechaSeleccionada(date); // Cambiar la fecha seleccionada
-    console.log("Fecha seleccionada:", date); // Log de la fecha seleccionada
+    const fechaFormateadaConZona = `${date.toISOString().split('T')[0]}T05:00:00.000+00:00`;
+    setFechaSeleccionada(date);
   };
 
-  // Función para formatear la fecha al formato 'YYYY-MM-DD' para la consulta
   const formatDate = (date) => {
-    const formattedDate = date.toISOString().split('T')[0]; // Obtener solo la parte de la fecha (YYYY-MM-DD)
-    console.log("Fecha formateada para consulta:", formattedDate); // Log de la fecha formateada
-    return formattedDate;
+    return date.toISOString().split('T')[0];
   };
 
-  // Función para mostrar la fecha en formato 'DD/MM/YYYY' para la UI
   const formatDateToDisplay = (date) => {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    const displayDate = `${day}/${month}/${year}`; // Corregir la interpolación
-    console.log("Fecha para mostrar:", displayDate); // Log de la fecha para mostrar
-    return displayDate;
+    return `${day}/${month}/${year}`;
+  };
+
+  const handleHorarioClick = (canchaId, horario) => {
+    setHorariosSeleccionados((prev) => {
+      const canchaExistente = prev.find((item) => item.canchaId === canchaId);
+      
+      if (canchaExistente) {
+        const horariosActualizados = [...canchaExistente.horarios];
+        const index = horariosActualizados.indexOf(horario);
+        
+        if (index !== -1) {
+          horariosActualizados.splice(index, 1);
+        } else {
+          if (horariosActualizados.length >= 2) {
+            Swal.fire({
+              title: "Error",
+              text: "No puede seleccionar más de dos horarios en una sola cancha",
+              icon: "warning",
+              confirmButtonText: "Aceptar",
+            });
+            return prev;
+          }
+          horariosActualizados.push(horario);
+        }
+        
+        return prev.map((item) => 
+          item.canchaId === canchaId ? { ...item, horarios: horariosActualizados } : item
+        );
+      } else {
+        return [...prev, { canchaId, horarios: [horario] }];
+      }
+    });
   };
 
   useEffect(() => {
     const fetchDatos = async () => {
-      if (!parque?._id) {
-        setError("Faltan datos de parque.");
-        setLoading(false);
-        return;
-      }
-
       try {
-        // Obtener todas las canchas asociadas a este parque
-        const responseCanchas = await axios.get(`http://localhost:8000/canchas?parqueId=${parque._id}`);
-        console.log("Canchas cargadas:", responseCanchas.data); // Log de las canchas cargadas
+        if (!parqueId) {
+          setError("Faltan datos de parque.");
+          setLoading(false);
+          return;
+        }
+
+        const responseCanchas = await axios.get(`http://localhost:8000/canchas?parqueId=${parqueId}`);
         setCanchas(responseCanchas.data);
 
-        // Obtener todas las reservas de este parque para la fecha seleccionada (formateada)
-        const fechaFormateada = formatDate(fechaSeleccionada); // Formatear la fecha seleccionada
+        const fechaFormateada = formatDate(fechaSeleccionada);
         const responseReservas = await axios.get(
-          `http://localhost:8000/reservas?parqueId=${parque._id}&fecha=${fechaFormateada}`
+          `http://localhost:8000/reservas?parqueId=${parqueId}&fecha=${fechaFormateada}`
         );
-        console.log("Reservas cargadas para la fecha:", responseReservas.data); // Log de las reservas cargadas
         setReservas(responseReservas.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error al cargar los datos:", error);
         setError("No se pudieron cargar las canchas o las reservas.");
         setLoading(false);
       }
     };
 
-    fetchDatos(); // Llamada a la función de obtención de datos cuando cambia la fecha seleccionada
-  }, [parque, fechaSeleccionada]); // Dependencias: parque y fecha seleccionada
+    fetchDatos();
+  }, [parqueId, fechaSeleccionada]);
 
-  // Normalizar fecha de reserva (solo fecha, sin hora)
   const normalizeDate = (date) => {
-    const dateObj = new Date(date); // Convertir a un objeto Date
-    return dateObj.toISOString().split('T')[0]; // Retornar en formato 'YYYY-MM-DD'
+    const dateObj = new Date(date);
+    return dateObj.toISOString().split('T')[0];
   };
 
-  // Extraer los horarios reservados para cada cancha en la fecha seleccionada
   const horariosReservadosPorCancha = reservas.reduce((acc, reserva) => {
     const canchaId = reserva.canchaId._id;
-    const fechaNormalizada = normalizeDate(reserva.fecha); // Normalizar la fecha de la reserva
+    const fechaNormalizada = normalizeDate(reserva.fecha);
 
-    // Comprobar si la fecha de la reserva coincide con la fecha seleccionada
     if (fechaNormalizada === formatDate(fechaSeleccionada)) {
       const horarios = reserva.horarios;
       if (!acc[canchaId]) acc[canchaId] = [];
@@ -93,7 +116,63 @@ function UsDisponibilidadH() {
     return acc;
   }, {});
 
-  console.log("Horarios reservados por cancha:", horariosReservadosPorCancha); // Log de los horarios reservados
+  const crearReserva = async () => {
+    if (!usuarioId) {
+        console.error("Error: usuarioId es undefined o null.");
+        return;
+    }
+
+    // Log para verificar los datos antes de enviarlos
+    console.log("Datos para la reserva:");
+    console.log("parqueId:", parqueId);
+    console.log("fecha:", formatDate(fechaSeleccionada)); // Verificar formato correcto de la fecha
+    console.log("usuarioId:", usuarioId);
+    console.log("horariosSeleccionados:", horariosSeleccionados);
+
+    // Verificar que tenemos los datos necesarios
+    if (!fechaSeleccionada || !parqueId || !horariosSeleccionados.length) {
+        console.error("Faltan datos para crear la reserva.");
+        return;
+    }
+
+    // Agregar T05:00:00.000+00:00 a la fecha seleccionada
+    const fechaFormateada = new Date(fechaSeleccionada);
+    const fechaFinal = `${fechaFormateada.toISOString().split('T')[0]}T05:00:00.000+00:00`;
+
+    // Crear la estructura de los datos para enviar al servidor
+    const horarios = horariosSeleccionados.flatMap(item => item.horarios);  // Obtener todos los horarios seleccionados
+
+    // Log para verificar los datos que serán enviados
+    console.log("Enviando datos al servidor para crear la reserva:", {
+        parqueId,
+        fecha: fechaFinal, // Usar fecha formateada
+        usuarioId,
+        canchaId: horariosSeleccionados[0]?.canchaId, // Usar el canchaId de la primera selección
+        horarios, // Array de horarios
+    });
+
+    try {
+        // Enviar la solicitud POST al servidor
+        const response = await axios.post('http://localhost:8000/reservas', {
+            parqueId,
+            fecha: fechaFinal, // Usar fecha formateada
+            usuarioId,
+            canchaId: horariosSeleccionados[0]?.canchaId, // Usar el canchaId de la primera selección
+            horarios, // Array de horarios
+        });
+
+        console.log('Reserva creada exitosamente:', response.data);
+        setSetReservaCreada(true);
+
+        window.dispatchEvent(new Event("reservaCreada"));
+        navigate('/HomeUser');
+    } catch (error) {
+        // Mostrar error detallado
+        console.error('Error al crear la reserva:', error.response?.data || error.message);
+    }
+};
+
+
 
   return (
     <div>
@@ -101,7 +180,6 @@ function UsDisponibilidadH() {
       <ItemBajoHeader nombre={texto[0].nombre} />
       <div className="us-disponibilidad-container">
         <div className="us-disponibilidad-content">
-          {/* Panel izquierdo: Calendario */}
           <div className="us-disponibilidad-left">
             <Calendar
               onChange={handleDateChange}
@@ -109,11 +187,10 @@ function UsDisponibilidadH() {
               className="custom-calendar"
             />
             <p className="fecha-seleccionada">
-              Fecha seleccionada: {formatDateToDisplay(fechaSeleccionada)} {/* Mostrar en DD/MM/YYYY */}
+              Fecha seleccionada: {formatDateToDisplay(fechaSeleccionada)}
             </p>
           </div>
 
-          {/* Panel derecho: Horarios de las canchas */}
           <div className="us-disponibilidad-right">
             {loading ? (
               <p>Cargando canchas y reservas...</p>
@@ -129,18 +206,19 @@ function UsDisponibilidadH() {
                       <div className="horarios-container">
                         {cancha.horarios && cancha.horarios.length > 0 ? (
                           cancha.horarios.map((horario, index) => {
-                            // Comprobar si el horario está reservado para la fecha seleccionada
                             const estaReservado =
                               horariosReservadosPorCancha[cancha._id]?.includes(horario);
+                            const estaSeleccionado = horariosSeleccionados.some(item => item.canchaId === cancha._id && item.horarios.includes(horario));
 
                             return (
                               <button
                                 key={index}
-                                className={`horario-button ${estaReservado ? "reservado" : ""}`} // Corregir la clase
+                                className={`horario-button ${estaReservado ? "reservado" : ""} ${estaSeleccionado ? "seleccionado" : ""}`}
                                 style={{
-                                  backgroundColor: estaReservado ? "#fd2b2b" : "#4CAF50", // Color rojo si está reservado
+                                  backgroundColor: estaReservado ? "#fd2b2b" : (estaSeleccionado ? "#ffcc00" : "#4CAF50"),
                                 }}
-                                disabled={estaReservado} // Deshabilitar si está reservado
+                                disabled={estaReservado}
+                                onClick={() => handleHorarioClick(cancha._id, horario)}
                               >
                                 {horario}
                               </button>
@@ -159,6 +237,12 @@ function UsDisponibilidadH() {
             )}
           </div>
         </div>
+        
+        {/* Botón para realizar la reserva */}
+        <button onClick={crearReserva} className="btn-reservar">
+          Reservar
+        </button>
+        
       </div>
     </div>
   );
