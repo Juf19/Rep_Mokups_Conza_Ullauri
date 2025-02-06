@@ -18,16 +18,35 @@ const AdminParqueDetalle = () => {
   });
 
   // Obtener los detalles de la cancha
+  const token = localStorage.getItem('token');
+
+  // Obtener encabezados con el token
+  const obtenerHeadersConToken = () => {
+      if (!token) {
+          throw new Error("No se encontró el token de autorización.");
+      }
+      return {
+          Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+      };
+  };
+
+  // Obtener detalles de la cancha específica
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/canchas/${id}`) // URL
-      .then((response) => {
-        setCancha(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener la cancha:", error);
-      });
-  }, [id]);
+      if (token) {  // Verificar si el token existe
+          axios
+              .get(`http://localhost:8000/canchas/${id}`, {
+                  headers: obtenerHeadersConToken()  // Usar la función para los encabezados
+              })
+              .then((response) => {
+                  setCancha(response.data);  // Actualiza el estado con la cancha
+              })
+              .catch((error) => {
+                  console.error("Error al obtener la cancha:", error);
+              });
+      } else {
+          console.error("No se encontró el token de autorización.");
+      }
+  }, [id, token]); // El useEffect se ejecutará cada vez que cambie `id` o `token`
 
   // Función para manejar la redirección
   const handleAceptar = () => {

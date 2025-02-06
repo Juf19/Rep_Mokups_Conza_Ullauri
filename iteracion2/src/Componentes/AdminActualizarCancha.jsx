@@ -22,24 +22,43 @@ const AdminActualizarCancha = () => {
   // Estado para controlar el modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedHorarios, setSelectedHorarios] = useState([]);
+  
+  const token = localStorage.getItem('token');
 
+  // Obtener encabezados con el token
+  const obtenerHeadersConToken = () => {
+    if (!token) {
+      throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+  };
+
+  // Obtener detalles de la cancha específica
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/canchas/${id}`)
-      .then((response) => {
-        const canchasData = response.data;
-        
-        // Asegurarse de que los horarios estén en formato de arreglo
-        const horarios = Array.isArray(canchasData.horarios) 
-          ? canchasData.horarios
-          : canchasData.horarios.split(',');  // Si es una cadena, convertirlo a un arreglo
-        
-        setCanchas({ ...canchasData, horarios }); // Actualizamos canchas con los horarios correctos
-      })
-      .catch((error) => {
-        console.error("Error al obtener las canchas:", error);
-      });
-  }, [id]);
+    if (token) {  // Verificar si el token existe
+      axios
+        .get(`http://localhost:8000/canchas/${id}`, {
+          headers: obtenerHeadersConToken()  // Usar la función para los encabezados
+        })
+        .then((response) => {
+          const canchasData = response.data;
+          
+          // Asegurarse de que los horarios estén en formato de arreglo
+          const horarios = Array.isArray(canchasData.horarios) 
+            ? canchasData.horarios
+            : canchasData.horarios.split(',');  // Si es una cadena, convertirlo a un arreglo
+          
+          setCanchas({ ...canchasData, horarios }); // Actualizamos canchas con los horarios correctos
+        })
+        .catch((error) => {
+          console.error("Error al obtener las canchas:", error);
+        });
+    } else {
+      console.error("No se encontró el token de autorización.");
+    }
+  }, [id, token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,7 +80,9 @@ const AdminActualizarCancha = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:8000/canchas/${id}`, canchas)
+    axios.put(`http://localhost:8000/canchas/${id}`, canchas, {
+      headers: obtenerHeadersConToken()  // Usar los encabezados con token
+    })
       .then(response => {
         console.log('Cancha actualizada:', response.data);
         navigate(`/Parque/${canchas.idParque}/canchas`);

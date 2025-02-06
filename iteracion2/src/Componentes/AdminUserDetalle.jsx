@@ -16,14 +16,31 @@ const AdminUserDetalle = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
+  const token = localStorage.getItem('token');  // Obtener token desde el localStorage
+
+  // Obtener encabezados con el token
+  const obtenerHeadersConToken = () => {
+    if (!token) {
+      throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+  };
 
   useEffect(() => {
-    axios.get("http://localhost:8000/usuarios/" + id)
-      .then(respuesta => {
-        setUsuario(respuesta.data);
-        console.log(respuesta.data);
-      }).catch(err => console.log(err));
-  }, [id]);
+    if (token) {  // Verificar si el token existe
+      axios.get("http://localhost:8000/usuarios/" + id, {
+        headers: obtenerHeadersConToken()  // Usar los encabezados con token
+      })
+        .then(respuesta => {
+          setUsuario(respuesta.data);
+          console.log(respuesta.data);
+        }).catch(err => console.log(err));
+    } else {
+      console.error("No se encontró el token de autorización.");
+    }
+  }, [id, token]);
 
   return (
     <div>
@@ -76,7 +93,7 @@ const AdminUserDetalle = () => {
                 type="text"
                 placeholder="Ingrese la fecha de nacimiento"
                 className="in"
-                name="fechaNacimiento" 
+                name="fechaNacimiento"
                 value={usuario.fechaNacimiento}
                 readOnly
               />
@@ -92,7 +109,7 @@ const AdminUserDetalle = () => {
                 <option value="Usuario">Usuario</option>
               </select>
             </div>
-            <button onClick={()=>{navigate('/Usuario')}}  type="button" className="btn-save">
+            <button onClick={() => { navigate('/Usuario') }} type="button" className="btn-save">
               Guardar
             </button>
           </div>

@@ -15,16 +15,34 @@ const AdminParqueDetalle = () => {
     url: ''
   });
   
+  const token = localStorage.getItem('token');  // Obtener token desde el localStorage
+
+  // Obtener encabezados con el token
+  const obtenerHeadersConToken = () => {
+    if (!token) {
+      throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+  };
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/parques/${id}`) // URL 
-      .then((response) => {
-        setParques(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los parques:", error);
-      });
-  }, [id]);
+    if (token) {  // Verificar si el token existe
+      axios
+        .get(`http://localhost:8000/parques/${id}`, {
+          headers: obtenerHeadersConToken()  // Usar los encabezados con token
+        })
+        .then((response) => {
+          setParques(response.data);
+        })
+        .catch((error) => {
+          console.error("Error al obtener los parques:", error);
+        });
+    } else {
+      console.error("No se encontró el token de autorización.");
+    }
+  }, [id, token]);
 
   return (
     <div>

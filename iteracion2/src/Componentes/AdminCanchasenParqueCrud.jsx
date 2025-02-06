@@ -4,7 +4,7 @@ import ItemHeaderA from './ItemHeaderA';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPencilAlt, faInfoCircle,faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPencilAlt, faInfoCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
 const AdminCanchaenParque = () => {
@@ -17,52 +17,77 @@ const AdminCanchaenParque = () => {
         descripcion: '',
         url: ''
     });
+    const token = localStorage.getItem('token');
+
+    // Obtener encabezados con el token
+    const obtenerHeadersConToken = () => {
+        if (!token) {
+            throw new Error("No se encontró el token de autorización.");
+        }
+        return {
+            Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+        };
+    };
 
     // Obtener detalles del parque actual
     useEffect(() => {
-        axios
-            .get(`http://localhost:8000/parques/${id}`)
-            .then((response) => {
-                setParques(response.data);
-            })
-            .catch((error) => {
-                console.error("Error al obtener el parque:", error);
-            });
-    }, [id]);
+        if (token) {  // Verificar si el token existe
+            axios
+                .get(`http://localhost:8000/parques/${id}`, {
+                    headers: obtenerHeadersConToken()  // Usar la función para los encabezados
+                })
+                .then((response) => {
+                    setParques(response.data);  // Actualiza el estado con el parque
+                })
+                .catch((error) => {
+                    console.error("Error al obtener el parque:", error);
+                });
+        } else {
+            console.error("No se encontró el token de autorización.");
+        }
+    }, [id, token]); // Se vuelve a ejecutar si cambia el `id` o `token`
 
     // Obtener canchas filtradas por el parque actual
     useEffect(() => {
-        axios
-            .get(`http://localhost:8000/canchas`)
-            .then((response) => {
-                const canchasFiltradas = response.data.filter(cancha => cancha.idParque === id);
-                setData(canchasFiltradas);
-            })
-            .catch((error) => {
-                console.error("Error al obtener las canchas:", error);
-            });
-    }, [id]);
+        if (token) {  // Verificar si el token existe
+            axios
+                .get("http://localhost:8000/canchas", {
+                    headers: obtenerHeadersConToken()  // Usar la función para los encabezados
+                })
+                .then((response) => {
+                    const canchasFiltradas = response.data.filter(cancha => cancha.idParque === id);
+                    setData(canchasFiltradas);  // Actualiza el estado con las canchas filtradas
+                })
+                .catch((error) => {
+                    console.error("Error al obtener las canchas:", error);
+                });
+        } else {
+            console.error("No se encontró el token de autorización.");
+        }
+    }, [id, token]); // Se vuelve a ejecutar si cambia el `id` o `token`
 
     // Eliminar una cancha
     const handleEliminar = async (canchaId) => {
         const confirmDelete = window.confirm("¿Estás seguro que deseas borrar esta cancha?");
         if (confirmDelete) {
             try {
-                await axios.delete(`http://localhost:8000/canchas/${canchaId}`);
+                await axios.delete(`http://localhost:8000/canchas/${canchaId}`, {
+                    headers: obtenerHeadersConToken()  // Usar los encabezados con token
+                });
                 const updatedData = data.filter((cancha) => cancha._id !== canchaId);
                 setData(updatedData);
                 Swal.fire({
-                          icon: 'success',
-                          title: 'Éxito',
-                          text: 'Cancha eliminado con exito',
-                        });
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Cancha eliminada con éxito',
+                });
             } catch (error) {
                 console.error("Error al eliminar la cancha:", error);
                 Swal.fire({
-                         icon: 'error',
-                         title: 'Error',
-                         text: 'No se pudo eliminar la cancha',
-                       });
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo eliminar la cancha',
+                });
             }
         }
     };
@@ -137,8 +162,9 @@ const AdminCanchaenParque = () => {
                     {/* Botón para agregar cancha asignando idParque automáticamente */}
                     <button
                         onClick={() => navigate(`/Parque/${id}/canchas/new`)}
-
-                    className="btnAgregar">  <FontAwesomeIcon icon={faPlus} />
+                        className="btnAgregar"
+                    >
+                        <FontAwesomeIcon icon={faPlus} />
                         +
                     </button>
                 </div>

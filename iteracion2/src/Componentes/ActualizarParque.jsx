@@ -17,17 +17,34 @@ const ActualizarParque = () => {
     url: ''
   });
   
+  const token = localStorage.getItem('token');  // Obtener token desde el localStorage
+
+  // Obtener encabezados con el token
+  const obtenerHeadersConToken = () => {
+    if (!token) {
+      throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+  };
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/parques/${id}`) // URL 
-      .then((response) => {
-        console.log("Datos del parque recibidos:", response.data); // Log para depurar
-        setParques(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los parques:", error);
-      });
-  }, [id]);
+    if (token) {  // Verificar si el token existe
+      axios
+        .get(`http://localhost:8000/parques/${id}`, {
+          headers: obtenerHeadersConToken()  // Usar los encabezados con token
+        })
+        .then((response) => {
+          setParques(response.data);
+        })
+        .catch((error) => {
+          console.error("Error al obtener los parques:", error);
+        });
+    } else {
+      console.error("No se encontró el token de autorización.");
+    }
+  }, [id, token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,15 +56,20 @@ const ActualizarParque = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:8000/parques/${id}`, parques)
-      .then(response => {
-        console.log('Parques actualizado:', response.data);
-        // navigate(`/setParquess/${id}`);
-        navigate(`/Parque`);
+    if (token) {
+      axios.put(`http://localhost:8000/parques/${id}`, parques, {
+        headers: obtenerHeadersConToken()  // Usar los encabezados con token
       })
-      .catch(error => {
-        console.error('Error al actualizar el Parques:', error);
-      });
+        .then(response => {
+          console.log('Parque actualizado:', response.data);
+          navigate(`/Parque`);
+        })
+        .catch(error => {
+          console.error('Error al actualizar el Parque:', error);
+        });
+    } else {
+      console.error("No se encontró el token de autorización.");
+    }
   };
 
   return (
