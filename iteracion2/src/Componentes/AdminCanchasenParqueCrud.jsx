@@ -4,7 +4,7 @@ import ItemHeaderA from './ItemHeaderA';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPencilAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPencilAlt, faInfoCircle,faPlus } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
 const AdminCanchaenParque = () => {
@@ -136,9 +136,9 @@ const AdminCanchaenParque = () => {
                     </table>
                     {/* Botón para agregar cancha asignando idParque automáticamente */}
                     <button
-                        className="boton-agregar"
                         onClick={() => navigate(`/Parque/${id}/canchas/new`)}
-                    >
+
+                    className="btnAgregar">  <FontAwesomeIcon icon={faPlus} />
                         +
                     </button>
                 </div>

@@ -1,10 +1,47 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Usuario = require("../models/Usuario.model");
+const mongoose = require('mongoose');
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET || "holasoyj", { expiresIn: '30d' });
 };
+
+module.exports.obtenerUsuarios = async (req, res) => {
+    try {
+      const usuario = await Usuario.find();
+  
+      if (usuario.length === 0) {
+        return res.status(404).json({ mensaje: "No se encontraron usuarios." });
+      }
+  
+      return res.status(200).json(usuario);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ mensaje: "Error al obtener las usuarios." });
+    }
+  };
+
+  module.exports.getUsuarios = (request, response) => {
+    Usuario.findOne({ _id: request.params.id })
+        .then(user => response.json(user))
+        .catch(err => response.json(err))
+}
+
+module.exports.updateUsuarios = (request, response) => {
+    Usuario.findOneAndUpdate({ _id: request.params.id }, request.body, { new: true })
+        .then(updatedUser => response.json(updatedUser))
+        .catch(err => response.json(err))
+}
+module.exports.deleteUsuarios = (request, response) => {
+    Usuario.deleteOne({ _id: request.params.id })
+        .then(userDeleted => response.json(userDeleted))
+        .catch(err => response.json(err))
+}
+  
+
+
+
 
 module.exports.createUser = async (req, res) => {
     const { email, password, cedula, fechaNacimiento, nombre, rol } = req.body;

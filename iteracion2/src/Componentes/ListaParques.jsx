@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // Importa useLocation
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UsParques from './UsParques';
 import ItemBajoHeader from './ItemBajoHeader';
@@ -8,13 +8,9 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const ListaParques = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    
-    // Recibir usuarioId desde UsReservas
-    const { usuarioId } = location.state || {};
-
     const [parques, setParques] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState(''); // Estado de búsqueda
 
     useEffect(() => {
         const fetchParques = async () => {
@@ -31,36 +27,42 @@ const ListaParques = () => {
         fetchParques();
     }, []);
 
+    // Filtrar parques según el término de búsqueda
+    const parquesFiltrados = parques.filter(parque =>
+        parque.nombre.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div>
-            <ItemHeader />
+            {/* Pasamos setSearchQuery para actualizar la búsqueda desde ItemHeader */}
+            <ItemHeader setSearchQuery={setSearchQuery} />
             <ItemBajoHeader />
-            <h2 className="text-start mb-4">Selecciona el parque en donde deseas reservar</h2>
+            <h2 className="text-start mb-4">
+                {searchQuery ? `Resultados para: "${searchQuery}"` : 'Selecciona el parque en donde deseas reservar'}
+            </h2>
             <Container className="mt-5">
                 {loading ? (
                     <p>Cargando parques...</p>
                 ) : (
                     <Row className="justify-content-center">
-                        {parques.map((parque) => (
-                            <Col
-                                xs={12}
-                                sm={6}
-                                md={4}
-                                key={parque._id}
-                                className="mb-4 d-flex justify-content-center"
-                            >
-                                <Button
-                                    className="parques-button w-100"
-                                    onClick={() =>
-                                        navigate('/detalles', {
-                                            state: { parque, usuarioId }, // Pasamos usuarioId a Detalles
-                                        })
-                                    }
-                                >
-                                    <UsParques name={parque.nombre} img={parque.url} />
-                                </Button>
-                            </Col>
-                        ))}
+                        {parquesFiltrados.length > 0 ? (
+                            parquesFiltrados.map((parque) => (
+                                <Col xs={12} sm={6} md={4} key={parque._id} className="mb-4 d-flex justify-content-center">
+                                    <Button
+                                        className="parques-button w-100"
+                                        onClick={() =>
+                                            navigate('/detalles', {
+                                                state: { parque },
+                                            })
+                                        }
+                                    >
+                                        <UsParques name={parque.nombre} img={parque.url} />
+                                    </Button>
+                                </Col>
+                            ))
+                        ) : (
+                            <p>No se encontraron parques con ese nombre.</p>
+                        )}
                     </Row>
                 )}
             </Container>

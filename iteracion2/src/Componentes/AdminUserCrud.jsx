@@ -11,19 +11,39 @@ import Swal from "sweetalert2";
 const AdimUserCrud = () => {
   const [data, setData] = useState([]); // Estado para almacenar los usuarios
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+
+  const obtenerHeadersConToken = () => {
+   
+    if (!token) {
+        throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+        Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+};
 
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/usuarios") // URL de tu API
-      .then((res) => {
-        console.log("Usuarios obtenidos: ", res);
-        setData(res.data); // Actualiza el estado con los usuarios
-      })
-      .catch((err) => {
-        console.error("Error al obtener los usuarios:", err);
-      });
-  }, []);
+useEffect(() => {
+  if (token) { // Verificar si el token existe
+      axios
+          .get("http://localhost:8000/listausuarios", {
+              headers: {
+                  Authorization: `Bearer ${token}`,  // Enviar el token en el encabezado
+              },
+          })
+          .then((res) => {
+              console.log("Usuarios obtenidos: ", res.data);
+              setData(res.data); // Actualiza el estado con los usuarios
+          })
+          .catch((err) => {
+              console.error("Error al obtener los usuarios:", err);
+          });
+  } else {
+      console.error("No se encontró el token de autorización.");
+  }
+}, [token]); // El useEffect se ejecutará cada vez que el token cambie
+
 
   const items = [
     { nombre: "Usuarios" },
@@ -31,30 +51,44 @@ const AdimUserCrud = () => {
   ];
 
   const eliminarUsuario = async (id) => {
-    const confirmDelete = window.confirm("¿Estás seguro que deseas borrar este usuario?");
-    if (confirmDelete) {
+    // Usamos SweetAlert para la confirmación
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'No, cancelar',
+    });
+  
+    if (result.isConfirmed) {
       try {
-        await axios.delete("http://localhost:3001/usuarios/" + id);
+        await axios.delete("http://localhost:8000/usuarios/" + id,obtenerHeadersConToken);
         const updatedData = data.filter((usuario) => usuario.id !== id);
         setData(updatedData);
+
+        
+        
+        // Mostrar mensaje de éxito
         Swal.fire({
           icon: 'success',
           title: 'Éxito',
           text: 'Usuario eliminado correctamente.',
         });
-        
+  
       } catch (error) {
         console.error("Error al eliminar el usuario:", error);
+        
+        // Mostrar mensaje de error
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'No se pudo eliminar el usuario.',
         });
-        
       }
     }
   };
-
+  
   return (
     <div>
       <ItemHeaderA />
@@ -72,9 +106,9 @@ const AdimUserCrud = () => {
               <tr key={index}>
                 <td>{usuario.nombre} </td>
                 <td>
-                  <button className="btnEditar" onClick={() => navigate('/EditarUsuario/' + usuario.id)}> <FontAwesomeIcon icon={faPencilAlt} />   </button>
-                  <button className="btnBorrar" onClick={() => eliminarUsuario(usuario.id)}> <FontAwesomeIcon icon={faTrash} /></button>
-                  <button  className="btnDetalle" onClick={() => navigate('/DetalleUsuario/' + usuario.id)}> <FontAwesomeIcon icon={faInfoCircle} /></button>
+                  <button className="btnEditar" onClick={() => navigate('/EditarUsuario/' + usuario._id)}> <FontAwesomeIcon icon={faPencilAlt} />   </button>
+                  <button className="btnBorrar" onClick={() => eliminarUsuario(usuario._id)}> <FontAwesomeIcon icon={faTrash} /></button>
+                  <button  className="btnDetalle" onClick={() => navigate('/DetalleUsuario/' + usuario._id)}> <FontAwesomeIcon icon={faInfoCircle} /></button>
                 </td>
               </tr>
             ))}

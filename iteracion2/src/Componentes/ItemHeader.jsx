@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconButton, TextField, } from '@mui/material';
+import { IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-const ItemHeader = () => {
+const ItemHeader = ({ setSearchQuery }) => {
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState('');
+
+  // Manejar cambios en el input y actualizar el estado en ListaParques
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+    setSearchQuery(value); // Filtrar en tiempo real
+  };
+
   return (
     <div className="app">
       <header className="header">
@@ -15,6 +24,8 @@ const ItemHeader = () => {
                 size="small"
                 fullWidth
                 className="search-input" // Clase para el campo de entrada
+                value={searchInput}
+                onChange={handleChange} // Actualiza la búsqueda en tiempo real
                 InputProps={{
                     endAdornment: (
                         <IconButton type="submit" aria-label="search" className="search-button">

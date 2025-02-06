@@ -28,36 +28,57 @@
   .parques {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-height: 500px; /* Altura máxima para la sección */
-    overflow-y: auto; /* Habilita el scroll vertical si hay más contenido */
-    padding: 10px;
-  }
-  
-  .parque {
-    flex: 1 1 calc(33.33% - 20px); /* Ajusta el ancho para 3 elementos por fila */
-    max-width: 800px; /* Asegura que cada elemento tenga un ancho máximo */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    gap: 30px; /* Espacio más grande entre los elementos */
+    max-height: 600px; /* Incrementar altura máxima */
+    overflow-y: auto;
+    padding: 15px;
+    width: 100%;
+}
+
+.parque {
+    flex: 0 1 400px; /* Aumentar ancho proporcional */
+    max-width: 400px; /* Más ancho para el contenedor */
     text-align: center;
-  }
-  
-  .parque-image {
-    width: 85%;
-    height: 150px;
-    
-    
-  }
+    margin: 0 auto;
+}
+
+/* Ajustar la imagen */
+.parque-image {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: auto; /* Mantener proporciones */
+    object-fit: cover; /* Recorta si es necesario */
+    max-height: 300px; /* Más alto */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Botón para parque con formato más grande */
+.parques-button {
+    width: 100%; /* Botón ocupa todo el ancho disponible */
+    background-color: white;
+    padding: 15px; /* Más espacio interno para el botón */
+    border: none;
+    cursor: pointer;
+    display: block;
+    max-width: 400px; /* Ancho máximo */
+    min-width: 300px; /* Asegura tamaño mínimo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras más notorias */
+    transition: transform 0.2s ease; /* Animación suave */
+}
+
+.parques-button:hover {
+    transform: scale(1.05); /* Efecto de agrandamiento al pasar el cursor */
+}
+
+
+
+
   
   .name{
     font-family: "Pathway Extreme";
     font-size: 20px;
   }
   
-  .parques-button {
-    border: none;           /* Sin borde */
-    background: none;      /* Sin fondo */
-    padding: 0;            /* Sin padding */
-    cursor: pointer;       /* Cambia el cursor al pasar sobre el botón */
-    display: inline-block;  /* Para que se comporte como un bloque en línea */
-    background-color: white;
-}
+  

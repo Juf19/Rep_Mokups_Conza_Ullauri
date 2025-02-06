@@ -8,9 +8,8 @@ const AdminUserDetalle = () => {
   const [usuario, setUsuario] = useState({
     id: null,
     nombre: null,
-    correoelectronico: null,
+    email: null,
     cedula: null,
-    contrasena: null,
     fechaNacimiento: null,
     rol: null // Añadimos el campo rol al estado
   });
@@ -19,7 +18,7 @@ const AdminUserDetalle = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/usuarios/' + id)
+    axios.get("http://localhost:8000/usuarios/" + id)
       .then(respuesta => {
         setUsuario(respuesta.data);
         console.log(respuesta.data);
@@ -57,7 +56,7 @@ const AdminUserDetalle = () => {
                 type="email"
                 className="in"
                 name="correoelectronico"
-                value={usuario.correoelectronico || ""}
+                value={usuario.email || ""}
                 readOnly
               />
             </div>
@@ -74,21 +73,11 @@ const AdminUserDetalle = () => {
             <div className="form-group">
               <label>Fecha de nacimiento:</label>
               <input
-                type="date"
+                type="text"
                 placeholder="Ingrese la fecha de nacimiento"
                 className="in"
-                name="fechanacimiento" 
+                name="fechaNacimiento" 
                 value={usuario.fechaNacimiento}
-                readOnly
-              />
-            </div>
-            <div className="form-group">
-              <label>Contraseña:</label>
-              <input
-                type="password"
-                className="in"
-                name="contrasena"
-                value={usuario.contrasena || ""}
                 readOnly
               />
             </div>
@@ -96,7 +85,7 @@ const AdminUserDetalle = () => {
               <label className="l">Rol</label>
               <select
                 name="rol"
-                value={usuario.rol }
+                value={usuario.rol}
                 disabled
               >
                 <option value="Administrador">Administrador</option>

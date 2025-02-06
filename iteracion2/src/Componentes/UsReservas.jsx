@@ -29,7 +29,6 @@ function UsReservas() {
         }
     }, [usuarioId]);
     
-
     // Detectar si location.state solicita actualización
     useEffect(() => {
         if (location.state?.actualizarReservas) {
@@ -52,8 +51,17 @@ function UsReservas() {
             for (let i = 0; i < intentos; i++) {
                 try {
                     console.log(`Intento ${i + 1}: Cargando reservas para usuarioId:`, usuarioId);
-                    const response = await axios.get(`http://localhost:8000/reservas/usuario/${usuarioId}`);
-        
+                    
+                    // Obtener el token desde localStorage
+                    const token = localStorage.getItem("token");
+
+                    // Realizar la solicitud con el token de autorización
+                    const response = await axios.get(`http://localhost:8000/reservas/usuario/${usuarioId}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`  // Enviar el token en los encabezados
+                        }
+                    });
+
                     if (response.data.length > 0) {
                         console.log("Reservas obtenidas:", response.data);
                         setReservas(response.data);
@@ -71,7 +79,6 @@ function UsReservas() {
             setLoading(false);
         };
         
-    
         fetchReservas();
     
         const handleReservaCreada = () => {
@@ -86,8 +93,6 @@ function UsReservas() {
         };
     }, [usuarioId]);
     
-    
-
     const formatDate = (date) => {
         const newDate = new Date(date);
         return newDate.toISOString().split('T')[0];

@@ -8,7 +8,7 @@ const AdminUsuarioEditar = () => {
     const [usuario, setUsuario] = useState({
         id: "",
         nombre: "",
-        correoelectronico: "",
+        email: "",
         cedula: "",
         contrasena: "",
         fechaNacimiento: "",
@@ -19,7 +19,7 @@ const AdminUsuarioEditar = () => {
   const { id } = useParams(); 
 
   useEffect(() => {
-    axios.get('http://localhost:3001/usuarios/'+id)
+    axios.get('http://localhost:8000/usuarios/'+id)
       .then(res => {
         console.log("R. Exitosa:", res);
         setUsuario(res.data);
@@ -31,7 +31,7 @@ const AdminUsuarioEditar = () => {
 
   const handleActualizarUsuario = (e) => { 
     e.preventDefault();
-    axios.put('http://localhost:3001/usuarios/' + id, usuario)
+    axios.put('http://localhost:8000/usuarios/' + id, usuario)
       .then(res => {
         console.log("Insercion Exitosa");
         navigate('/Usuario');
@@ -65,7 +65,7 @@ const AdminUsuarioEditar = () => {
             </div>
             <div className="form-group">
               <label>Correo electrónico:</label>
-              <input type="email"  className="in" name="correoelectronico" value={usuario.correoelectronico} onChange={handleUsuario} />
+              <input type="email"  className="in" name="email" value={usuario.email} onChange={handleUsuario} />
             </div>
             <div className="form-group">
               <label>Cédula:</label>

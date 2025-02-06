@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPencilAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPencilAlt, faInfoCircle, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 
 const AdimParqueCrud = () => {
@@ -16,24 +16,42 @@ const AdimParqueCrud = () => {
     { nombre: "Parques" },
     { accion: "Acción" }
   ];
+  const token = localStorage.getItem('token');
+
+  const obtenerHeadersConToken = () => {
+    if (!token) {
+      throw new Error("No se encontró el token de autorización.");
+    }
+    return {
+      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+    };
+  };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/parques") // URL 
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los parques:", error);
-      })
-  }, []);
+    if (token) {  // Verificar si el token existe
+        axios
+            .get("http://localhost:8000/parques", {
+                headers: {
+                    Authorization: `Bearer ${token}`,  // Enviar el token en el encabezado
+                },
+            })
+            .then((response) => {
+                setData(response.data);  // Actualiza el estado con los parques
+            })
+            .catch((error) => {
+                console.error("Error al obtener los parques:", error);
+            });
+    } else {
+        console.error("No se encontró el token de autorización.");
+    }
+}, [token]);
 
 
   const handleEliminar = async (id) => {
     const confirmDelete = window.confirm("¿Estás seguro que deseas borrar este parque?");
     if (confirmDelete) {
       try {
-        await axios.delete("http://localhost:8000/parques/" + id);
+        await axios.delete("http://localhost:8000/parques/" + id,obtenerHeadersConToken);
         const updatedData = data.filter((parque) => parque._id !== id);
         setData(updatedData);
         Swal.fire({
@@ -92,7 +110,7 @@ const AdimParqueCrud = () => {
             ))}
           </tbody>
         </table>
-        <button className="boton-agregar" onClick={() => navigate(`/parques/new`)}>+</button>
+        <button  onClick={() => navigate(`/parques/new`)} className="btnAgregar">  <FontAwesomeIcon icon={faPlus} />+</button>
       </div>
     </div>
   );

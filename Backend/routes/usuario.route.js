@@ -5,7 +5,10 @@ module.exports = function (app) {
     // Rutas públicas
     app.post('/register', UsuarioController.createUser); // Registro de usuarios
     app.post('/login', UsuarioController.loginUser); // Login de usuarios
-
+    app.get("/listausuarios", UsuarioController.obtenerUsuarios);
+    app.get("/usuarios/:id", UsuarioController.getUsuarios);
+    app.put("/usuarios/:id", UsuarioController.updateUsuarios);
+    app.delete("/usuarios/:id", UsuarioController.deleteUsuarios);
     // Rutas protegidas
     app.get('/admin', protect, role('Administrador'), (req, res) => {
         res.json({ message: 'Bienvenido administrador' });
