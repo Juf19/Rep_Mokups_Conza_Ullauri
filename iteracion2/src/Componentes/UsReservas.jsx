@@ -115,7 +115,7 @@ function UsReservas() {
     
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "¡Una vez cancelado no podra revertir la cancelación!",
+            text: "¡Una vez cancelado no podra revertir esto!",
             icon: 'warning',
             showCancelButton: true,
            
