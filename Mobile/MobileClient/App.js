@@ -1,81 +1,45 @@
 import React, { useState, useEffect } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    StatusBar,
-    TextInput,
-    TouchableOpacity,
-    Image,
-    ScrollView
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios'; // Importa Axios
-import { useRouter } from "expo-router";
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ScrollView } from "react-native";
+import axios from "axios";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import EditarParque from "./Componentes/EditarParque";
 
-const App = () => {
+const Stack = createNativeStackNavigator ();
+
+const HomeScreen = ({ navigation }) => {
     const [parques, setParques] = useState([]);
-    const [token, setToken] = useState(null);
-    const router = useRouter();
 
     useEffect(() => {
-        const checkToken = async () => {
-            const storedToken = await AsyncStorage.getItem('token');
-            if (storedToken) {
-                setToken(storedToken);
-                fetchParques(storedToken);
-            } else {
-                // Si no hay token, redirige al login
-                router.replace('/(auth)/login');
-            }
-        };
-
-        checkToken();
+        fetchParques();
     }, []);
 
-    const fetchParques = async (token) => {
+    const fetchParques = async () => {
         try {
-            const response = await axios.get('http://192.168.100.9:8000/parques', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await axios.get("http://172.29.29.226:8000/parques");
             setParques(response.data);
         } catch (error) {
-            console.error('Error al obtener la lista de parques:', error);
-            // Si el token es inválido o ha expirado, redirige al login
-            if (error.response && error.response.status === 401) {
-                await AsyncStorage.removeItem('token');
-                router.replace('/(auth)/login');
-            }
+            console.error("Error al obtener la lista de parques:", error);
         }
-    };
-
-    const handleLogout = async () => {
-        await AsyncStorage.removeItem('token');
-        setToken(null);
-        router.replace('/(auth)/login');
     };
 
     return (
         <View style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>
-                    Bienvenidos al sistema de reserva de canchas
-                </Text>
-                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-                    <Text style={styles.logoutText}>Cerrar Sesión</Text>
-                </TouchableOpacity>
+                <Text style={styles.headerText}>Bienvenidos al sistema de reserva de canchas</Text>
             </View>
 
             <ScrollView contentContainerStyle={styles.parquesContainer}>
                 {parques.length > 0 ? (
                     parques.map((parque, index) => (
                         <View key={index} style={styles.parqueItem}>
-                            <Text style={styles.parqueNombre}>
-                                Nombre: {parque.nombre}
-                            </Text>
-                            {/* Puedes mostrar más detalles del parque aquí */}
+                            <Text style={styles.parqueNombre}>Nombre: {parque.nombre}</Text>
+                            <TouchableOpacity
+                                style={styles.editButton}
+                                onPress={() => navigation.navigate("EditarParque", { id: parque._id })}
+                            >
+                                <Text style={styles.editText}>Editar</Text>
+                            </TouchableOpacity>
                         </View>
                     ))
                 ) : (
@@ -86,37 +50,32 @@ const App = () => {
     );
 };
 
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Lista de Parques" }} />
+                <Stack.Screen name="EditarParque" component={EditarParque} options={{ title: "Editar Parque" }} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     header: {
-        backgroundColor: '#3385ff',
+        backgroundColor: "#3385ff",
         padding: 15,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
+        alignItems: "center",
     },
     headerText: {
-        color: 'white',
+        color: "white",
         fontSize: 18,
-    },
-    logoutButton: {
-        backgroundColor: 'red',
-        padding: 8,
-        borderRadius: 5,
-    },
-    logoutText: {
-        color: 'white',
     },
     parquesContainer: {
         padding: 10,
     },
     parqueItem: {
-        backgroundColor: '#f0f0f0',
+        backgroundColor: "#f0f0f0",
         padding: 15,
         marginBottom: 10,
         borderRadius: 5,
@@ -126,9 +85,18 @@ const styles = StyleSheet.create({
     },
     noParquesText: {
         fontSize: 16,
-        textAlign: 'center',
+        textAlign: "center",
         marginTop: 20,
     },
+    editButton: {
+        backgroundColor: "#3385ff",
+        padding: 10,
+        marginTop: 5,
+        borderRadius: 5,
+        alignItems: "center",
+    },
+    editText: {
+        color: "white",
+        fontWeight: "bold",
+    },
 });
-
-export default App;
