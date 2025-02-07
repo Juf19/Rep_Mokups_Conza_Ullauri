@@ -68,29 +68,41 @@ const AdminCanchaenParque = () => {
 
     // Eliminar una cancha
     const handleEliminar = async (canchaId) => {
-        const confirmDelete = window.confirm("¿Estás seguro que deseas borrar esta cancha?");
-        if (confirmDelete) {
-            try {
-                await axios.delete(`http://localhost:8000/canchas/${canchaId}`, {
-                    headers: obtenerHeadersConToken()  // Usar los encabezados con token
-                });
-                const updatedData = data.filter((cancha) => cancha._id !== canchaId);
-                setData(updatedData);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Cancha eliminada con éxito',
-                });
-            } catch (error) {
-                console.error("Error al eliminar la cancha:", error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'No se pudo eliminar la cancha',
-                });
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "Esta acción eliminará la cancha permanentemente.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await axios.delete(`http://localhost:8000/canchas/${canchaId}`, {
+                        headers: obtenerHeadersConToken()  // Usar los encabezados con token
+                    });
+    
+                    const updatedData = data.filter((cancha) => cancha._id !== canchaId);
+                    setData(updatedData);
+    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Cancha eliminada con éxito',
+                    });
+                } catch (error) {
+                    console.error("Error al eliminar la cancha:", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se pudo eliminar la cancha',
+                    });
+                }
             }
-        }
-    };
+        });
+    }
 
     const item = [
         { nombre: "Canchas" },
