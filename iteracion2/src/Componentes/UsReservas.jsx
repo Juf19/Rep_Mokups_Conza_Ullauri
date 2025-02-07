@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
 
@@ -18,7 +19,8 @@ function UsReservas() {
     const [reservas, setReservas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [actualizar, setActualizar] = useState(false);  // Estado para forzar actualización
+    const [reservaSeleccionada, setReservaSeleccionada] = useState(null); // Para almacenar la reserva seleccionada
+    const [puedeCancelar, setPuedeCancelar] = useState(false); // Estado para determinar si se puede cancelar
 
     // Guardar usuarioId en localStorage si no está almacenado
     useEffect(() => {
@@ -32,7 +34,7 @@ function UsReservas() {
     // Detectar si location.state solicita actualización
     useEffect(() => {
         if (location.state?.actualizarReservas) {
-            setActualizar(true); // Se activa la actualización de reservas
+            setPuedeCancelar(true); // Se activa la actualización de reservas
         }
     }, [location.state?.actualizarReservas]);
 
@@ -98,6 +100,57 @@ function UsReservas() {
         return newDate.toISOString().split('T')[0];
     };
 
+    const handleRowClick = (reserva) => {
+        setReservaSeleccionada(reserva);
+        
+        // Verificar si se puede cancelar la reserva
+        const ahora = new Date();
+        const fechaReserva = new Date(reserva.fecha);
+        const diferenciaEnHoras = (fechaReserva.getTime() - ahora.getTime()) / (1000 * 60 * 60);
+        
+        setPuedeCancelar(diferenciaEnHoras > 24);
+    };
+
+    const handleCancelarReserva = async () => {
+    
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Una vez cancelado no podra revertir la cancelación!",
+            icon: 'warning',
+            showCancelButton: true,
+           
+            confirmButtonText: 'Sí, cancelar reserva!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const token = localStorage.getItem("token");
+                axios.delete(`http://localhost:8000/reservas/${reservaSeleccionada._id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                .then(() => {
+                    Swal.fire(
+                        '¡Cancelada!',
+                        'La reserva ha sido cancelada con éxito.',
+                        'success'
+                    );
+                    setReservas(reservas.filter(reserva => reserva._id !== reservaSeleccionada._id));
+                    setReservaSeleccionada(null); // Limpiar la selección después de cancelar
+                    setPuedeCancelar(false); // Ocultar el botón después de cancelar
+                })
+                .catch((error) => {
+                    console.error("Error al cancelar la reserva:", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: 'Hubo un error al cancelar la reserva.',
+                    });
+                });
+            }
+        });
+    };
+
     return (
         <div className="App">
             <ItemHeader />
@@ -119,7 +172,14 @@ function UsReservas() {
                         </thead>
                         <tbody>
                             {reservas.map((reserva, index) => (
-                                <tr key={index}>
+                                <tr
+                                    key={index}
+                                    onClick={() => handleRowClick(reserva)}
+                                    style={{ 
+                                        cursor: 'pointer',
+                                        backgroundColor: reservaSeleccionada?._id === reserva._id ? 'lightblue' : 'white' 
+                                    }}
+                                >
                                     <td>{formatDate(reserva.fecha)}</td>
                                     <td>{reserva.parqueId ? reserva.parqueId.nombre : "Desconocido"}</td>
                                     <td>{reserva.canchaId ? reserva.canchaId.nombre : "Desconocido"}</td>
@@ -139,12 +199,14 @@ function UsReservas() {
                         Reservar
                     </button>
                 </div>
-                <div className='derecha'>
-                    <button className='rojo'>Cancelar</button>
-                </div>
+                {puedeCancelar && (
+                    <div className='derecha'>
+                        <button className='rojo' onClick={handleCancelarReserva}>Cancelar Reserva</button>
+                    </div>
+                )}
             </div>
         </div>
     );
 }
 
-export default UsReservas;
+export default UsReservas

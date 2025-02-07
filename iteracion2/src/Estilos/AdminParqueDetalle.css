@@ -1,3 +1,35 @@
 .perfil-dato{
     color: black;
 }
+.detalle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Espaciado entre la imagen y el formulario */
+    padding: 20px;
+    flex-wrap: wrap; /* Permite que los elementos se acomoden en pantallas pequeñas */
+  }
+  
+  .parque-image {
+    flex: 1.5; /* Le damos más espacio a la imagen */
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  
+  .form-container {
+    flex: 1;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .img-parque{
+    
+    width: 300px;
+    height: 200px;
+ 
+    background-color: #e0e0e0;
+
+  }
+  

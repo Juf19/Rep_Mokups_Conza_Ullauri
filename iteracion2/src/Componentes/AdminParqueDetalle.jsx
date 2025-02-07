@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import ItemHeaderA from './ItemHeaderA';
 import ItemBajoHeader from './ItemBajoHeader';
-import axios from 'axios';
 import "../Estilos/AdminParqueDetalle.css";
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 
 const AdminParqueDetalle = () => {
   const { id } = useParams();
@@ -14,8 +13,8 @@ const AdminParqueDetalle = () => {
     descripcion: '',
     url: ''
   });
-  
-  const token = localStorage.getItem('token');  // Obtener token desde el localStorage
+
+  const token = localStorage.getItem('token');  
 
   // Obtener encabezados con el token
   const obtenerHeadersConToken = () => {
@@ -23,15 +22,15 @@ const AdminParqueDetalle = () => {
       throw new Error("No se encontró el token de autorización.");
     }
     return {
-      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+      Authorization: `Bearer ${token}`  
     };
   };
 
   useEffect(() => {
-    if (token) {  // Verificar si el token existe
+    if (token) {  
       axios
         .get(`http://localhost:8000/parques/${id}`, {
-          headers: obtenerHeadersConToken()  // Usar los encabezados con token
+          headers: obtenerHeadersConToken()  
         })
         .then((response) => {
           setParques(response.data);
@@ -46,33 +45,41 @@ const AdminParqueDetalle = () => {
 
   return (
     <div>
-      <ItemHeaderA></ItemHeaderA>
-      <ItemBajoHeader></ItemBajoHeader>
-      <h3>Detalle Parque</h3>
-      <form>
-    <div className="parque-informacion">
-    
-      <div className="perfil-item">
-        <label>Nombre</label>
-        <input type="text" name="nombre" className="perfil-dato" value={parques.nombre} disabled={true} />
+      <ItemHeaderA />
+      <ItemBajoHeader />
+      <h1 id="titulos">Detalle del Parque</h1>
+      <div className="form-container">
+        {/* Imagen del parque */}
+        <div className="parque-image">
+          <img
+            src={parques.url} 
+            alt="Imagen del Parque"
+            className="img-parque"
+          />
+        </div>
+        <form className="form">
+         
+          <div className="datos">
+            <div className="form-group">
+              <label>Nombre:</label>
+              <input type="text" name="nombre" className="in" value={parques.nombre} readOnly />
+            </div>
+            <div className="form-group">
+              <label>Descripción:</label>
+              <input type="text" name="descripcion" className="in" value={parques.descripcion} readOnly />
+            </div>
+            <div className="form-group">
+              <label>URL de la Imagen:</label>
+              <input type="text" name='url' className="in" value={parques.url} readOnly />
+            </div>
+            <button className="btn-save" onClick={() => navigate('/Parque')} type="button">
+              Aceptar
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="perfil-item">
-        <label>Descripcion</label>
-        <input type="text" name="descripcion" className="perfil-dato" value={parques.descripcion} disabled={true}/>
-      </div>
-      <div className="perfil-item">
-        <label>URL</label>
-        <input type="text" name='url' className="perfil-dato" value={parques.url} disabled={true}/>
-      </div>
-      <div className="parte-btn">
-        <button className="btn-save"onClick={() => navigate(`/Parque`)} >Aceptar</button>
-      </div>
-    
-    </div>
-    </form>
     </div>
   );
 };
 
 export default AdminParqueDetalle;
-

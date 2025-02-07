@@ -89,6 +89,12 @@
     
   }
 
+  .in1{
+    width: 600px;
+    border-radius: 20px;
+    position: relative;
+    left: 200px 
+  }
   .datos{
     margin-left: 1000px;
   }
