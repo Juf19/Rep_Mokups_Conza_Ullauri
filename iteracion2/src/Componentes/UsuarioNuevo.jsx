@@ -54,7 +54,8 @@ const UsuarioNuevo = (props) => {
       .post('http://localhost:8000/register', datosFormUsuario)
       .then((res) => {
         console.log("Inserción Exitosa", res.data);
-        navigate("http://localhost:3000/Usuario");
+        navigate("/Usuario");
+
       })
       .catch((err) => {
         console.log("Inserción Fallida", err.response.data);

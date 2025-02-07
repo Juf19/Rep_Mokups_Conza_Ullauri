@@ -47,28 +47,38 @@ const AdimParqueCrud = () => {
 }, [token]);
 
 
-  const handleEliminar = async (id) => {
-    const confirmDelete = window.confirm("¿Estás seguro que deseas borrar este parque?");
-    if (confirmDelete) {
+const handleEliminar = async (id) => {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'Esta acción eliminará el parque permanentemente.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }).then(async (result) => {
+    if (result.isConfirmed) {
       try {
-        await axios.delete("http://localhost:8000/parques/" + id,obtenerHeadersConToken);
+        await axios.delete(`http://localhost:8000/parques/${id}`, { headers: obtenerHeadersConToken() });
         const updatedData = data.filter((parque) => parque._id !== id);
         setData(updatedData);
         Swal.fire({
           icon: 'success',
-          title: 'Éxito',
-          text: 'Parque eliminado con exito',
+          title: 'Eliminado',
+          text: 'El parque ha sido eliminado correctamente.',
         });
       } catch (error) {
         console.error("Error al eliminar el parque:", error);
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'No se pudo eliminar el parque',
+          text: 'No se pudo eliminar el parque.',
         });
       }
     }
-  };
+  });
+};
+
 
   return (
     <div>
