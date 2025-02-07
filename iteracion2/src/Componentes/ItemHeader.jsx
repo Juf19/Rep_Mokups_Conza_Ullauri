@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const ItemHeader = ({ setSearchQuery }) => {
   const navigate = useNavigate();
+  const location = useLocation(); // Asegúrate de importar useLocation
   const [searchInput, setSearchInput] = useState('');
 
+  const isSearchablePage = location.pathname === '/ListaParques';
   // Manejar cambios en el input y actualizar el estado en ListaParques
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchInput(value);
-    setSearchQuery(value); // Filtrar en tiempo real
+
+    // Solo actualizar searchQuery si estamos en la página de ListaParques
+    if (isSearchablePage) {
+      setSearchQuery(value); // Filtrar en tiempo real
+    }
   };
 
   return (

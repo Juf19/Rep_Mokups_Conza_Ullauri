@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.get('/reservas', ReservaController.obtenerReservas);
 
     // Ruta para obtener una reserva por ID
-    app.get('/reservas/:id', ReservaController.obtenerReservaPorId);
+    app.get('/reservas/:id',protect, ReservaController.obtenerReservaPorId);
 
     // Ruta para agregar una nueva reserva
     app.post('/reservas', protect,ReservaController.agregarReserva);

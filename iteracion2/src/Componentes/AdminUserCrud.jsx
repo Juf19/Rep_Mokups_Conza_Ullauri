@@ -65,9 +65,6 @@ const AdimUserCrud = () => {
         await axios.delete("http://localhost:8000/usuarios/" + id, obtenerHeadersConToken);
         const updatedData = data.filter((usuario) => usuario.id !== id);
         setData(updatedData);
-
-
-
         // Mostrar mensaje de éxito
         Swal.fire({
           icon: 'success',

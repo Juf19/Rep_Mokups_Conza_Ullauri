@@ -1,46 +1,40 @@
-import React from 'react';
-import ItemHeaderA from './ItemHeaderA';
-import ItemBajoHeader from './ItemBajoHeader';
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import ItemHeaderA from "./ItemHeaderA";
+import ItemBajoHeader from "./ItemBajoHeader";
+import { useNavigate, useParams } from "react-router-dom";
 import "../Estilos/ActualizarParque.css";
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 
 const ActualizarParque = () => {
   const { id } = useParams();
-  console.log("ID recuperado de useParams:", id); // Agrega esto para depurar
   const navigate = useNavigate();
-  const [parques, setParques] = useState({
-    _id: '',
-    nombre: '',
-    descripcion: '',
-    url: ''
+  const [parque, setParque] = useState({
+    _id: "",
+    nombre: "",
+    descripcion: "",
+    url: ""
   });
-  
-  const token = localStorage.getItem('token');  // Obtener token desde el localStorage
 
-  // Obtener encabezados con el token
+  const token = localStorage.getItem('token');
+
   const obtenerHeadersConToken = () => {
     if (!token) {
       throw new Error("No se encontró el token de autorización.");
     }
-    return {
-      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
-    };
+    return { Authorization: `Bearer ${token}` };
   };
 
   useEffect(() => {
-    if (token) {  // Verificar si el token existe
-      axios
-        .get(`http://localhost:8000/parques/${id}`, {
-          headers: obtenerHeadersConToken()  // Usar los encabezados con token
-        })
-        .then((response) => {
-          setParques(response.data);
-        })
-        .catch((error) => {
-          console.error("Error al obtener los parques:", error);
-        });
+    if (token) {
+      axios.get(`http://localhost:8000/parques/${id}`, {
+        headers: obtenerHeadersConToken()
+      })
+      .then((response) => {
+        setParque(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos del parque:", error);
+      });
     } else {
       console.error("No se encontró el token de autorización.");
     }
@@ -48,8 +42,8 @@ const ActualizarParque = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setParques(prevParques => ({
-      ...prevParques,
+    setParque((prevParque) => ({
+      ...prevParque,
       [name]: value
     }));
   };
@@ -57,16 +51,16 @@ const ActualizarParque = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (token) {
-      axios.put(`http://localhost:8000/parques/${id}`, parques, {
-        headers: obtenerHeadersConToken()  // Usar los encabezados con token
+      axios.put(`http://localhost:8000/parques/${id}`, parque, {
+        headers: obtenerHeadersConToken()
       })
-        .then(response => {
-          console.log('Parque actualizado:', response.data);
-          navigate(`/Parque`);
-        })
-        .catch(error => {
-          console.error('Error al actualizar el Parque:', error);
-        });
+      .then(() => {
+        console.log('Parque actualizado exitosamente');
+        navigate(`/Parque`);
+      })
+      .catch((error) => {
+        console.error('Error al actualizar el parque:', error);
+      });
     } else {
       console.error("No se encontró el token de autorización.");
     }
@@ -74,30 +68,34 @@ const ActualizarParque = () => {
 
   return (
     <div>
-      <ItemHeaderA></ItemHeaderA>
-      <ItemBajoHeader></ItemBajoHeader>
-      <h3>Editar Parque</h3>
-      <form onSubmit={handleSubmit}>
-    <div className="parque-informacion">
-    
-      <div className="perfil-item">
-        <label>Nombre</label>
-        <input type="text" name="nombre" className="perfil-dato1" value={parques.nombre} onChange={handleChange} />
+      <ItemHeaderA />
+      <ItemBajoHeader />
+      <div className="form-container">
+      <img
+            src={parque.url} 
+            alt="Imagen del Parque"
+            className="imagen-parque1"
+          />
+        </div>
+      <div className="parque-image">
+        <form onSubmit={handleSubmit} className="form">
+          <div className="datos">
+            <div className="form-group">
+              <label>Nombre:</label>
+              <input type="text" className="in1" name="nombre" value={parque.nombre} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label>Descripción:</label>
+              <input type="text" className="in1" name="descripcion" value={parque.descripcion} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label>URL de imagen:</label>
+              <input type="text" className="in1" name="url" value={parque.url} onChange={handleChange} />
+            </div>
+            <button type="submit" className="btn-save">Guardar</button>
+          </div>
+        </form>
       </div>
-      <div className="perfil-item">
-        <label>Descripcion</label>
-        <input type="text" name="descripcion" className="perfil-dato1" value={parques.descripcion} onChange={handleChange}/>
-      </div>
-      <div className="perfil-item">
-        <label>URL</label>
-        <input type="text" name='url' className="perfil-dato1" value={parques.url} onChange={handleChange}/>
-      </div>
-      <div className="parte-btn">
-      <button type="submit" className="btn-save">Guardar</button>
-      </div>
-    
-    </div>
-    </form>
     </div>
   );
 };

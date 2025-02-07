@@ -312,12 +312,22 @@ body {
   margin: 20px 0;
 }
 
-.imagen-parque {
+.imagen-parque1 {
   width: 100%;
   max-width: 350px;
   max-height: 400px;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.imagen-parque1 {
+  width: 100%;
+  max-width: 350px;
+  max-height: 400px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  position: relative;
+  left: 500px;
 }
 
 .boton-cargar {
