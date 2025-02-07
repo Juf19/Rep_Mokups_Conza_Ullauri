@@ -1,0 +1,98 @@
+/* AdminActualizarCancha.css */
+
+/* Estilos generales */
+.admin-actualizar-cancha {
+    font-family: sans-serif;
+  }
+  
+  .admin-actualizar-cancha-container {
+    margin-top: 20px;
+  }
+  
+  .admin-actualizar-cancha-title {
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Estilos para el formulario */
+  .admin-actualizar-cancha-form {
+    margin-top: 20px;
+  }
+  
+  .admin-actualizar-cancha-textfield,
+  .admin-actualizar-cancha-select {
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos para los botones */
+  .admin-actualizar-cancha-button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .admin-actualizar-cancha-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para la lista de horarios */
+  .admin-actualizar-cancha-subtitle {
+    margin-top: 15px;
+    color: #555;
+  }
+  
+  .admin-actualizar-cancha-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .admin-actualizar-cancha-list-item {
+    margin-bottom: 5px;
+    color: #777;
+  }
+  
+  /* Estilos para los días de la semana */
+  .admin-actualizar-cancha-formcontrollabel {
+    margin-right: 15px;
+  }
+  
+  /* Estilos específicos para el botón de guardar */
+  .admin-actualizar-cancha-button-save {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .admin-actualizar-cancha-button-save:hover {
+    background-color: #1e7e34;
+  }
+  
+  /* Estilos para el modal */
+  .admin-actualizar-cancha-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .admin-actualizar-cancha-modal-content {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 400px;
+    border-radius: 5px;
+  }
+  
+  .admin-actualizar-cancha-modal-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .admin-actualizar-cancha-modal-button-save {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .admin-actualizar-cancha-modal-button-close {
+    background-color: #dc3545;
+    color: white;
+  }
+  

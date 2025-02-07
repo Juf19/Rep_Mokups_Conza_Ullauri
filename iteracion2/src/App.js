@@ -20,6 +20,7 @@ import "./Estilos/UsDisponibilidadH.css";
 import "./Estilos/UsPerfil.css";
 import "./Estilos/UsReservarCancha.css";
 import "./Estilos/UsReservas.css";
+import "./Estilos/AdminActualizarCancha.css";
 
 
 import AdminCancha from './Componentes/AdminCancha';
@@ -54,6 +55,7 @@ import AdminAddCancha from './Componentes/AdminAddCancha';
 import AdminCanchaDetalle from './Componentes/AdminCanchaDetalle';
 import MapContainer from './Componentes/MapContainer';
 import MapComponent from './Componentes/MapComponent';
+
 
 
 

@@ -2,62 +2,62 @@ import React, { useState, useEffect } from 'react';
 import ItemHeaderA from './ItemHeaderA';
 import ItemBajoHeader from './ItemBajoHeader';
 import axios from 'axios';
-import "../Estilos/ActualizarParque.css";
 import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Typography, Grid, TextField, Select, MenuItem, Button, FormControlLabel, Checkbox, Box, Modal } from '@mui/material';
+
 
 const AdminActualizarCancha = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const [canchas, setCanchas] = useState({
     id: '',
     nombre: '',
     descripcion: '',
     tipo: '',
-    horarios: [], // Asegurarse de que sea un arreglo vacío
+    horarios: [],
     dias: [],
     idParque: ''
   });
 
-  // Estado para controlar el modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedHorarios, setSelectedHorarios] = useState([]);
-  
   const token = localStorage.getItem('token');
 
-  // Obtener encabezados con el token
   const obtenerHeadersConToken = () => {
     if (!token) {
       throw new Error("No se encontró el token de autorización.");
     }
     return {
-      Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
+      Authorization: `Bearer ${token}`
     };
   };
 
-  // Obtener detalles de la cancha específica
   useEffect(() => {
-    if (token) {  // Verificar si el token existe
-      axios
-        .get(`http://localhost:8000/canchas/${id}`, {
-          headers: obtenerHeadersConToken()  // Usar la función para los encabezados
-        })
-        .then((response) => {
-          const canchasData = response.data;
-          
-          // Asegurarse de que los horarios estén en formato de arreglo
-          const horarios = Array.isArray(canchasData.horarios) 
-            ? canchasData.horarios
-            : canchasData.horarios.split(',');  // Si es una cadena, convertirlo a un arreglo
-          
-          setCanchas({ ...canchasData, horarios }); // Actualizamos canchas con los horarios correctos
-        })
-        .catch((error) => {
-          console.error("Error al obtener las canchas:", error);
+    const fetchCancha = async () => {
+      try {
+        if (!token) {
+          console.error("No se encontró el token de autorización.");
+          return;
+        }
+
+        const response = await axios.get(`http://localhost:8000/canchas/${id}`, {
+          headers: obtenerHeadersConToken()
         });
-    } else {
-      console.error("No se encontró el token de autorización.");
-    }
+
+        const canchasData = response.data;
+
+        const horarios = Array.isArray(canchasData.horarios)
+          ? canchasData.horarios
+          : canchasData.horarios.split(',');
+
+        setCanchas({ ...canchasData, horarios });
+      } catch (error) {
+        console.error("Error al obtener las canchas:", error);
+      }
+    };
+
+    fetchCancha();
   }, [id, token]);
 
   const handleChange = (e) => {
@@ -78,32 +78,28 @@ const AdminActualizarCancha = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:8000/canchas/${id}`, canchas, {
-      headers: obtenerHeadersConToken()  // Usar los encabezados con token
-    })
-      .then(response => {
-        console.log('Cancha actualizada:', response.data);
-        navigate(`/Parque/${canchas.idParque}/canchas`);
-      })
-      .catch(error => {
-        console.error('Error al actualizar la cancha:', error);
+    try {
+      await axios.put(`http://localhost:8000/canchas/${id}`, canchas, {
+        headers: obtenerHeadersConToken()
       });
+      console.log('Cancha actualizada:', canchas);
+      navigate(`/Parque/${canchas.idParque}/canchas`);
+    } catch (error) {
+      console.error('Error al actualizar la cancha:', error);
+    }
   };
 
-  // Abrir el modal
   const openModal = () => {
-    setSelectedHorarios(canchas.horarios); // Cargar los horarios actuales
+    setSelectedHorarios(canchas.horarios);
     setIsModalOpen(true);
   };
 
-  // Cerrar el modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  // Manejar la selección de horarios
   const handleHorarioSelection = (horario) => {
     setSelectedHorarios(prevSelected => {
       if (prevSelected.includes(horario)) {
@@ -114,7 +110,6 @@ const AdminActualizarCancha = () => {
     });
   };
 
-  // Guardar los horarios seleccionados
   const saveHorarios = () => {
     setCanchas(prevCanchas => ({
       ...prevCanchas,
@@ -123,93 +118,137 @@ const AdminActualizarCancha = () => {
     closeModal();
   };
 
+  const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+  const horariosDisponibles = Array.from({ length: 14 }, (_, i) => `${7 + i}:00-${8 + i}:00`);
+
   return (
-    <div>
+    <div className="admin-actualizar-cancha"> {/*  Clase contenedora principal */}
       <ItemHeaderA />
       <ItemBajoHeader />
-      <h3>Editar Cancha</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="parque-informacion">
-          <div className="perfil-item">
-            <label>Nombre</label>
-            <input type="text" name="nombre" className="perfil-dato" value={canchas.nombre} onChange={handleChange} />
-          </div>
-          <div className="perfil-item">
-            <label>Descripcion</label>
-            <input type="text" name="descripcion" className="perfil-dato" value={canchas.descripcion} onChange={handleChange} />
-          </div>
-          <div className="perfil-item">
-            <label>Tipo de Cancha</label>
-            <select name="tipo" className="perfil-dato" value={canchas.tipo} onChange={handleChange}>
-              <option value="Futbol">Fútbol</option>
-              <option value="Basquet">Básquet</option>
-              <option value="Tenis">Tenis</option>
-            </select>
-          </div>
-          <div className="perfil-item">
-            <label>Horarios</label>
-            <button type="button" onClick={openModal} className="btn-open-modal">
-              Editar Horarios
-            </button>
-            <div>
-              {Array.isArray(canchas.horarios) && canchas.horarios.length > 0 ? (
-                <ul>
-                  {canchas.horarios.map((hora, index) => (
-                    <li key={index}>{hora}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No hay horarios seleccionados.</p>
-              )}
-            </div>
-          </div>
-          <div className="perfil-item">
-            <label>Días Disponibles</label>
-            <div className="dias-container">
-              {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].map(dia => (
-                <div key={dia} className="dia-item">
-                  <input
-                    type="checkbox"
-                    value={dia}
-                    checked={canchas.dias.includes(dia)}
-                    onChange={handleCheckboxChange}
+      <Container maxWidth="md" className="admin-actualizar-cancha-container">
+        <Typography variant="h4" component="h3" gutterBottom className="admin-actualizar-cancha-title">
+          Editar Cancha
+        </Typography>
+        <form onSubmit={handleSubmit} className="admin-actualizar-cancha-form">
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Nombre"
+                name="nombre"
+                value={canchas.nombre}
+                onChange={handleChange}
+                variant="outlined"
+                className="admin-actualizar-cancha-textfield"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Descripción"
+                name="descripcion"
+                value={canchas.descripcion}
+                onChange={handleChange}
+                variant="outlined"
+                className="admin-actualizar-cancha-textfield"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Select
+                fullWidth
+                label="Tipo de Cancha"
+                name="tipo"
+                value={canchas.tipo}
+                onChange={handleChange}
+                variant="outlined"
+                className="admin-actualizar-cancha-select"
+              >
+                <MenuItem value="Futbol">Fútbol</MenuItem>
+                <MenuItem value="Basquet">Básquet</MenuItem>
+                <MenuItem value="Tenis">Tenis</MenuItem>
+              </Select>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Box mt={2}>
+                <Button variant="contained" color="primary" onClick={openModal} className="admin-actualizar-cancha-button">
+                  Editar Horarios
+                </Button>
+                <Typography variant="subtitle1" mt={1} className="admin-actualizar-cancha-subtitle">
+                  Horarios Seleccionados:
+                </Typography>
+                {Array.isArray(canchas.horarios) && canchas.horarios.length > 0 ? (
+                  <ul className="admin-actualizar-cancha-list">
+                    {canchas.horarios.map((hora, index) => (
+                      <li key={index} className="admin-actualizar-cancha-list-item">{hora}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <Typography variant="body2">No hay horarios seleccionados.</Typography>
+                )}
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" className="admin-actualizar-cancha-subtitle">Días Disponibles:</Typography>
+              <Box display="flex" flexWrap="wrap">
+                {diasSemana.map(dia => (
+                  <FormControlLabel
+                    key={dia}
+                    control={
+                      <Checkbox
+                        value={dia}
+                        checked={canchas.dias.includes(dia)}
+                        onChange={handleCheckboxChange}
+                        name={dia}
+                      />
+                    }
+                    label={dia}
+                    className="admin-actualizar-cancha-formcontrollabel"
                   />
-                  <label>{dia}</label>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="parte-btn">
-            <button type="submit" className="btn-save">Guardar</button>
-          </div>
-        </div>
-      </form>
+                ))}
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="center" mt={3}>
+                <Button variant="contained" color="success" type="submit" className="admin-actualizar-cancha-button-save">
+                  Guardar
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </form>
 
-      {/* Modal para horarios */}
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h4>Selecciona los horarios</h4>
-            <div className="horarios-list">
-              {Array.from({ length: 14 }, (_, i) => (
-                <div key={i} className="horario-item">
-                  <input
-                    type="checkbox"
-                    value={`${7 + i}:00-${8 + i}:00`}
-                    checked={selectedHorarios.includes(`${7 + i}:00-${8 + i}:00`)}
-                    onChange={() => handleHorarioSelection(`${7 + i}:00-${8 + i}:00`)}
-                  />
-                  <label>{`${7 + i}:00-${8 + i}:00`}</label>
-                </div>
+        {/* Modal para horarios */}
+        <Modal open={isModalOpen} onClose={closeModal} className="admin-actualizar-cancha-modal">
+          <Box className="admin-actualizar-cancha-modal-content">
+            <Typography variant="h6" component="h4" gutterBottom className="admin-actualizar-cancha-modal-title">
+              Selecciona los horarios
+            </Typography>
+            <Box display="flex" flexDirection="column">
+              {horariosDisponibles.map(horario => (
+                <FormControlLabel
+                  key={horario}
+                  control={
+                    <Checkbox
+                      value={horario}
+                      checked={selectedHorarios.includes(horario)}
+                      onChange={() => handleHorarioSelection(horario)}
+                    />
+                  }
+                  label={horario}
+                />
               ))}
-            </div>
-            <div className="modal-buttons">
-              <button onClick={saveHorarios} className="btn-save">Guardar</button>
-              <button onClick={closeModal} className="btn-cancel">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      )}
+            </Box>
+            <Box mt={2} display="flex" justifyContent="space-around">
+              <Button variant="contained" color="success" onClick={saveHorarios} className="admin-actualizar-cancha-modal-button-save">
+                Guardar
+              </Button>
+              <Button variant="contained" color="error" onClick={closeModal} className="admin-actualizar-cancha-modal-button-close">
+                Cerrar
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+      </Container>
     </div>
   );
 };
