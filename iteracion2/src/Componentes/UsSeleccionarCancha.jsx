@@ -1,35 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { GoogleMap, LoadScript, OverlayView } from '@react-google-maps/api';
 import ItemHeader from './ItemHeader';
 import ItemBajoHeader from './ItemBajoHeader';
-import MapContainer from './MapContainer';
 import axios from 'axios';
 
 const UsSeleccionarCancha = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { parque, usuarioId } = location.state || {}; // Recibir usuarioId
-    console.log("UsuarioId:", usuarioId);
-
+    const { parque, usuarioId } = location.state || {};
     const [canchas, setCanchas] = useState([]);
     const [loading, setLoading] = useState(true);
-    const token = localStorage.getItem('token'); // Obtener el token desde el localStorage
+    const mapRef = useRef(null);
+    const markersRef = useRef([]);
+    const token = localStorage.getItem('token');
 
-    // Obtener encabezados con el token
     const obtenerHeadersConToken = () => {
-        if (!token) {
-            throw new Error("No se encontró el token de autorización.");
-        }
-        return {
-            Authorization: `Bearer ${token}`  // Retornar el encabezado con el token
-        };
+        if (!token) throw new Error("No se encontró el token de autorización.");
+        return { Authorization: `Bearer ${token}` };
     };
 
     useEffect(() => {
         const fetchCanchas = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/canchas', {
-                    headers: obtenerHeadersConToken() // Usar los encabezados con el token
+                    headers: obtenerHeadersConToken()
                 });
                 const canchasFiltradas = response.data.filter(
                     cancha => String(cancha.idParque).trim() === String(parque._id).trim()
@@ -42,16 +37,35 @@ const UsSeleccionarCancha = () => {
             }
         };
 
-        if (parque) {
-            fetchCanchas();
-        }
+        if (parque) fetchCanchas();
     }, [parque, token]);
 
-    const ubicaciones = {
-        "C-F1": { top: "30%", left: "53%" },
-        "C-F2": { top: "25%", left: "47%" },
-        "C-F3": { top: "55%", left: "50%" },
-        "C-B1": { top: "60%", left: "35%" },
+    const handleMapLoad = (map) => {
+        mapRef.current = map;
+        agregarMarcadores();
+    };
+
+    const agregarMarcadores = () => {
+        if (!mapRef.current || !window.google) return;
+
+        markersRef.current.forEach(marker => marker.setMap(null));
+        markersRef.current = [];
+
+        canchas.forEach(cancha => {
+            const lat = parseFloat(cancha.latitud);
+            const lng = parseFloat(cancha.longitud);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                const marker = new window.google.maps.Marker({
+                    position: { lat, lng },
+                    map: mapRef.current,
+                    title: cancha.nombre,
+                });
+                marker.addListener('click', () => {
+                    navigate('/reserva', { state: { parque, cancha, usuarioId } });
+                });
+                markersRef.current.push(marker);
+            }
+        });
     };
 
     return (
@@ -59,28 +73,52 @@ const UsSeleccionarCancha = () => {
             <ItemHeader />
             <ItemBajoHeader nombre={parque?.nombre || 'Parque no especificado'} />
             <div className="app-container">
-                <MapContainer />
-                {loading ? (
-                    <p>Cargando canchas...</p>
-                ) : (
-                    canchas.map((cancha) => (
-                        <button
-                            key={cancha._id}
-                            className="cancha"
-                            style={ubicaciones[cancha.nombre] || {}}
-                            onClick={() =>
-                                navigate('/reserva', { state: { parque, cancha, usuarioId } }) // Pasamos usuarioId
-                            }
-                        >
-                            {cancha.nombre} {cancha.tipo === "Futbol" ? "⚽" : "🏀"}
-                        </button>
-                    ))
-                )}
+                <LoadScript googleMapsApiKey="AIzaSyDcw4n3APLA58T-j2C_l6g5qhKtK_hpNss">
+                    <GoogleMap
+                        mapContainerStyle={{ width: '100%', height: '730px' }}
+                        center={{ lat: -0.178880, lng: -78.482560 }}
+                        zoom={18}
+                        onLoad={handleMapLoad}
+                    >
+                        {!loading &&
+                            canchas.map((cancha) => {
+                                const lat = parseFloat(cancha.latitud);
+                                const lng = parseFloat(cancha.longitud);
+                                if (isNaN(lat) || isNaN(lng)) return null;
+
+                                return (
+                                    <OverlayView
+                                        key={cancha._id}
+                                        position={{ lat, lng }}
+                                        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                                    >
+                                        <button
+                                            className="cancha"
+                                            style={{
+                                                backgroundColor: 'rgba(0, 0, 0, 0.7)', // Negro con transparencia
+                                                color: 'white',
+                                                border: 'none',
+                                                padding: '8px 12px',
+                                                cursor: 'pointer',
+                                                borderRadius: '5px',
+                                                position: 'absolute',
+                                                transform: 'translate(-50%, -50%)',
+                                                fontWeight: 'bold'
+                                            }}
+                                            onClick={() => navigate('/reserva', { state: { parque, cancha, usuarioId } })}
+                                        >
+                                            {cancha.nombre} {cancha.tipo === "Futbol" ? "⚽" : "🏀"}
+                                        </button>
+                                    </OverlayView>
+                                );
+                            })}
+                    </GoogleMap>
+                </LoadScript>
             </div>
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <button
                     className="boton-disponibilidad"
-                    onClick={() => navigate('/Disponibilidad', { state: { parque, usuarioId } })} // Pasamos usuarioId
+                    onClick={() => navigate('/Disponibilidad', { state: { parque, usuarioId } })}
                 >
                     Disponibilidad
                 </button>

@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 const AdminActualizarCancha = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+  const url= '/Parque/:id/canchas/:id/actualizar'
   const [canchas, setCanchas] = useState({
     id: '',
     nombre: '',
@@ -129,6 +129,34 @@ const AdminActualizarCancha = () => {
       <ItemBajoHeader />
       <h3>Editar Cancha</h3>
       <form onSubmit={handleSubmit}>
+        {/* Campo Ubicación */}
+        <div className="perfil-item mb-4">
+            <label htmlFor="latitud" className="form-label">Latitud</label>
+            <input
+              type="text"
+              id="latitud"
+              name="latitud"
+              className="form-control"
+              placeholder="Selecione en el mapa"
+              value={canchas.latitud}
+              onChange={handleChange}
+              required
+            />
+
+            <button disabled={true} className='f' onClick={() => navigate('/cancha/mapa', { state: { id } })}>Selecionar en mapa</button>
+
+            <label htmlFor="longitud" className="form-label">Longitud</label>
+            <input
+              type="text"
+              id="longitud"
+              name="longitud"
+              className="form-control"
+              placeholder="Selecione en el mapa"
+              value={canchas.longitud}
+              onChange={handleChange}
+              required
+            />
+          </div>
         <div className="parque-informacion">
           <div className="perfil-item">
             <label>Nombre</label>

@@ -14,7 +14,7 @@ const AdminAddCancha = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const {lat, lng, id} = location.state || {}; // Recibir 
+  const { lat, lng, id } = location.state || {}; // Recibir 
   console.log("Latitud:", lat);
   console.log("Longitud:", lng);
   console.log("ID del parque actual:", id);
@@ -33,7 +33,7 @@ const AdminAddCancha = () => {
   // Estado para controlar el modal de horarios
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedHorarios, setSelectedHorarios] = useState([]);
- 
+
   // Manejar cambios en los inputs
   const handleAddCancha = (e) => {
     const { name, value } = e.target;
@@ -142,146 +142,147 @@ const AdminAddCancha = () => {
 
   return (
     <div>
-  <ItemHeaderA />
-  <ItemBajoHeader />
-  <h3 className="mb-4">Agregar Cancha</h3>
-  <form onSubmit={handleSubmit}>
-    {/* Campo Ubicación */}
-    <div className="parque-informacion">
-    <div className="perfil-item mb-4">
-        <label htmlFor="latitud" className="form-label">Latitud</label>
-        <input
-        disabled={true}
-          type="text"
-          id="latitud"
-          name="latitud"
-          className="form-control"
-          placeholder="Selecione en el mapa"
-          value={nuevaCancha.latitud}
-          onChange={handleAddCancha}
-          required
-        />
+      <ItemHeaderA />
+      <ItemBajoHeader />
+      <h3 className="mb-4">Agregar Cancha</h3>
+      <form onSubmit={handleSubmit}>
+        
+        <div className="parque-informacion">
+          {/* Campo Ubicación */}
+          <div className="perfil-item mb-4">
+            <label htmlFor="latitud" className="form-label">Latitud</label>
+            <input
+              disabled={true}
+              type="text"
+              id="latitud"
+              name="latitud"
+              className="form-control"
+              placeholder="Selecione en el mapa"
+              value={nuevaCancha.latitud}
+              onChange={handleAddCancha}
+              required
+            />
 
-        <button className='f' onClick={ () => navigate('/cancha/mapa', { state: { id } })}>Selecionar en mapa</button>
+            <button className='f' onClick={() => navigate('/cancha/mapa', { state: { id } })}>Selecionar en mapa</button>
 
-        <label htmlFor="longitud" className="form-label">Longitud</label>
-        <input
-        disabled={true}
-          type="text"
-          id="longitud"
-          name="longitud"
-          className="form-control"
-          placeholder="Selecione en el mapa"
-          value={nuevaCancha.longitud}
-          onChange={handleAddCancha}
-          required
-        />
-      </div> 
-      {/* Campo Nombre */}
-      <div className="perfil-item mb-4">
-        <label htmlFor="nombre" className="form-label">Nombre</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          className="form-control form-control-lg"
-          placeholder="Ingrese su nombre"
-          value={nuevaCancha.nombre}
-          onChange={handleAddCancha}
-          required
-        />
-      </div>
+            <label htmlFor="longitud" className="form-label">Longitud</label>
+            <input
+              disabled={true}
+              type="text"
+              id="longitud"
+              name="longitud"
+              className="form-control"
+              placeholder="Selecione en el mapa"
+              value={nuevaCancha.longitud}
+              onChange={handleAddCancha}
+              required
+            />
+          </div>
+          {/* Campo Nombre */}
+          <div className="perfil-item mb-4">
+            <label htmlFor="nombre" className="form-label">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              className="form-control form-control-lg"
+              placeholder="Ingrese su nombre"
+              value={nuevaCancha.nombre}
+              onChange={handleAddCancha}
+              required
+            />
+          </div>
 
-      {/* Campo Descripción */}
-      <div className="perfil-item mb-4">
-        <label htmlFor="descripcion" className="form-label">Descripción</label>
-        <input
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          className="form-control"
-          placeholder="Ingrese una descripción"
-          value={nuevaCancha.descripcion}
-          onChange={handleAddCancha}
-          required
-        />
-      </div>
+          {/* Campo Descripción */}
+          <div className="perfil-item mb-4">
+            <label htmlFor="descripcion" className="form-label">Descripción</label>
+            <input
+              type="text"
+              id="descripcion"
+              name="descripcion"
+              className="form-control"
+              placeholder="Ingrese una descripción"
+              value={nuevaCancha.descripcion}
+              onChange={handleAddCancha}
+              required
+            />
+          </div>
 
-      {/* Campo Tipo de Cancha */}
-      <div className="perfil-item mb-4">
-        <label htmlFor="tipo" className="form-label">Tipo de Cancha</label>
-        <select
-          name="tipo"
-          id="tipo"
-          className="form-select"
-          value={nuevaCancha.tipo}
-          onChange={handleAddCancha}
-        >
-          <option value="">Seleccione un tipo</option>
-          <option value="Futbol">Fútbol</option>
-          <option value="Basquet">Básquet</option>
-          <option value="Tenis">Tenis</option>
-        </select>
-      </div>
+          {/* Campo Tipo de Cancha */}
+          <div className="perfil-item mb-4">
+            <label htmlFor="tipo" className="form-label">Tipo de Cancha</label>
+            <select
+              name="tipo"
+              id="tipo"
+              className="form-select"
+              value={nuevaCancha.tipo}
+              onChange={handleAddCancha}
+            >
+              <option value="">Seleccione un tipo</option>
+              <option value="Futbol">Fútbol</option>
+              <option value="Basquet">Básquet</option>
+              <option value="Tenis">Tenis</option>
+            </select>
+          </div>
 
-      {/* Campo Horarios */}
-      <div className="perfil-item mb-4">
-        <label className="form-label">Horarios</label>
-        <button type="button" onClick={openModal} className="btn btn-primary mb-2">
-          Editar Horarios
-        </button>
-        <div className="horarios-container">
-          {Array.isArray(nuevaCancha.horarios) && nuevaCancha.horarios.length > 0 ? (
-            nuevaCancha.horarios.map((hora, index) => (
-              <div key={index} className="horario-item d-flex justify-content-center align-items-center">
-                <span className="horario-text">{hora}</span>
-                {/* Mostrar "X" para eliminar */}
-                <span
-                  onClick={() => {
-                    setNuevaCancha(prevCancha => ({
-                      ...prevCancha,
-                      horarios: prevCancha.horarios.filter((_, i) => i !== index),
-                    }));
-                  }}
-                  className="horario-remove-btn" // Clase para la "X"
-                >
-                  &times; {/* Este es el símbolo "X" */}
-                </span>
-              </div>
-            ))
-          ) : (
-            <p>No hay horarios seleccionados.</p>
-          )}
-        </div>
-      </div>
-
-      {/* Días Disponibles */}
-      <div className="perfil-item mb-4">
-        <label className="form-label">Días Disponibles</label>
-        <div className="dias-container d-flex flex-wrap">
-          {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].map(dia => (
-            <div key={dia} className="form-check me-3 mb-2 d-flex align-items-center">
-              <input
-                type="checkbox"
-                id={`dia-${dia}`}
-                value={dia}
-                checked={nuevaCancha.dias.includes(dia)}
-                onChange={handleCheckboxChange}
-                className="form-check-input border border-dark" // Aumentar el borde del checkbox
-              />
-              <label htmlFor={`dia-${dia}`} className="form-check-label ms-2">{dia}</label> {/* Alinear etiqueta */}
+          {/* Campo Horarios */}
+          <div className="perfil-item mb-4">
+            <label className="form-label">Horarios</label>
+            <button type="button" onClick={openModal} className="btn btn-primary mb-2">
+              Editar Horarios
+            </button>
+            <div className="horarios-container">
+              {Array.isArray(nuevaCancha.horarios) && nuevaCancha.horarios.length > 0 ? (
+                nuevaCancha.horarios.map((hora, index) => (
+                  <div key={index} className="horario-item d-flex justify-content-center align-items-center">
+                    <span className="horario-text">{hora}</span>
+                    {/* Mostrar "X" para eliminar */}
+                    <span
+                      onClick={() => {
+                        setNuevaCancha(prevCancha => ({
+                          ...prevCancha,
+                          horarios: prevCancha.horarios.filter((_, i) => i !== index),
+                        }));
+                      }}
+                      className="horario-remove-btn" // Clase para la "X"
+                    >
+                      &times; {/* Este es el símbolo "X" */}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p>No hay horarios seleccionados.</p>
+              )}
             </div>
-          ))}
+          </div>
+
+          {/* Días Disponibles */}
+          <div className="perfil-item mb-4">
+            <label className="form-label">Días Disponibles</label>
+            <div className="dias-container d-flex flex-wrap">
+              {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].map(dia => (
+                <div key={dia} className="form-check me-3 mb-2 d-flex align-items-center">
+                  <input
+                    type="checkbox"
+                    id={`dia-${dia}`}
+                    value={dia}
+                    checked={nuevaCancha.dias.includes(dia)}
+                    onChange={handleCheckboxChange}
+                    className="form-check-input border border-dark" // Aumentar el borde del checkbox
+                  />
+                  <label htmlFor={`dia-${dia}`} className="form-check-label ms-2">{dia}</label> {/* Alinear etiqueta */}
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Botón Guardar */}
+          <div className="parte-btn">
+            <button type="submit" className="btn btn-success">
+              Guardar
+            </button>
+          </div>
         </div>
-      </div>
-      {/* Botón Guardar */}
-      <div className="parte-btn">
-        <button type="submit" className="btn btn-success">
-          Guardar
-        </button>
-      </div>
-    </div>
-  </form>
+      </form>
 
 
 

@@ -18,7 +18,7 @@ const MapComponent = () => {
     }
 
     const googleMapsScript = document.createElement("script");
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyATY5YvVhsvqSeX3_tUAlqZkkZdxWO2tII&callback=initMap`; // Reemplaza con tu API Key
+    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDcw4n3APLA58T-j2C_l6g5qhKtK_hpNss&callback=initMap`; // Reemplaza con tu API Key
     googleMapsScript.id = "google-maps-script";
     googleMapsScript.async = true;
     googleMapsScript.defer = true;

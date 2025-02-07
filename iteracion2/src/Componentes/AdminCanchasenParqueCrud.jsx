@@ -138,7 +138,7 @@ const AdminCanchaenParque = () => {
                                     <td>
                                         <button
                                             className="btnEditar"
-                                            onClick={() => navigate(`/Parque/${cancha.idParque}/canchas/${cancha._id}/actualizar`)}
+                                            onClick={() => navigate(`/Parque/${cancha.idParque}/canchas/${cancha._id}/actualizar`, { state: { id } })}
                                         >
                                             <FontAwesomeIcon icon={faPencilAlt} />
                                         </button>

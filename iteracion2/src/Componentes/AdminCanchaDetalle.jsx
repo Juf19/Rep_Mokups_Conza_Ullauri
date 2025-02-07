@@ -59,6 +59,31 @@ const AdminParqueDetalle = () => {
       <ItemBajoHeader />
       <h3>Detalle Cancha</h3>
       <form>
+      <div className="perfil-item mb-4">
+            <label htmlFor="latitud" className="form-label">Latitud</label>
+            <input
+              type="text"
+              id="latitud"
+              name="latitud"
+              className="form-control"
+              placeholder="Selecione en el mapa"
+              value={cancha.latitud}
+              disabled={true}
+              required
+            />
+
+            <label htmlFor="longitud" className="form-label">Longitud</label>
+            <input
+              type="text"
+              id="longitud"
+              name="longitud"
+              className="form-control"
+              placeholder="Selecione en el mapa"
+              value={cancha.longitud}
+              disabled={true}
+              required
+            />
+          </div>
         <div className="parque-informacion">
           <div className="perfil-item">
             <label>Nombre</label>
