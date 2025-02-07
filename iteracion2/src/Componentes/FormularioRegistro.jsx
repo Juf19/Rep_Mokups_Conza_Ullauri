@@ -56,6 +56,7 @@ const RegistroUsuario = () => {
             setSuccess(true);
             setFormData({ nombre: '', password: '', email: '', cedula: '', fechaNacimiento: '' });
             setErrors({});
+            navigate('/');
         } catch (err) {
             setErrors({ server: "Error al registrar usuario." });
         }
@@ -125,7 +126,7 @@ const RegistroUsuario = () => {
                         helperText={errors.fechaNacimiento}
                         
                     />
-                    <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+                    <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }} >
                         Crear cuenta
                     </Button>
                 </form>
