@@ -42,7 +42,7 @@ function UsDisponibilidadH() {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    const displayDate = `${day}/${month}/${year}`;
+    const displayDate = `${year}-${month}-${day}`;
     console.log("Fecha para mostrar:", displayDate); // Log de la fecha para mostrar
     return displayDate;
   };
@@ -72,7 +72,8 @@ function UsDisponibilidadH() {
         setCanchas(canchasFiltradas);
   
         // Obtener todas las reservas de este parque para la fecha seleccionada
-        const fechaFormateada = formatDate(fechaSeleccionada);
+        const fechaFormateada = formatDateToDisplay(fechaSeleccionada);
+        console.log("Fecha seleccionada:", fechaSeleccionada);
         console.log("Fecha formateada para consulta de reservas:", fechaFormateada);
   
         const responseReservas = await axios.get(
@@ -104,7 +105,7 @@ function UsDisponibilidadH() {
     const canchaId = reserva.canchaId._id;
     const fechaNormalizada = normalizeDate(reserva.fecha);
 
-    if (fechaNormalizada === formatDate(fechaSeleccionada)) {
+    if (fechaNormalizada === formatDateToDisplay(fechaSeleccionada)) {
       const horarios = reserva.horarios;
       if (!acc[canchaId]) acc[canchaId] = [];
       acc[canchaId] = [...acc[canchaId], ...horarios];
