@@ -1,98 +1,47 @@
-/* AdminActualizarCancha.css */
+/* Estilos para la lista de horarios en el modal */
+.horarios-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta el tamaño mínimo según sea necesario */
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
 
-/* Estilos generales */
-.admin-actualizar-cancha {
-    font-family: sans-serif;
-  }
-  
-  .admin-actualizar-cancha-container {
-    margin-top: 20px;
-  }
-  
-  .admin-actualizar-cancha-title {
-    text-align: center;
-    color: #333;
-  }
-  
-  /* Estilos para el formulario */
-  .admin-actualizar-cancha-form {
-    margin-top: 20px;
-  }
-  
-  .admin-actualizar-cancha-textfield,
-  .admin-actualizar-cancha-select {
-    margin-bottom: 15px;
-  }
-  
-  /* Estilos para los botones */
-  .admin-actualizar-cancha-button {
-    margin-top: 10px;
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .admin-actualizar-cancha-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos para la lista de horarios */
-  .admin-actualizar-cancha-subtitle {
-    margin-top: 15px;
-    color: #555;
-  }
-  
-  .admin-actualizar-cancha-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .admin-actualizar-cancha-list-item {
-    margin-bottom: 5px;
-    color: #777;
-  }
-  
-  /* Estilos para los días de la semana */
-  .admin-actualizar-cancha-formcontrollabel {
-    margin-right: 15px;
-  }
-  
-  /* Estilos específicos para el botón de guardar */
-  .admin-actualizar-cancha-button-save {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .admin-actualizar-cancha-button-save:hover {
-    background-color: #1e7e34;
-  }
-  
-  /* Estilos para el modal */
-  .admin-actualizar-cancha-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .admin-actualizar-cancha-modal-content {
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 400px;
-    border-radius: 5px;
-  }
-  
-  .admin-actualizar-cancha-modal-title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .admin-actualizar-cancha-modal-button-save {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .admin-actualizar-cancha-modal-button-close {
-    background-color: #dc3545;
-    color: white;
-  }
-  
+/* Estilos para cada item de horario */
+.horario-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.horario-item:hover {
+  background-color: #e9e9e9;
+}
+
+.horario-item input[type="checkbox"] {
+  margin-right: 10px;
+  /* Alinea verticalmente el checkbox */
+  vertical-align: middle;
+}
+
+/* Estilo para el label del horario */
+.horario-item label {
+  font-size: 14px;
+  color: #333;
+  /* Alinea verticalmente el texto del label */
+  vertical-align: middle;
+}
+
+/* Opcional: Estilo diferenciado para los horarios seleccionados */
+.horario-item input[type="checkbox"]:checked + label {
+  font-weight: bold;
+  color: #007bff; /* Un color que resalte la selección */
+}

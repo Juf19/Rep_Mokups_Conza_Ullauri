@@ -9,7 +9,7 @@
     position: relative; /* Importante para posicionar elementos como la "X" */
     display: flex;
     background-color: #007bff; /* Azul para el fondo */
-    color: white;
+    color: black;
     border-radius: 50%; /* Hace que sea un círculo */
     width: 60px; /* Tamaño del círculo */
     height: 60px; /* Tamaño del círculo */

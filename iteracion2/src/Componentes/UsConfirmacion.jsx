@@ -68,8 +68,8 @@ const UsConfirmacion = () => {
         <div className="contenedorp">
           {!reservaCreada ? (
             <Typography variant="h6" gutterBottom>
-              Reserva confirmada. Revisa tu correo para verificar la validez de tu reserva.
-              Recuerda que puedes cancelarla hasta un día antes de la fecha programada.
+              Reserva confirmada. Puedes revisar la sección de reservas para visualizarla en la tabla.
+              Recuerda que puedes cancelarla hasta 24 horas antes de la fecha programada.
             </Typography>
           ) : (
             <Typography variant="h6" gutterBottom>
